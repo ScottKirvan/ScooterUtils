@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"FriendlyName": "Scooter Utilities v1",
+	"Version": 2020110901,
+	"VersionName": "v1 - Beta1 - v1.0.2020110901",
+	"Description": "Miscellaneous Utilities for Unreal Engine (v1)",
+	"Category": "Utility",
+	"CreatedBy": "Scott Kirvan",
+	"CreatedByURL": "http://www.ScottKirvan.com",
+	"DocsURL": "http://www.ScottKirvan.com",
+	"SupportURL": "http://www.ScottKirvan.com",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"EnabledByDefault": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "ScooterUtils",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
