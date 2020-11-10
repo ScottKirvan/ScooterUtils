@@ -43,8 +43,9 @@ The plugin development workflow is really very impressive, and if you've ever de
 
 ## Support / Contact
 
-Please [file an issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
+- Please [file an issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
 or submit a [pull request](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
+- Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
 
 To locate other developers, I recommend the **# cpp** and **# engine-source** channels on the **Unreal Slackers** Discord server.
 
