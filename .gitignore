@@ -1,0 +1,5 @@
+
+# exclude Intermediate and Binaries folders
+
+Intermediate/
+Binaries/
