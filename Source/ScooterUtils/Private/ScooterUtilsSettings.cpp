@@ -3,17 +3,15 @@
 #include "ScooterUtilsSettings.h"
 
 
-UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer& ObjectInitializer)
-: Super(ObjectInitializer)
+UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-
 		ApplicationScale = 1.0f;
 }
 
 void UScooterUtilsSettings::Init()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	UE_LOG(LogTemp, Warning, TEXT("We're unexpectedly in UScooterUtilsSettins::Init()"));
+	UE_LOG(LogTemp, Warning, TEXT("We're unexpectedly in UScooterUtilsSettings::Init()"));
 	// I don't think this method ever executes - this may be more for things that are instantiated like actors - hopefully this UObject is safe to use this way - it appears to get constructed early on
 }
 
