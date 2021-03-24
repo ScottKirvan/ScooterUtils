@@ -1,13 +1,13 @@
 # UE4-ScooterUtils
- A UE4 plugin which may someday contain multiple miscellaneous utilities for Unreal Engine
+ A UE4 editor plugin which contains multiple miscellaneous artist/utilities utilities for Unreal Engine.
 
 Plugin currently contains:
 - *Scooter Utilities: Screen Real Estate settings* - can be found in *Editor Preferences* under *Plugins/Scooter Utilities*
 - *Scooter Utilities: Maximum FPS* - can be found in *Editor Preferences* under *Plugins/Scooter Utilities*
 
-## About - for Artists/Users
+## Getting up and running
 
-Editor Settings are stored in this file:  
+The persistent editor Settings are stored in this file:  
 ```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 
 ### Screen Real Estate Setting
@@ -19,7 +19,9 @@ all the fluff scaled down to about 80% of what's considered "normal," so I set t
 Persistant Editor Scale to *0.8*.
 
 This same setting is available in the Unreal Editor by going to **Window**, selecting **Developer Tools**, **Widget Reflector**, and setting the *Application Scale*, however, the *Widget Reflector* method doesn't stick -- you have to set it everytime you restart **Unreal Engine**.  The Scooter Utility writes this value to one of your Config files, so you don't have to constantly re-set it.
+
 ### FPS Settings
+
 The *Max FPS* setting can be found by going to **Edit**, selecting **Editor Preferences**, and then selecting **Scooter Utilities** under the **Plugins** sub-heading in the preferences menu.
 
 The *Max FPS* overrides the console variable setting (t.MaxFPS) and sets the engine's maximum frame rate.  
@@ -27,9 +29,18 @@ The *Max FPS* overrides the console variable setting (t.MaxFPS) and sets the eng
 Turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under **Edit|Project Preferences|General Settings|Framerate** if you need
 to unclamp the system and run it as freewheeling as possible. (These are off by default)
 
+
+### Installation
+This is kind of standard practice for GitHub Unreal plugins; it goes like this:
+1. Create a new Unreal project.
+1. Create a ```Plugins``` folder in your project directory.
+1. Clone the GitHub repository (or grab and unzip the project) into your ```Plugins``` folder.
+1. Launch Unreal; You should be prompted to build the plugin.
+2. Optional:  Use or convert your unreal project to a C++ project so that you can edit and build the code outside of Unreal.
+
 ## About - for Developers
 
-This is my first plugin in Unreal Engine.  It was inspired by a [declined Epic Games Github Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436).  It's very simple and direct -- I wanted to understand the bare bones of the system, so there's not a lot of bells-and-whistles in this code.
+This was my first plugin in Unreal Engine.  It was inspired by a [declined Epic Games Github Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436).  It's very simple and direct -- I wanted to understand the bare bones of the system, so there's not a lot of bells-and-whistles in this code.
 
 The plugin has two components, an ``IModuleInterface`` derived ``FScooterUtilsModule``, which bootstraps and provides basic life-support to the plugin, and an ``IObject`` derived ``IScooterUtilsSettings`` object which is the system-aware component that works directly
 with Unreal's ``ISettingsModule`` and ``FSlateApplication``'s ``ApplicationScale``.  The *Module* registers the callbacks and the *IObject* manages the data and processes the callbacks.
@@ -53,7 +64,7 @@ If you are new to programming in UE4,
 please see the official [Programming Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html)! 
 The plugin development workflow is really very impressive, and if you've ever developed plugins for other applications, you should check it out.  
 
-## Support / Contact
+## Contributions
 
 - Please [file an issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
 or grab a fork, hack away, and submit [pull requests](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
