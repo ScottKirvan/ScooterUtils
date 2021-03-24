@@ -1,5 +1,5 @@
 # UE4-ScooterUtils
- A UE4 editor plugin which contains multiple miscellaneous artist/utilities utilities for Unreal Engine.
+ A UE4 editor plugin which contains multiple miscellaneous artist/developer utilities for Unreal Engine.
 
 Plugin currently contains:
 - *Scooter Utilities: Screen Real Estate settings* - can be found in *Editor Preferences* under *Plugins/Scooter Utilities*
