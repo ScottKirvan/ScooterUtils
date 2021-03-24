@@ -56,7 +56,7 @@ The plugin development workflow is really very impressive, and if you've ever de
 ## Support / Contact
 
 - Please [file an issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
-or submit a [pull request](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
+or grab a fork, hack away, and submit [pull requests](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
 - Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
 - You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB) server, I'm cptvideo.
 
