@@ -8,6 +8,9 @@ Plugin currently contains:
 
 Once the plugin is built and loaded, you can find the Screen Real Estate setting by going to **Edit**, selecting **Editor Preferences**, and then selecting **Scooter Utilities** under the **Plugins** sub-heading in the preferences menu.
 
+For example, here's where I found the settings saved on my system:  🚡
+```C:\Users\<username>\AppData\Local\UnrealEngine\4.26\Saved\Config\Windows```
+
 The *Persistant Editor Scale* value is a percentage relative to the default screen size of elements like 
 fonts, buttons, and other widgets in the Unreal Engine UI.  I like to work with 
 all the fluff scaled down to about 80% of what's considered "normal," so I set the
