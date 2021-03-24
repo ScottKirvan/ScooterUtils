@@ -15,9 +15,6 @@ public:
 	void SetApplicationScale(float f);
 	float GetApplicationScale();
 	void UpdateApplicationScale();
-	void SetApplicationScale2(float f);
-	float GetApplicationScale2();
-	void UpdateApplicationScale2();
 	void SetMaxFPS(int f);
 	int GetMaxFPS();
 	void UpdateMaxFPS();
