@@ -25,6 +25,8 @@ void FScooterUtilsModule::StartupModule()
 		{ 
 			GetMutableDefault<UScooterUtilsSettings>()->LoadConfig();
 			GetMutableDefault<UScooterUtilsSettings>()->UpdateApplicationScale();
+			GetMutableDefault<UScooterUtilsSettings>()->UpdateMaxFPS();
+			//GetMutableDefault<UScooterUtilsSettings>()->UpdateShowFPS();
 
 			SettingsSection->OnModified().BindLambda(
 				[]() { 
