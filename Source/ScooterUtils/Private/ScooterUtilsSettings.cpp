@@ -32,10 +32,7 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent&
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, MaxFPS))
 	{
-		//FSlateApplication::Get().SetMaxFPS(ApplicationScale);
-		UE_LOG(LogTemp, Log, TEXT("GetMaxFXP"));
-		IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));
-		CVar->Set(MaxFPS);
+		GEngine->SetMaxFPS(MaxFPS);
 	}
 
 	/*
@@ -104,10 +101,9 @@ void UScooterUtilsSettings::UpdateApplicationScale()
 void UScooterUtilsSettings::UpdateMaxFPS() 
 {
 	UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
-	IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("t.MaxFPS"));
-	CVar->Set(MaxFPS);
-	MaxFPS = CVar->GetInt();
-	UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);
+	GEngine->SetMaxFPS(MaxFPS);
+	MaxFPS = GEngine->GetMaxFPS();
+	//UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
 } 
 
 /*
