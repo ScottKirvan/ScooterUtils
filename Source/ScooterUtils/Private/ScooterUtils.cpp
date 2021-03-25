@@ -4,8 +4,15 @@
 #include "ISettingsModule.h"
 #include "ScooterUtilsSettings.h"
 #include "ISettingsSection.h"
+#include "ScooterUtilsMenu.h"
+#include "LevelEditor.h"
 
 #define LOCTEXT_NAMESPACE "FScooterUtilsModule"
+
+void FScooterUtilsModule::AddModuleListeners()
+{
+	ModuleListeners.Add(MakeShareable(new ScooterUtilsMenu));
+}
 
 void FScooterUtilsModule::StartupModule()
 {
@@ -36,6 +43,25 @@ void FScooterUtilsModule::StartupModule()
 			);
 		}
 	}
+	
+	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
+	if (!IsRunningCommandlet())
+	{
+		FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+		LevelEditorMenuExtensibilityManager = LevelEditorModule.GetMenuExtensibilityManager();
+		MenuExtender = MakeShareable(new FExtender);
+		LevelEditorMenuExtensibilityManager->AddExtender(MenuExtender);
+	}
+
+		if (!IsRunningCommandlet())
+		{
+			AddModuleListeners();
+			for (int32 i = 0; i < ModuleListeners.Num(); ++i)
+			{
+				ModuleListeners[i]->OnStartupModule();
+			}
+		}
+	
 }
 
 void FScooterUtilsModule::ShutdownModule()
@@ -49,6 +75,11 @@ void FScooterUtilsModule::ShutdownModule()
 	{
 		SettingsModule->UnregisterSettings("Editor", "Plugins", "sk_UE4_Utils"); // what happens if this text doesn't match exactly?
 	}
+}
+
+void FScooterUtilsModule::AddMenuExtension(const FMenuExtensionDelegate &extensionDelegate, FName extensionHook, const TSharedPtr<FUICommandList> &CommandList, EExtensionHook::Position position)
+{
+	MenuExtender->AddMenuExtension(extensionHook, position, CommandList, extensionDelegate);
 }
 
 #undef LOCTEXT_NAMESPACE

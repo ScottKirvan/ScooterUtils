@@ -38,6 +38,8 @@ public class ScooterUtils : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"EditorStyle",
+				"UnrealEd",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

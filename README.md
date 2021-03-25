@@ -1,26 +1,31 @@
 # UE4-ScooterUtils
 
- A UE4 editor plugin which contains multiple miscellaneous
+ A UE4 editor plugin which contains miscellaneous
  artist/developer utilities for Unreal Engine.
+
+If common tasks can be automated or streamlined, they may end up in ScooterUtils.
 
 ![](Docs/Images/prefs.png)
 
+![](Docs/Images/restart.png)
+
 Plugin currently contains:
-- *Scooter Utilities: Screen Real Estate settings* - can be found in
-*Editor Preferences* under *Plugins/Scooter Utilities*
-- *Scooter Utilities: Maximum FPS* - can be found in *Editor Preferences*
-under *Plugins/Scooter Utilities*
+- *Screen Real Estate* - found in the
+**Editor Preferences** under **Plugins/Scooter Utilities**
+- *Maximum FPS* - found in **Editor Preferences**
+under **Plugins/Scooter Utilities**
+- Restart Editor - From the Main Menu bar, choose 
+  **File > Restart Editor...**
+  
+The persistent editor Settings, in Windows, are stored in this file:  
+```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 
 ## Getting up and running
 
-The persistent editor Settings are stored in this file:  
-```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
-
-### Screen Real Estate Setting
-Once the plugin is built and loaded, you can find the Screen Real Estate
-setting by going to **Edit**, selecting **Editor Preferences**, and
-then selecting **Scooter Utilities** under the **Plugins** sub-heading
-in the preferences menu.
+### Screen Real Estate 
+Once the plugin is built and loaded, you can find the **Screen Real Estate**
+setting by choosing **Edit > Editor Preferences** from the Main Menu bar, and
+then selecting **Plugins/Scooter Utilities**.
 
 The *Persistant Editor Scale* value is a percentage relative to the default 
 screen size of elements like fonts, buttons, and other widgets in the Unreal 
@@ -28,25 +33,37 @@ Engine UI.  I like to work with all the fluff scaled down to about 80% of
 what's considered "normal," so I set the Persistant Editor Scale to *0.8*.
 
 This same setting is available in the Unreal Editor by going to
-**Window**, selecting **Developer Tools**, **Widget Reflector**,
-and setting the *Application Scale*, however, the *Widget Reflector*
+the Main Menu bar, selecting **Window > Developer Tools > Widget Reflector**,
+and changing the **Application Scale** setting.  However, the **Widget Reflector**
 method doesn't stick -- you have to set it everytime you restart **Unreal
-Engine**.  The Scooter Utility writes this value to one of your Config
-files, so you don't have to constantly re-set it.
+Engine**.  The Scooter Utility writes this value to your Config
+file, so you don't have to constantly re-set it.
 
-### FPS Settings
+### Max FPS
+The **Max FPS** (Maximum Frames Per Second)
+setting is found in the Main Menu bar; **Edit > Editor Preferences**, 
+then selecting **Plugins/Scooter Utilities**.
 
-The *Max FPS* setting can be found by going to **Edit**, selecting
-**Editor Preferences**, and then selecting **Scooter Utilities** under
-the **Plugins** sub-heading in the preferences menu.
-
-The *Max FPS* overrides the console variable setting (t.MaxFPS) and sets
-the engine's maximum frame rate.  
+**Max FPS** overrides the console variable setting (t.MaxFPS) and sets
+the engine's maximum editor frame rate.  
 
 Turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under
-**Edit|Project Preferences|General Settings|Framerate** if you need to 
-unclamp the system and run it as freewheeling as possible. (These
-are off by default)
+**Edit > Project Preferences**, **General Settings/Framerate** if you need to 
+unclamp the system and run it as freewheeling as possible (These
+are off by default).
+
+### Restart Editor...
+**Restart Editor** is found in the Main Menu bar, under
+  **File > Restart Editor...**.
+
+This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload 
+your project on restart.  This is the same behavior you see when you enable or disable a plugin.
+
+This is for developers that need to frequently restart the engine to test code changes.  It's also 
+nice for those times you've been working in the editor for a while and things just start to feel... um...
+off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no launcher popping up and prompting 
+for what to load, and no searching in file explorer to find the uproject file to open.
+
 
 ### Installation
 
@@ -97,7 +114,7 @@ platforms.
 ## Dependencies
 
 This plugin is source code only - I'm not currently providing binaries.
-If you're looking for binaires for the 4.26 windows version, contact me
+If you're looking for binaries for the 4.26 windows version, contact me
 and I'll try get you a build.  If you need an older build or another
 platform, you're going to have to get in touch with someone that can
 help you (See the Support/Contacts section below).
