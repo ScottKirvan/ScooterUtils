@@ -44,8 +44,12 @@ The **Max FPS** (Maximum Frames Per Second)
 setting is found in the Main Menu bar; **Edit > Editor Preferences**, 
 then selecting **Plugins/Scooter Utilities**.
 
-**Max FPS** overrides the console variable setting (t.MaxFPS) and sets
-the engine's maximum editor frame rate.  
+**Max FPS** overrides the console variable setting (```t.MaxFPS```) and sets
+the engine's maximum editor frame rate.  Like the Screen Real Estate setting
+above, if you use ```t.MaxFPS```, it will reset any time you shutdown or restart 
+the editor.  Using the **ScooterUtils Max FPS** setting will be persistent and 
+stay set until you reset it.  Set it to ```0``` to let the system take over the 
+default.
 
 Turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under
 **Edit > Project Preferences**, **General Settings/Framerate** if you need to 
