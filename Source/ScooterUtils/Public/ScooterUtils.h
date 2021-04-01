@@ -30,7 +30,7 @@ public:
         return FModuleManager::LoadModuleChecked< FScooterUtilsModule >("ScooterUtils");
     }
 	
-	void AddMenuExtension(const FMenuExtensionDelegate &extensionDelegate, FName extensionHook, const TSharedPtr<FUICommandList> &CommandList = nullptr, EExtensionHook::Position position = EExtensionHook::Before);
+	void AddMenuExtension(const FMenuExtensionDelegate &extensionDelegate, FName extensionHook, const TSharedPtr<FUICommandList> &CommandList = nullptr, EExtensionHook::Position position = EExtensionHook::After);
 protected:
 	TArray<TSharedRef<IScooterUtilsModuleListenerInterface>> ModuleListeners;
 	TSharedPtr<FExtender> MenuExtender;
