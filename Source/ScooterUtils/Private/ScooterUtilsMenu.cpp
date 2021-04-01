@@ -42,7 +42,7 @@ void ScooterUtilsMenu::OnStartupModule()
 	MapCommands();
 	FScooterUtilsModule::Get().AddMenuExtension(
 		FMenuExtensionDelegate::CreateRaw(this, &ScooterUtilsMenu::MakeMenuEntry),
-		FName("DataValidation"),  // just before the DataValidation section, at the end of off the project build options
+		FName("FileProject"),  // trying to place this at the end of the mail File/Project menu section
 		CommandList);
 }
 
