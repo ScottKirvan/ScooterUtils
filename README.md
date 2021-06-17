@@ -118,7 +118,7 @@ platforms.
 ## Dependencies
 
 This plugin is source code only - I'm not currently providing binaries.
-If you're looking for binaries for the 4.26 windows version, contact me
+If you're looking for binaries for the Windows version, contact me
 and I'll try get you a build.  If you need an older build or another
 platform, you're going to have to get in touch with someone that can
 help you (See the Support/Contacts section below).
