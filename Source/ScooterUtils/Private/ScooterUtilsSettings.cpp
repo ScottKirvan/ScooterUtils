@@ -90,9 +90,9 @@ bool UScooterUtilsSettings::GetShowFPS()
 }
 */
 
-void UScooterUtilsSettings::UpdateApplicationScale() 
+void UScooterUtilsSettings::UpdateApplicationScale()
 { 
-	if (ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)  {
+	if (FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)  {
 		FSlateApplication::Get().SetApplicationScale(ApplicationScale); 
 	}
 	// TODO - maybe put in a .ini file only flag that would let a power user use a scale outside this range by editing the ini directly
