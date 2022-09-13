@@ -1,4 +1,5 @@
-# UE4-ScooterUtils
+[UE4-ScooterUtils](https://github.com/ScottKirvan/UE4-ScooterUtils)
+==================
 
  A UE4 editor plugin which contains miscellaneous
  artist/developer utilities for Unreal Engine.
