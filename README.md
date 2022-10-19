@@ -1,8 +1,8 @@
 [ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)
 ==================
 
- A UE4 editor plugin which contains miscellaneous
- artist/developer utilities for Unreal Engine.
+ A Unreal Engine editor plugin which contains miscellaneous
+ artist/developer utilities.
 
 If common tasks can be automated or streamlined, they may end up in ScooterUtils.
 
@@ -112,7 +112,7 @@ pull together the pieces you need to accomplish what you're after.
 
 ## Supported Platforms
 
-This plug-in was developed and built against **Unreal Engine 4.25, 4.26, 4.27 & UE5 EA1 & EA2**. It
+This plug-in was developed and built against **Unreal Engine 4.25, 4.26, 4.27, 5.0, & 5.1**. It
 should work on other
 platforms.
 
@@ -121,10 +121,10 @@ platforms.
 This plugin is source code only - I'm not currently providing binaries.
 If you're looking for binaries for the Windows version, contact me
 and I'll try get you a build.  If you need an older build or another
-platform, you're going to have to get in touch with someone that can
+platform, I won't be able to build it for you, so you're going to have to get in touch with someone that can
 help you (See the Support/Contacts section below).
 
-The source requires Visual Studio (I used the free 2019 community version)
+The source requires Visual Studio (I;ve used the free 2019 & 2022 community versionc)
 and either an Unreal C++ code (rather than blueprint) project or the full
 Unreal Engine 4 source code from GitHub (just use the project-based
 approach, it's so easy). 
@@ -137,7 +137,7 @@ project directory for the project you're working on, or copied into
 your Engine's main *Plugins* folder so it's available to all your future
 editing sessions.  
 
-If you are new to programming in UE4,
+If you are new to programming in UE,
 please see the official [Programming
 Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html)!
 The plugin development workflow is really very impressive, and if you've
@@ -177,5 +177,5 @@ accomplish the same thing when the Pull Request came in.  Had it not
 been declined, I probably never would have said, "hey, why not make it
 a plugin?"
 
-Updated: *March 24, 2021*
+Updated: *October 19, 2022*
 
