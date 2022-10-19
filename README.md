@@ -1,4 +1,4 @@
-[UE4-ScooterUtils](https://github.com/ScottKirvan/UE4-ScooterUtils)
+[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)
 ==================
 
  A UE4 editor plugin which contains miscellaneous
