@@ -1,6 +1,7 @@
 
 #include "ScooterUtilsMenu.h"
 #include "ScooterUtils.h"
+#include "EditorStyleSet.h"
 
 #define LOCTEXT_NAMESPACE "ScooterUtilsMenu"
 
