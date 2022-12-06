@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"FriendlyName": "Scooter Utilities v1",
 	"Version": 2020110901,
-	"VersionName": "v1 - Beta1 - v1.0.2020110901",
+	"VersionName": "v1.0.2022120501",
 	"Description": "Miscellaneous Utilities for Unreal Engine (v1)",
 	"Category": "Utility",
 	"CreatedBy": "Scott Kirvan",
@@ -19,5 +19,7 @@
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
 		}
-	]
+	],
+	"MarketplaceURL": "",
+	"IsExperimentalVersion": false
 }
