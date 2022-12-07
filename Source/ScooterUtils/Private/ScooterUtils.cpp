@@ -23,7 +23,7 @@ void FScooterUtilsModule::StartupModule()
 	if (SettingsModule != nullptr)
 	{
 		TSharedPtr<ISettingsSection> SettingsSection = 
-			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils",  // Editor Preferences->Plugins->Scooter Utilities...
+			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils",  // Editor Preferences->Plugins->Scooter Utilities... 
 				FText::FromString("Scooter Utilities"), 
 				FText::FromString("Miscellaneous Editor Preferences"), 
 				GetMutableDefault<UScooterUtilsSettings>());
