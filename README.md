@@ -112,7 +112,7 @@ pull together the pieces you need to accomplish what you're after.
 
 ## Supported Platforms
 
-This plug-in was developed and built against **Unreal Engine 4.25, 4.26, 4.27, 5.0, & 5.1**. It
+This plug-in was developed and built against **Unreal Engine 4.25, 4.26, 4.27, 5.0, 5.1, 5.2, & 5.3**. It
 should work on other
 platforms.
 
