@@ -177,5 +177,13 @@ accomplish the same thing when the Pull Request came in.  Had it not
 been declined, I probably never would have said, "hey, why not make it
 a plugin?"
 
-Updated: *October 19, 2022*
+## Credits
+
+**Copyright (c) (2020):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
+*ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md).*  
+
+Project Link:  [EU_QuickLaunch](https://github.com/ScottKirvan/EU_QuickLaunch)  
+[CHANGELOG](CHANGELOG.md)  
+[TODO](TODO.md)
+
 
