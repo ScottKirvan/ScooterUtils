@@ -9,3 +9,6 @@ Binaries/
 Binaries.dead/Win64/UnrealEditor-ScooterUtils.dll
 Binaries.dead/Win64/UnrealEditor-ScooterUtils.pdb
 Binaries.dead/Win64/UnrealEditor.modules
+
+
+.obsidian/*
