@@ -10,7 +10,7 @@
 	"DocsURL": "https://github.com/ScottKirvan/ScooterUtils#readme",
 	"SupportURL": "https://github.com/ScottKirvan/ScooterUtils#contributions",
 	"CanContainContent": true,
-	"IsBetaVersion": true,
+	"IsBetaVersion": false,
 	"EnabledByDefault": true,
 	"Installed": true,
 	"Modules": [
