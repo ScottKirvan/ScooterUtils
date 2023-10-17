@@ -15,8 +15,8 @@ Plugin currently contains:
 **Editor Preferences** under **Plugins/Scooter Utilities**
 - *Maximum FPS* - found in **Editor Preferences**
 under **Plugins/Scooter Utilities**
-- Restart Editor - From the Main Menu bar, choose 
-  **File > Restart Editor...**
+- Restart Editor - From the Main Menu bar, choose **File > Restart Editor...**
+- Show Project in Explorer - From the Main Menu bar, choose **File > Show Project in Explorer**
   
 The persistent editor Settings, in Windows, are stored in this file:  
 ```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
@@ -69,6 +69,13 @@ nice for those times you've been working in the editor for a while and things ju
 off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no launcher popping up and prompting 
 for what to load, and no searching in file explorer to find the uproject file to open.
 
+### Show Project in Explorer
+**Show Project in Explorer** is found in the Main Menu bar, under
+  **File > Show Project in Explorer**.
+
+This will open file explorer in your main project folder -- i.e. the same folder as your project's `.uproject` file.
+
+Being able to open the project in Explorer is nice for when you've opened a project from the Launcher and you need to know where it's actually stored on disk.  You can also do this by right clicking on assets in the content browser, which will take you do your project's content folder, but this menu makes it a bit quicker to get to.
 
 ### Installation
 

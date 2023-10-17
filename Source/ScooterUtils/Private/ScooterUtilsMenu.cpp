@@ -21,10 +21,12 @@ public:
 	virtual void RegisterCommands() override
 	{
 		UI_COMMAND(MenuCommand1, "Restart Editor...", "Restart the editor, re-opening the current project. - ScooterUtils", EUserInterfaceActionType::Button, FInputChord());
+		UI_COMMAND(MenuCommand2, "Show Project in Explorer", "Find this project on disk. - ScooterUtils", EUserInterfaceActionType::Button, FInputChord());
 	}
 
 public:
 	TSharedPtr<FUICommandInfo> MenuCommand1;
+	TSharedPtr<FUICommandInfo> MenuCommand2;
 };
 
 void ScooterUtilsMenu::MapCommands()
@@ -32,6 +34,7 @@ void ScooterUtilsMenu::MapCommands()
 	const auto &Commands = ScooterUtilsMenuCommands::Get();
 
 	CommandList->MapAction(Commands.MenuCommand1, FExecuteAction::CreateSP(this, &ScooterUtilsMenu::MenuCommand1), FCanExecuteAction());
+	CommandList->MapAction(Commands.MenuCommand2, FExecuteAction::CreateSP(this, &ScooterUtilsMenu::MenuCommand2), FCanExecuteAction());
 }
 
 void ScooterUtilsMenu::OnStartupModule()
@@ -41,7 +44,7 @@ void ScooterUtilsMenu::OnStartupModule()
 	MapCommands();
 	FScooterUtilsModule::Get().AddMenuExtension(
 		FMenuExtensionDelegate::CreateRaw(this, &ScooterUtilsMenu::MakeMenuEntry),
-		FName("FileProject"), // trying to place this at the end of the mail File/Project menu section
+		FName("FileProject"), // trying to place this at the end of the main File/Project menu section
 		CommandList);
 }
 
@@ -53,11 +56,20 @@ void ScooterUtilsMenu::OnShutdownModule()
 void ScooterUtilsMenu::MakeMenuEntry(FMenuBuilder &menuBuilder)
 {
 	menuBuilder.AddMenuEntry(ScooterUtilsMenuCommands::Get().MenuCommand1);
+	menuBuilder.AddMenuEntry(ScooterUtilsMenuCommands::Get().MenuCommand2);
 }
 
+// Restarts the editor, re-opening the current project
 void ScooterUtilsMenu::MenuCommand1()
 {
 	FUnrealEdMisc::Get().RestartEditor(false);
+}
+
+// Shows the project folder in explorer/finder
+void ScooterUtilsMenu::MenuCommand2()
+{
+	FString ProjectFolder = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
+	FPlatformProcess::ExploreFolder(*ProjectFolder);
 }
 
 #undef LOCTEXT_NAMESPACE

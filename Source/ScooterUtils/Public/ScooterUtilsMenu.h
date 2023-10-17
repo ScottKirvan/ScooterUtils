@@ -19,5 +19,6 @@ protected:
 
 	//************************
 	// UI Command functions
-	void MenuCommand1();
+	void MenuCommand1();  // restart editor
+	void MenuCommand2();  // open project folder
 };
