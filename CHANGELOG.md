@@ -6,7 +6,7 @@
 [Unreleased]
 ============
 
-[1.0.2] - 2023-10-17
+[1.1.0] - 2023-10-17
 --------------------
 - ***Added***
     - [enhancement] Menu item:  **File > Show Project in Explorer**
