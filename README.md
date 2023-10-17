@@ -189,7 +189,7 @@ a plugin?"
 **Copyright (c) (2020):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
 *ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md).*  
 
-Project Link:  [EU_QuickLaunch](https://github.com/ScottKirvan/EU_QuickLaunch)  
+Project Link:  [ScottKirvan/ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
 [CHANGELOG](notes/CHANGELOG.md)  
 [TODO](notes/TODO.md)
 
