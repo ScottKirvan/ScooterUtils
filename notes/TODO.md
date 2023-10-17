@@ -8,7 +8,7 @@ TODO
 ----
 - [ ] get project package'able for the unreal marketplace
 - [ ] update documentation with better installation instructions since UE5 is more restrictive on where you install plugins.  See issue [#14](https://github.com/ScottKirvan/ScooterUtils/issues/14)
-- [ ] Look into persisting some viewport settins [#13](https://github.com/ScottKirvan/ScooterUtils/issues/13) [#12](https://github.com/ScottKirvan/ScooterUtils/issues/12) [#11](https://github.com/ScottKirvan/ScooterUtils/issues/11)
+- [ ] Look into persisting some viewport settings [#13](https://github.com/ScottKirvan/ScooterUtils/issues/13) [#12](https://github.com/ScottKirvan/ScooterUtils/issues/12) [#11](https://github.com/ScottKirvan/ScooterUtils/issues/11)
 
 In Progress
 -----------
@@ -21,4 +21,4 @@ Done ✓
 Not Gonna Do ✓
 ------
 - [x] F11/Immersive mode doesn't work properly with application set (window size is wrong) [#2](https://github.com/ScottKirvan/ScooterUtils/issues/2)
-    - This is a Slate issue adn can be duplicated using Widget Reflector
+    - This is a Slate issue and can be duplicated using Widget Reflector
