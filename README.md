@@ -6,9 +6,9 @@
 
 If common tasks can be automated or streamlined, they may end up in ScooterUtils.
 
-![](Docs/Images/prefs.png)
+![](assets/media/prefs.png)
 
-![](Docs/Images/restart.png)
+![](assets/media/restart.png)
 
 Plugin currently contains:
 - *Screen Real Estate* - found in the
@@ -190,7 +190,7 @@ a plugin?"
 *ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md).*  
 
 Project Link:  [EU_QuickLaunch](https://github.com/ScottKirvan/EU_QuickLaunch)  
-[CHANGELOG](CHANGELOG.md)  
-[TODO](TODO.md)
+[CHANGELOG](notes/CHANGELOG.md)  
+[TODO](notes/TODO.md)
 
 
