@@ -8,14 +8,13 @@
 class ScooterUtilsMenuCommands : public TCommands<ScooterUtilsMenuCommands>
 {
 public:
-
 	ScooterUtilsMenuCommands()
 		: TCommands<ScooterUtilsMenuCommands>(
-		TEXT("ScooterUtilsMenu"), // Context name for fast lookup
-		FText::FromString("Example Menu tool"), // Context name for displaying
-		NAME_None,	 // No parent context
-		FEditorStyle::GetStyleSetName() // Icon Style Set
-		)
+			  TEXT("ScooterUtilsMenu"),				  // Context name for fast lookup
+			  FText::FromString("Example Menu tool"), // Context name for displaying
+			  NAME_None,							  // No parent context
+			  FAppStyle::GetAppStyleSetName()		  // Icon Style Set
+		  )
 	{
 	}
 
@@ -30,10 +29,9 @@ public:
 
 void ScooterUtilsMenu::MapCommands()
 {
-	const auto& Commands = ScooterUtilsMenuCommands::Get();
+	const auto &Commands = ScooterUtilsMenuCommands::Get();
 
-	CommandList->MapAction( Commands.MenuCommand1, FExecuteAction::CreateSP(this, &ScooterUtilsMenu::MenuCommand1), FCanExecuteAction());
-
+	CommandList->MapAction(Commands.MenuCommand1, FExecuteAction::CreateSP(this, &ScooterUtilsMenu::MenuCommand1), FCanExecuteAction());
 }
 
 void ScooterUtilsMenu::OnStartupModule()
@@ -43,7 +41,7 @@ void ScooterUtilsMenu::OnStartupModule()
 	MapCommands();
 	FScooterUtilsModule::Get().AddMenuExtension(
 		FMenuExtensionDelegate::CreateRaw(this, &ScooterUtilsMenu::MakeMenuEntry),
-		FName("FileProject"),  // trying to place this at the end of the mail File/Project menu section
+		FName("FileProject"), // trying to place this at the end of the mail File/Project menu section
 		CommandList);
 }
 
