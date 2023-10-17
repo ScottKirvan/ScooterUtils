@@ -2,12 +2,11 @@
 
 #include "ScooterUtilsSettings.h"
 
-
-UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
-		ApplicationScale = 1.0f;
-		MaxFPS = 0;
-		//ShowFPS = false;
+	ApplicationScale = 1.0f;
+	MaxFPS = 0;
+	// ShowFPS = false;
 }
 
 void UScooterUtilsSettings::Init()
@@ -19,7 +18,7 @@ void UScooterUtilsSettings::Init()
 
 #if WITH_EDITOR
 
-void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent &PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
@@ -48,7 +47,7 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent&
 		}
 	}
 	*/
-	
+
 	SaveConfig();
 
 	SettingChangedEvent.Broadcast(PropertyName);
@@ -57,57 +56,60 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent&
 #endif // WITH_EDITOR
 
 void UScooterUtilsSettings::SetApplicationScale(float f)
-{ 
-	ApplicationScale = f; UpdateApplicationScale(); 
-}  
+{
+	ApplicationScale = f;
+	UpdateApplicationScale();
+}
 
 void UScooterUtilsSettings::SetMaxFPS(int fps)
-{ 
-	MaxFPS = fps; UpdateMaxFPS(); 
-}  
+{
+	MaxFPS = fps;
+	UpdateMaxFPS();
+}
 
 /*
 void UScooterUtilsSettings::SetShowFPS(bool show)
-{ 
-	ShowFPS = show; UpdateShowFPS(); 
+{
+	ShowFPS = show; UpdateShowFPS();
 }
 */
 
 float UScooterUtilsSettings::GetApplicationScale()
-{ 
-	return ApplicationScale; 
-} 
+{
+	return ApplicationScale;
+}
 
 int UScooterUtilsSettings::GetMaxFPS()
-{ 
-	return MaxFPS; 
-} 
+{
+	return MaxFPS;
+}
 
 /*
 bool UScooterUtilsSettings::GetShowFPS()
-{ 
-	return ShowFPS; 
+{
+	return ShowFPS;
 }
 */
 
 void UScooterUtilsSettings::UpdateApplicationScale()
-{ 
-	if (FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)  {
-		FSlateApplication::Get().SetApplicationScale(ApplicationScale); 
+{
+	if (FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)
+	{
+		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
 	}
 	// TODO - maybe put in a .ini file only flag that would let a power user use a scale outside this range by editing the ini directly
-} 
+}
 
-void UScooterUtilsSettings::UpdateMaxFPS() 
+void UScooterUtilsSettings::UpdateMaxFPS()
 {
 	UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
 	GEngine->SetMaxFPS(MaxFPS);
 	MaxFPS = GEngine->GetMaxFPS();
-	//UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
-} 
+	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
+}
 
 /*
-void UScooterUtilsSettings::UpdateShowFPS() 
+void UScooterUtilsSettings::UpdateShowFPS()
 {
 	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS1:  %d"), ShowFPS);
 	if (ShowFPS)
@@ -120,4 +122,3 @@ void UScooterUtilsSettings::UpdateShowFPS()
 	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS2:  %d"), ShowFPS);
 }
 */
-
