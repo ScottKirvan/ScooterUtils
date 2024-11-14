@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"Version": 2024111401,
 	"VersionName": "v1.2.0.2024111401",
-	"FriendlyName": "Scooter Utilities v1",
+	"FriendlyName": "Scooter Utilities",
 	"Description": "Miscellaneous Utilities for Unreal Engine",
 	"Category": "Utility",
 	"CreatedBy": "Scott Kirvan",
