@@ -1,56 +1,81 @@
-[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)
-==================
 
- A Unreal Engine editor plugin which contains miscellaneous
- artist/developer utilities.
+<div align="center">
 
-If common tasks can be automated or streamlined, they may end up in ScooterUtils.
-
-![](assets/media/prefs.png)
-
-![](assets/media/restart.png)
-
-Plugin currently contains:
-- *Screen Real Estate* - found in the
-**Editor Preferences** under **Plugins/Scooter Utilities**
-- *Maximum FPS* - found in **Editor Preferences**
-under **Plugins/Scooter Utilities**
-- Restart Editor - From the Main Menu bar, choose **File > Restart Editor...**
-- Show Project in Explorer - From the Main Menu bar, choose **File > Show Project in Explorer**
+  <img src="assets/media/logo.jpg" alt="logo" width="200" height="auto" />
+    <h1><a href="https://github.com/ScottKirvan/ScooterUtils">ScottKirvan/ScooterUtils</a></h1>
+  <h3>A collection of editor tools for Unreal Engine</h3>
   
-The persistent editor Settings, in Windows, are stored in this file:  
+<!-- Badges -->
+<p>
+  <a href="https://github.com/ScottKirvan/ScooterUtils/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/ScottKirvan/ScooterUtils" alt="contributors" />
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/github/last-commit/ScottKirvan/ScooterUtils" alt="last update" />
+  </a>
+  <a href="https://github.com/ScottKirvan/ScooterUtils/network/members">
+    <img src="https://img.shields.io/github/forks/ScottKirvan/ScooterUtils" alt="forks" />
+  </a>
+  <a href="https://github.com/ScottKirvan/ScooterUtils/stargazers">
+    <img src="https://img.shields.io/github/stars/ScottKirvan/ScooterUtils" alt="stars" />
+  </a>
+  <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">
+    <img src="https://img.shields.io/github/issues/ScottKirvan/ScooterUtils" alt="open issues" />
+  </a>
+  <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/ScottKirvan/ScooterUtils.svg" alt="license" />
+  </a>
+  <a href="https://discord.gg/gQH4mXWQRT">
+    <!--<img src="https://img.shields.io/discord/704680098577514527?style=flat-square&label=%F0%9F%92%AC%20discord&color=00ACD7">-->
+    <img src="https://img.shields.io/discord/1052011377415438346?style=flat-square&label=discord&color=00ACD7">
+  </a>
+</p>
+   
+<h4>
+    <!--
+    <a href="https://github.com/ScottKirvan/ScooterUtils/">View Demo</a>
+  <span> · </span>
+  -->
+    <a href="https://scottkirvan.com/ScooterUtils">Documentation</a>
+  <span> · </span>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">Request Feature</a>
+  </h4>
+</div>
+
+ **ScotterUtils** is an Unreal Engine editor plugin which contains miscellaneous
+ artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and 
+ to help keep some setting persistent between restarts in the editor.
+
+If common tasks can be automated or streamlined, they may end up in ScooterUtils. Generally stuff that makes 
+Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've
+got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
+good candidate for an addition here, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
+
+This plugin currently contains:
+- Menus:
+  - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
+  - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
+- Persistent Settings:
+  - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
+  
+In Windows, the persistent editor Settings, are stored in this config file:  
 ```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 
 ## Getting up and running
-
-### Screen Real Estate 
-Once the plugin is built and loaded, you can find the **Screen Real Estate**
-setting by choosing **Edit > Editor Preferences** from the Main Menu bar, and
-then selecting **Plugins/Scooter Utilities**.
-
-The *Persistant Editor Scale* value is a percentage relative to the default 
-screen size of elements like fonts, buttons, and other widgets in the Unreal 
-Engine UI.  I like to work with all the fluff scaled down to about 80% of 
-what's considered "normal," so I set the Persistant Editor Scale to *0.8*.
-
-This same setting is available in the Unreal Editor by going to
-the Main Menu bar, selecting **Window > Developer Tools > Widget Reflector**,
-and changing the **Application Scale** setting.  However, the **Widget Reflector**
-method doesn't stick -- you have to set it everytime you restart **Unreal
-Engine**.  The Scooter Utility writes this value to your Config
-file, so you don't have to constantly re-set it.
 
 ### Max FPS
 The **Max FPS** (Maximum Frames Per Second)
 setting is found in the Main Menu bar; **Edit > Editor Preferences**, 
 then selecting **Plugins/Scooter Utilities**.
 
-**Max FPS** overrides the console variable setting (```t.MaxFPS```) and sets
-the engine's maximum editor frame rate.  Like the Screen Real Estate setting
-above, if you use ```t.MaxFPS```, it will reset any time you shutdown or restart 
-the editor.  Using the **ScooterUtils Max FPS** setting will be persistent and 
-stay set until you reset it.  Set it to ```0``` to let the system take over the 
-default.
+**Max FPS** overrides the console variable setting, ```t.MaxFPS```, which sets
+the engine's maximum editor frame rate.
+The **ScooterUtils Max FPS** setting is persistent and will
+stay set across all projects and restarts.
+Set it to ```0``` to let the
+system and it's console settings take over again.
 
 Turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under
 **Edit > Project Preferences**, **General Settings/Framerate** if you need to 
@@ -64,18 +89,24 @@ are off by default).
 This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload 
 your project on restart.  This is the same behavior you see when you enable or disable a plugin.
 
-This is for developers that need to frequently restart the engine to test code changes.  It's also 
+This is for developers that need to frequently restart the engine to test code changes, clear 
+undo stacks, refresh the system, etc.  It's also 
 nice for those times you've been working in the editor for a while and things just start to feel... um...
-off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no launcher popping up and prompting 
-for what to load, and no searching in file explorer to find the uproject file to open.
+off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no 
+launcher popping up and prompting 
+for a project to load, and no searching in file explorer to find the uproject file to open.
 
 ### Show Project in Explorer
 **Show Project in Explorer** is found in the Main Menu bar, under
   **File > Show Project in Explorer**.
 
-This will open file explorer in your main project folder -- i.e. the same folder as your project's `.uproject` file.
+This will open file explorer focused on  your main project folder -- i.e. the same 
+folder as your project's `.uproject` file.
 
-Being able to open the project in Explorer is nice for when you've opened a project from the Launcher and you need to know where it's actually stored on disk.  You can also do this by right clicking on assets in the content browser, which will take you do your project's content folder, but this menu makes it a bit quicker to get to.
+Being able to open the project in Explorer is nice for when you've opened a project from 
+the Launcher and you need to know where it's actually stored on disk.  You can 
+also do this by right clicking on assets in the content browser, which will 
+take you do your project's content folder, but this menu makes it a bit quicker to get to.
 
 ### Installation
 
@@ -92,34 +123,22 @@ that you can edit and build the code outside of Unreal.
 
 
 
-## About - for Developers
+## Where did "Persistent Editor Scale" go?  
 
 This was my first plugin in Unreal Engine.
 It was inspired by a [declined Epic Games Github Pull
-Request](https://github.com/EpicGames/UnrealEngine/pull/7436).  It's very
-simple and direct -- I wanted to understand the bare bones of the system,
-so there's not a lot of bells-and-whistles in this code.
+Request](https://github.com/EpicGames/UnrealEngine/pull/7436).
 
-The plugin has two components, an ``IModuleInterface`` derived
-``FScooterUtilsModule``, which bootstraps and provides basic life-support
-to the plugin, and an ``IObject`` derived ``IScooterUtilsSettings``
-object which is the system-aware component that works directly
-with Unreal's ``ISettingsModule`` and ``FSlateApplication``'s
-``ApplicationScale``.  The *Module* registers the callbacks and the
-*IObject* manages the data and processes the callbacks.
-
-First impressions, being new to the system:  The system itself -- the
-thin veil between the editor and the code, between the *UnrealBuildTool*
-and the Artist -- brilliant.  Conceptually, there is a hurdle --
-*there is no plugin api.*  You write your code to the entire surface
-of the application and all it's various plugins.  -- and getting build
-dependencies figured is a very high bar, but those details should be in
-the background, and once they are, it takes very little hard coding to
-pull together the pieces you need to accomplish what you're after.
+I wanted that feature myself, so I took the opportunity to teach myself plugin 
+programming and implemented it as a feature called 
+*Persistent Editor Scale*. Since that time (as of UE 5.4)
+Epic implemented the feature, and it can be found by navigating to
+`Edit` > `Editor Preferences...` > `General - Appearance` > `User Interface` > `Application Scale`. 
+I've removed the functionality from ScooterUtils to avoid any conflicts or confusion.
 
 ## Supported Platforms
 
-This plug-in was developed, built, and tested against **Unreal Engine 4.25, 4.26, 4.27, 5.0, 5.1, 5.2, 5.3, & 5.4**. It
+This plug-in was developed, built, and tested against **Unreal Engine 4.25, 4.26, 4.27, 5.0, 5.1, 5.2, 5.3, 5.4, & 5.5**. It
 should work on other
 platforms.
 
