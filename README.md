@@ -122,7 +122,11 @@ like this:
 2. Optional:  Use or convert your unreal project to a C++ project so
 that you can edit and build the code outside of Unreal.
 
-
+> [!WARNING]
+> As of UE 5.5.0, the automatic building of plugins from source is no longer 
+> working - You need to be using a C++ based Unreal project for the source 
+> to build.  Once it's built, you can copy/paste the plugin to other projects 
+> (or to your engine's **Plugins/Marketplace** folder to install it as an engine plugin).
 
 ## Where did "Persistent Editor Scale" go?  
 
@@ -139,11 +143,11 @@ I've removed the functionality from ScooterUtils to avoid any conflicts or confu
 
 ## Supported Platforms
 
-Supported Unreal Engine versions: **4.25-5.5**  *
+Supported Unreal Engine versions: **4.25-5.5**<sup>*</sup>
 
 For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
 
-* If you are working with an engine version prior to UE 5.5, please make sure you clone/download the correct branch.
+<sup>*</sup> *If you are using this repo/plugin with an engine version prior to UE 5.5, please make sure you clone/download the correct branch/version.*
 
 ## Dependencies
 
