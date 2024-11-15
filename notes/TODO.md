@@ -6,9 +6,13 @@ This is not a formal roadmap, or even a prioritized list, just a shorthand to he
 
 TODO
 ----
-- [ ] get project package'able for the unreal marketplace
-- [ ] update documentation with better installation instructions since UE5 is more restrictive on where you install plugins.  See issue [#14](https://github.com/ScottKirvan/ScooterUtils/issues/14)
+- [ ] reimplement the **Persistent Editor Scale** settings - Epics implementation is project based, not an editor setting. fml.
+- [ ] get project package'able for the unreal marketplace/fab
+- [x] update documentation with better engine installation instructions since UE5 is more restrictive on where you install plugins.  See issue [#14](https://github.com/ScottKirvan/ScooterUtils/issues/14)
 - [ ] Look into persisting some viewport settings [#13](https://github.com/ScottKirvan/ScooterUtils/issues/13) [#12](https://github.com/ScottKirvan/ScooterUtils/issues/12) [#11](https://github.com/ScottKirvan/ScooterUtils/issues/11)
+- [ ] update the installation docs with something clearer - I like how BrightEye does it
+- [ ] add binaries to the github releases - use unreal's "package" function to build them.
+- [ ] break documentation up so there's github savvy docs and user docs
 
 In Progress
 -----------
