@@ -173,15 +173,17 @@ ever developed plugins for other applications, you should check it out.
 
 - Please [file an
 issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
-or grab a fork, hack away, and submit [pull
+or grab a fork, hack away, and submit some [pull
 requests](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
 - Contact me at
 [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
 - You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB)
 server, I'm cptvideo.
 
-To locate other developers, I recommend the **# cpp** and **#
-engine-source** channels on the **Unreal Slackers** Discord server.
+To locate other developers, I'd like to recommend the **# cpp**, **# plugin-dev** and **#
+engine-source** channels on the **Unreal Slackers** Discord server, but recently
+there's a lot more trolls than helpful people up there.  It used to be better, but give it a 
+shot.  You may have better luck than me :-)
 
 ## References / Inspirations / Credits
 
