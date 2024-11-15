@@ -44,7 +44,7 @@
   </h4>
 </div>
 
- **ScotterUtils** is an Unreal Engine editor plugin which contains miscellaneous
+ **ScooterUtils** is an Unreal Engine editor plugin which contains miscellaneous
  artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and 
  to help keep some setting persistent between restarts in the editor.
 
@@ -157,7 +157,7 @@ and I'll try get you a build.  If you need an older build or another
 platform, I won't be able to build it for you, so you're going to have to get in touch with someone that can
 help you (See the Support/Contacts section below).
 
-The source requires Visual Studio (I;ve used the free 2019 & 2022 community versionc)
+The source requires Visual Studio (I;ve used the free 2019 & 2022 community version)
 and either an Unreal C++ code (rather than blueprint) project or the full
 Unreal Engine 4 source code from GitHub (just use the project-based
 approach, it's so easy). 
