@@ -127,20 +127,22 @@ that you can edit and build the code outside of Unreal.
 
 This was my first plugin in Unreal Engine.
 It was inspired by a [declined Epic Games Github Pull
-Request](https://github.com/EpicGames/UnrealEngine/pull/7436).
+Request](https://github.com/EpicGames/UnrealEngine/pull/7436). 
 
 I wanted that feature myself, so I took the opportunity to teach myself plugin 
 programming and implemented it as a feature called 
 *Persistent Editor Scale*. Since that time (as of UE 5.4)
-Epic implemented the feature, and it can be found by navigating to
-`Edit` > `Editor Preferences...` > `General - Appearance` > `User Interface` > `Application Scale`. 
+Epic [implemented the feature!](https://github.com/EpicGames/UnrealEngine/pull/7436#issuecomment-2068361921), and it can be found by navigating to
+**Edit > Editor Preferences...**, **General - Appearance / User Interface / Application Scale**. 
 I've removed the functionality from ScooterUtils to avoid any conflicts or confusion.
 
 ## Supported Platforms
 
-This plug-in was developed, built, and tested against **Unreal Engine 4.25, 4.26, 4.27, 5.0, 5.1, 5.2, 5.3, 5.4, & 5.5**. It
-should work on other
-platforms.
+Supported Unreal Engine versions: **4.25-5.5**  *
+
+For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
+
+* If you are working with an engine version prior to UE 5.5, please make sure you clone/download the correct branch.
 
 ## Dependencies
 
