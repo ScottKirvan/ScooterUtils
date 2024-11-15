@@ -5,11 +5,12 @@
 
 [Unreleased]
 ============
-
-[1.2.0] 2024-11-14
---------------------
+- ***Added***
+    - Icon for the plugin prefs dialog
+- ***Refactored***
+    - massive changes to README.md
 - ***Removed*** 
-    - removed *Screen Real Estate* - historically found in the **Editor Preferences** under **Plugins/Scooter Utilities**
+    - removed *Screen Real Estate* - historically found in the **Editor Preferences** under **Plugins/Scooter Utilities** - **[UPDATE]** I just found out that Epic's implementation of Application Scale is scoped to the project and isn't actually an editor setting - I'm going to have to roll all this code back in and do some thinking on how to deal with the potential weirdness/conflict of having the same setting in two places (one of which will be ignored for now)
 
 [1.1.0] - 2023-10-17
 --------------------
@@ -24,10 +25,10 @@
 
 [1.0.1] - 2023-10-17
 --------------------
-- ### Added
+- ***Added***
     - VERSION.md, CHANGELOG.md
 
-- ### Refactored
+- ***Refactored***
     - moving files and cleaning up directory structures
 
 ----------------------------------------------------------------------
