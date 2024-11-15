@@ -48,8 +48,9 @@
  artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and 
  to help keep some setting persistent between restarts in the editor.
 
-If common tasks can be automated or streamlined, they may end up in ScooterUtils. Generally stuff that makes 
-Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've
+If common tasks can be automated or streamlined, they may end up in ScooterUtils. Generally, the 
+plugin includes things that make Unreal Engine a bit quicker to use, especially if you're 
+creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
 good candidate for an addition here, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
