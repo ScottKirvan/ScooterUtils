@@ -126,7 +126,7 @@ that you can edit and build the code outside of Unreal.
 > As of UE 5.5.0, the automatic building of plugins from source is no longer 
 > working - You need to be using a C++ based Unreal project for the source 
 > to build.  Once it's built, you can copy/paste the plugin to other projects 
-> (or to your engine's **Plugins/Marketplace** folder to install it as an engine plugin).
+> (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
 
 ## Where did "Persistent Editor Scale" go?  
 
