@@ -18,50 +18,48 @@ void FScooterUtilsModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 
-	ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+	ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
 	if (SettingsModule != nullptr)
 	{
-		TSharedPtr<ISettingsSection> SettingsSection = 
-			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils",  // Editor Preferences->Plugins->Scooter Utilities... 
-				FText::FromString("Scooter Utilities"), 
-				FText::FromString("Miscellaneous Editor Preferences"), 
-				GetMutableDefault<UScooterUtilsSettings>());
+		TSharedPtr<ISettingsSection> SettingsSection =
+			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils", // Editor Preferences->Plugins->Scooter Utilities...
+											 FText::FromString("Scooter Utilities"),
+											 FText::FromString("Miscellaneous Editor Preferences"),
+											 GetMutableDefault<UScooterUtilsSettings>());
 
-		if (SettingsSection.IsValid()) 
-		{ 
+		if (SettingsSection.IsValid())
+		{
 			GetMutableDefault<UScooterUtilsSettings>()->LoadConfig();
-			GetMutableDefault<UScooterUtilsSettings>()->UpdateApplicationScale();
 			GetMutableDefault<UScooterUtilsSettings>()->UpdateMaxFPS();
-			//GetMutableDefault<UScooterUtilsSettings>()->UpdateShowFPS();
+			// GetMutableDefault<UScooterUtilsSettings>()->UpdateShowFPS();
 
 			SettingsSection->OnModified().BindLambda(
-				[]() { 
-					GetMutableDefault<UScooterUtilsSettings>()->SaveConfig(); 
-					return true; 
-				}
-			);
+				[]()
+				{
+					GetMutableDefault<UScooterUtilsSettings>()->SaveConfig();
+					return true;
+				});
 		}
 	}
-	
+
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	if (!IsRunningCommandlet())
 	{
-		FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+		FLevelEditorModule &LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 		LevelEditorMenuExtensibilityManager = LevelEditorModule.GetMenuExtensibilityManager();
 		MenuExtender = MakeShareable(new FExtender);
 		LevelEditorMenuExtensibilityManager->AddExtender(MenuExtender);
 	}
 
-		if (!IsRunningCommandlet())
+	if (!IsRunningCommandlet())
+	{
+		AddModuleListeners();
+		for (int32 i = 0; i < ModuleListeners.Num(); ++i)
 		{
-			AddModuleListeners();
-			for (int32 i = 0; i < ModuleListeners.Num(); ++i)
-			{
-				ModuleListeners[i]->OnStartupModule();
-			}
+			ModuleListeners[i]->OnStartupModule();
 		}
-	
+	}
 }
 
 void FScooterUtilsModule::ShutdownModule()
@@ -69,7 +67,7 @@ void FScooterUtilsModule::ShutdownModule()
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
 
-	ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+	ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
 	if (SettingsModule != nullptr)
 	{
@@ -83,5 +81,5 @@ void FScooterUtilsModule::AddMenuExtension(const FMenuExtensionDelegate &extensi
 }
 
 #undef LOCTEXT_NAMESPACE
-	
+
 IMPLEMENT_MODULE(FScooterUtilsModule, ScooterUtils)

@@ -4,7 +4,6 @@
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
-	ApplicationScale = 1.0f;
 	MaxFPS = 0;
 	// ShowFPS = false;
 }
@@ -24,11 +23,6 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 
 	const FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
 
-	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ApplicationScale))
-	{
-		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
-	}
-
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, MaxFPS))
 	{
 		GEngine->SetMaxFPS(MaxFPS);
@@ -37,7 +31,6 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 	/*
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowFPS))
 	{
-		//FSlateApplication::Get().SetMaxFPS(ApplicationScale);
 		if (ShowFPS)
 		{
 			//UE_LOG(LogTemp, Log, TEXT("ShowFPS"));
@@ -55,12 +48,6 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 
 #endif // WITH_EDITOR
 
-void UScooterUtilsSettings::SetApplicationScale(float f)
-{
-	ApplicationScale = f;
-	UpdateApplicationScale();
-}
-
 void UScooterUtilsSettings::SetMaxFPS(int fps)
 {
 	MaxFPS = fps;
@@ -74,11 +61,6 @@ void UScooterUtilsSettings::SetShowFPS(bool show)
 }
 */
 
-float UScooterUtilsSettings::GetApplicationScale()
-{
-	return ApplicationScale;
-}
-
 int UScooterUtilsSettings::GetMaxFPS()
 {
 	return MaxFPS;
@@ -90,15 +72,6 @@ bool UScooterUtilsSettings::GetShowFPS()
 	return ShowFPS;
 }
 */
-
-void UScooterUtilsSettings::UpdateApplicationScale()
-{
-	if (FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)
-	{
-		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
-	}
-	// TODO - maybe put in a .ini file only flag that would let a power user use a scale outside this range by editing the ini directly
-}
 
 void UScooterUtilsSettings::UpdateMaxFPS()
 {
