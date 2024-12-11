@@ -18,11 +18,9 @@ public:
 	void SetMaxFPS(int f);
 	int GetMaxFPS();
 	void UpdateMaxFPS();
-	/*
-	void SetShowFPS(bool f);
-	bool GetShowFPS();
-	void UpdateShowFPS();
-	*/
+	void SetShowViewportFPS(bool f);
+	bool GetShowViewportFPS();
+	void ToggleViewportFPS();
 
 protected:
 	// UObject overrides
@@ -60,7 +58,7 @@ public:
 	int MaxFPS;
 
 	UPROPERTY(EditAnywhere, config, Category = "Show FPS Onscreen", meta = (DisplayName = "Viewport toggle:  Show FPS"))
-	bool ShowFPS;
+	bool ShowViewportFPS;
 
 	/**
 	 * Returns an event delegate that is executed when a setting has changed.

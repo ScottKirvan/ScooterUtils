@@ -26,7 +26,7 @@ void FScooterUtilsModule::StartupModule()
 	if (SettingsModule != nullptr)
 	{
 		TSharedPtr<ISettingsSection> SettingsSection =
-			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils", // Editor Preferences->Plugins->Scooter Utilities...
+			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE_Utils", // Editor Preferences->Plugins->Scooter Utilities...
 											 FText::FromString("Scooter Utilities"),
 											 FText::FromString("Miscellaneous Editor Preferences"),
 											 GetMutableDefault<UScooterUtilsSettings>());
@@ -89,14 +89,17 @@ void FScooterUtilsModule::EditorIsFullyLoaded() const
 	if (GEngine && GUnrealEd)
 	{
 		FCoreDelegates::OnEndFrame.Remove(MyHandle);
-		ToggleViewportFPS();
+		if (GetMutableDefault<UScooterUtilsSettings>()->GetShowViewportFPS())
+		{
+			ShowViewportFPS();
+		}
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("FPS in Viewport: GEngine or GUnrealEd is still do not exist for whatever reason..."));
 	}
 }
-void FScooterUtilsModule::ToggleViewportFPS()
+void FScooterUtilsModule::ShowViewportFPS()
 {
 	const FString FPS = "FPS";
 	GEngine->ExecEngineStat(GUnrealEd->GetWorld(), GUnrealEd->GetWorld()->GetGameViewport(), *FPS);

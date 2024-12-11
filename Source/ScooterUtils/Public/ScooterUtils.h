@@ -41,5 +41,5 @@ protected:
 	TSharedPtr<FExtensibilityManager> LevelEditorMenuExtensibilityManager;
 
 private:
-	static void ToggleViewportFPS();
+	static void ShowViewportFPS();
 };

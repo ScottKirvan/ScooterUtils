@@ -1,12 +1,14 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ScooterUtilsSettings.h"
+#include "Editor/UnrealEdEngine.h"
+#include "UnrealEdGlobals.h"
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
 	ApplicationScale = 1.0f;
 	MaxFPS = 0;
-	ShowFPS = false;
+	ShowViewportFPS = false;
 }
 
 void UScooterUtilsSettings::Init()
@@ -34,12 +36,9 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 		GEngine->SetMaxFPS(MaxFPS);
 	}
 
-	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowFPS))
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowViewportFPS))
 	{
-		if (ShowFPS)
-		{
-			// GEngine->Exec( GetWorld(), TEXT( "stat fps" ) );
-		}
+		SetShowViewportFPS(ShowViewportFPS);
 	}
 
 	SaveConfig();
@@ -61,12 +60,11 @@ void UScooterUtilsSettings::SetMaxFPS(int fps)
 	UpdateMaxFPS();
 }
 
-/*
-void UScooterUtilsSettings::SetShowFPS(bool show)
+void UScooterUtilsSettings::SetShowViewportFPS(bool show)
 {
-	ShowFPS = show; UpdateShowFPS();
+	ShowViewportFPS = show;
+	ToggleViewportFPS();
 }
-*/
 
 float UScooterUtilsSettings::GetApplicationScale()
 {
@@ -78,12 +76,10 @@ int UScooterUtilsSettings::GetMaxFPS()
 	return MaxFPS;
 }
 
-/*
-bool UScooterUtilsSettings::GetShowFPS()
+bool UScooterUtilsSettings::GetShowViewportFPS()
 {
-	return ShowFPS;
+	return ShowViewportFPS;
 }
-*/
 
 void UScooterUtilsSettings::UpdateApplicationScale()
 {
@@ -102,17 +98,10 @@ void UScooterUtilsSettings::UpdateMaxFPS()
 	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
 }
 
-/*
-void UScooterUtilsSettings::UpdateShowFPS()
+void UScooterUtilsSettings::ToggleViewportFPS()
 {
-	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS1:  %d"), ShowFPS);
-	if (ShowFPS)
-	{
-		//IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("stat fps"));
-		//CVar->Set(ShowFPS);
-		//ShowFPS = CVar->GetBool();
-		GEngine->Exec( GetWorld(), TEXT( "stat fps" ) );
-	}
-	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS2:  %d"), ShowFPS);
+	// UE_LOG(LogTemp, Log, TEXT("ToggleViewportFPS1:  %d"), ShowViewportFPS);
+	const FString FPS = "FPS";
+	GEngine->ExecEngineStat(GUnrealEd->GetWorld(), GUnrealEd->GetWorld()->GetGameViewport(), *FPS);
+	// UE_LOG(LogTemp, Log, TEXT("ToggleViewportFPS2:  %d"), ShowViewportFPS);
 }
-*/
