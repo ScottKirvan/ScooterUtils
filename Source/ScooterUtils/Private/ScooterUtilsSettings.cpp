@@ -100,10 +100,9 @@ void UScooterUtilsSettings::UpdateApplicationScale()
 
 void UScooterUtilsSettings::UpdateMaxFPS()
 {
-	UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
+	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
 	GEngine->SetMaxFPS(MaxFPS);
 	MaxFPS = GEngine->GetMaxFPS();
-	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
 }
 
 void UScooterUtilsSettings::ToggleViewportFPS()
@@ -111,5 +110,4 @@ void UScooterUtilsSettings::ToggleViewportFPS()
 	// UE_LOG(LogTemp, Log, TEXT("ToggleViewportFPS1:  %d"), ShowViewportFPS);
 	const FString FPS = "FPS";
 	GEngine->ExecEngineStat(GUnrealEd->GetWorld(), GUnrealEd->GetWorld()->GetGameViewport(), *FPS);
-	// UE_LOG(LogTemp, Log, TEXT("ToggleViewportFPS2:  %d"), ShowViewportFPS);
 }

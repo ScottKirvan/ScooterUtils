@@ -33,13 +33,12 @@ public:
 	UPROPERTY(config)
 	bool bOverrideUEApplicationScale;
 	/**
-	 * Controls the scale of text and widgets in the editor, allowing you to gain more control
-	 * over how much infomation you see and giving you the ability to work with what may be
-	 * more comfortable then the default size.  This setting persists system-wide between
-	 * editing sessions and all projects launched under the same version of Unreal.
+	 * Controls the scale of text and widgets in the editor, giving you the ability
+	 * to work with more comfortable default sizes.  This setting persists system-wide
+	 * between editing sessions and all projects launched under the same version of Unreal.
 	 *
-	 * NOTE: Disabling this setting will default back to the system default scale, you may need to
-	 * restart the editor to get the system to recognize the settings in Editor Preferences.
+	 * NOTE: Disabling this setting will default back to the system default scale, you may
+	 * need to restart the editor to get the system to recognize the settings in Editor Preferences.
 	 *
 	 * C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
 	 *
@@ -50,9 +49,9 @@ public:
 	float ApplicationScale;
 
 	/**
-	 * Controls the Maximum FPS the system can run at.  By default, when you start up, this is
-	 * set to 60 or 120 fps.  By running with this unclamped, you can spot performance impacts early on.
-	 * In the system, you can set this in the console by typing "t.MaxFPS #".  By default, the value is
+	 * Controls the Maximum FPS the system can run at.  By default, when you start up, this is set
+	 * to 60 or 120 fps.  By running with this unclamped, you can spot performance impacts early on.
+	 *  In the system, you can set this in the console by typing "t.MaxFPS #".  By default, the value is
 	 * set to 0, which leaves the decision up to the system.
 	 *
 	 * C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
@@ -64,7 +63,7 @@ public:
 	int MaxFPS;
 
 	/**
-	 * Controls whether or not, by default, the FPS is shown in the viewport.
+	 * Controls whether or not, by default, the FPS is shown in the editor viewport.
 	 *
 	 * C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
 	 *
