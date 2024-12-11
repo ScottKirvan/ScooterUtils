@@ -1,4 +1,4 @@
-OL2Cal - TODO
+ScooterUtils - TODO
 ====
 Just a spot to keep track of what's being worked on, what may get worked on next, and  what's been done.  
 
@@ -27,3 +27,4 @@ Not Gonna Do ✓
 - [x] F11/Immersive mode doesn't work properly with application set (window size is wrong) [#2](https://github.com/ScottKirvan/ScooterUtils/issues/2)
     - This is a Slate issue and can be duplicated using Widget Reflector
     - *Update:* as of 5.4, the application scale setting has been added to the engine under `Edit` > `Editor Preferences...` > `General - Appearance` > `User Interface` > `Application Scale`, so I'm removing the functionality in 5.5+ to avoid conflicting behaviors.  This "*bug*" is still present, so even Epic didn't think it was all that important.
+    - -*Update Update:* Epic's implementation is per-project, not global, so this functionality is being re-introduced.
