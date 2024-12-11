@@ -6,6 +6,7 @@
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
+	bOverrideUEApplicationScale = false;
 	ApplicationScale = 1.0f;
 	MaxFPS = 0;
 	ShowViewportFPS = false;
@@ -28,7 +29,14 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ApplicationScale))
 	{
-		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
+		if (bOverrideUEApplicationScale)
+		{
+			FSlateApplication::Get().SetApplicationScale(ApplicationScale);
+		}
+		else
+		{
+			FSlateApplication::Get().SetApplicationScale(1.0f);
+		}
 	}
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, MaxFPS))
@@ -83,7 +91,7 @@ bool UScooterUtilsSettings::GetShowViewportFPS()
 
 void UScooterUtilsSettings::UpdateApplicationScale()
 {
-	if (FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)
+	if (bOverrideUEApplicationScale && FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)
 	{
 		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
 	}
