@@ -66,6 +66,23 @@ In Windows, the persistent editor Settings, are stored in this config file:
 
 ## Getting up and running
 
+### Screen Real Estate 
+Once the plugin is built and loaded, you can find the **Screen Real Estate**
+setting by choosing **Edit > Editor Preferences** from the Main Menu bar, and
+then selecting **Plugins/Scooter Utilities**.
+
+The *Persistant Editor Scale* value is a percentage relative to the default 
+screen size of elements like fonts, buttons, and other widgets in the Unreal 
+Engine UI.  I like to work with all the fluff scaled down to about 80% of 
+what's considered "normal," so I set the Persistant Editor Scale to *0.8*.
+
+This same setting is available in the Unreal Editor by going to
+the Main Menu bar, selecting **Window > Developer Tools > Widget Reflector**,
+and changing the **Application Scale** setting.  However, the **Widget Reflector**
+method doesn't stick -- you have to set it everytime you restart **Unreal
+Engine**.  The Scooter Utility writes this value to your Config
+file, so you don't have to constantly re-set it.
+
 ### Max FPS
 The **Max FPS** (Maximum Frames Per Second)
 setting is found in the Main Menu bar; **Edit > Editor Preferences**, 
