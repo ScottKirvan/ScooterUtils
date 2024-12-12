@@ -44,16 +44,16 @@
   </h4>
 </div>
 
- **ScooterUtils** is an Unreal Engine editor plugin which contains miscellaneous
+ **ScooterUtils** is an Unreal Engine editor plugin (**Scooter Utilities**) which contains miscellaneous
  artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and 
  to help keep some settings persistent between restarts in the editor.
 
-If common tasks can be automated or streamlined, they may end up in ScooterUtils. Generally, the 
+If common tasks can be automated or streamlined, they may end up in **ScooterUtils**. Generally, the 
 plugin is a Swiss Army Knife of tools and includes things that make Unreal Engine a bit quicker to 
 use, especially if you're 
 creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
-good candidate for an addition to ScooterUtils, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
+good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
 This plugin currently contains:
 - Menus:
@@ -69,7 +69,7 @@ In Windows, the persistent editor Settings, are stored in this config file:
 
 ## Getting up and running
 
-Navigate to the **Edit > Plugins** menu. Search for **Scooter Utils**, and enable the plugin (restart required). 
+Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 With the plugin enabled, you'll be able to find the following new tools:
 
 ### Restart Editor...
@@ -107,7 +107,7 @@ Engine UI.  I like to work with all the fluff scaled down to about 80% of
 what's considered "normal," so I set the Persistent Editor Scale to *0.8*.
 
 As of **Unreal Engine 5.4** there is an Application Scale setting under **Editor Preferences/Appearance**, 
-which works great, but resets between different projects.  The setting in **ScooterUtils** is persistent
+which works great, but resets between different projects.  The setting in **Scooter Utilities** is persistent
 and works globally across all projects. 
 
 > [!NOTE]
@@ -120,7 +120,7 @@ Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and sel
 
 *Persistent Editor Max FPS Setting* overrides the console variable setting, ```t.MaxFPS```, which sets
 the engine's maximum editor frame rate.
-The *ScooterUtils Max FPS* setting is persistent and will
+The *Max FPS* setting is persistent and will
 stay set across all projects and restarts.
 Set it to ```0``` to let the
 system and it's console settings take over again.
