@@ -7,10 +7,11 @@
 ============
 - ***Added***
     - Icon for the plugin prefs dialog.
-    - checkbox for making the "show fps" viewport setting persistent.
+    - persistent *Show FPS* viewport setting.
+    - a checkbox for *Persistent Editor Scale* - this now overrides the setting in **Editor Preferences/Appearance**
 - ***Refactored***
     - massive changes to README.md
-    - Application scale is getting a rework due to Epic's implementation of this in Editor Prefs - this setting is global to all editor instances, not tied to a project
+    - Application scale was reworked due to Epic's implementation of this in Editor Prefs - **ScooterUtil**'s setting is global to all editor instances, not tied to a project
 
 [1.1.0] - 2023-10-17
 --------------------
