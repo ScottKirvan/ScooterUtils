@@ -1,11 +1,15 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ScooterUtilsSettings.h"
+#include "Editor/UnrealEdEngine.h"
+#include "UnrealEdGlobals.h"
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
+	bOverrideUEApplicationScale = false;
+	ApplicationScale = 1.0f;
 	MaxFPS = 0;
-	// ShowFPS = false;
+	ShowViewportFPS = false;
 }
 
 void UScooterUtilsSettings::Init()
@@ -23,23 +27,27 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 
 	const FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
 
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ApplicationScale))
+	{
+		if (bOverrideUEApplicationScale)
+		{
+			FSlateApplication::Get().SetApplicationScale(ApplicationScale);
+		}
+		else
+		{
+			FSlateApplication::Get().SetApplicationScale(1.0f);
+		}
+	}
+
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, MaxFPS))
 	{
 		GEngine->SetMaxFPS(MaxFPS);
 	}
 
-	/*
-	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowFPS))
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowViewportFPS))
 	{
-		if (ShowFPS)
-		{
-			//UE_LOG(LogTemp, Log, TEXT("ShowFPS"));
-			//IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("stat fps"));
-			//CVar->Set(ShowFPS);
-			GEngine->Exec( GetWorld(), TEXT( "stat fps" ) );
-		}
+		SetShowViewportFPS(ShowViewportFPS);
 	}
-	*/
 
 	SaveConfig();
 
@@ -48,50 +56,58 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 
 #endif // WITH_EDITOR
 
+void UScooterUtilsSettings::SetApplicationScale(float f)
+{
+	ApplicationScale = f;
+	UpdateApplicationScale();
+}
+
 void UScooterUtilsSettings::SetMaxFPS(int fps)
 {
 	MaxFPS = fps;
 	UpdateMaxFPS();
 }
 
-/*
-void UScooterUtilsSettings::SetShowFPS(bool show)
+void UScooterUtilsSettings::SetShowViewportFPS(bool show)
 {
-	ShowFPS = show; UpdateShowFPS();
+	ShowViewportFPS = show;
+	ToggleViewportFPS();
 }
-*/
+
+float UScooterUtilsSettings::GetApplicationScale()
+{
+	return ApplicationScale;
+}
 
 int UScooterUtilsSettings::GetMaxFPS()
 {
 	return MaxFPS;
 }
 
-/*
-bool UScooterUtilsSettings::GetShowFPS()
+bool UScooterUtilsSettings::GetShowViewportFPS()
 {
-	return ShowFPS;
+	return ShowViewportFPS;
 }
-*/
+
+void UScooterUtilsSettings::UpdateApplicationScale()
+{
+	if (bOverrideUEApplicationScale && FSlateApplication::IsInitialized() && ApplicationScale >= 0.5f && ApplicationScale <= 3.0f)
+	{
+		FSlateApplication::Get().SetApplicationScale(ApplicationScale);
+	}
+	// TODO - maybe put in a .ini file only flag that would let a power user use a scale outside this range by editing the ini directly
+}
 
 void UScooterUtilsSettings::UpdateMaxFPS()
 {
-	UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
+	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS1:  %d"), MaxFPS);
 	GEngine->SetMaxFPS(MaxFPS);
 	MaxFPS = GEngine->GetMaxFPS();
-	// UE_LOG(LogTemp, Log, TEXT("UpdateMaxFPS2:  %d"), MaxFPS);  // I'm keeping there here as an example of formatted string printing to the log
 }
 
-/*
-void UScooterUtilsSettings::UpdateShowFPS()
+void UScooterUtilsSettings::ToggleViewportFPS()
 {
-	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS1:  %d"), ShowFPS);
-	if (ShowFPS)
-	{
-		//IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("stat fps"));
-		//CVar->Set(ShowFPS);
-		//ShowFPS = CVar->GetBool();
-		GEngine->Exec( GetWorld(), TEXT( "stat fps" ) );
-	}
-	UE_LOG(LogTemp, Log, TEXT("UpdateShowFPS2:  %d"), ShowFPS);
+	// UE_LOG(LogTemp, Log, TEXT("ToggleViewportFPS1:  %d"), ShowViewportFPS);
+	const FString FPS = "FPS";
+	GEngine->ExecEngineStat(GUnrealEd->GetWorld(), GUnrealEd->GetWorld()->GetGameViewport(), *FPS);
 }
-*/

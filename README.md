@@ -1,7 +1,7 @@
 
 <div align="center">
 
-  <img src="assets/media/logo.jpg" alt="logo" width="200" height="auto" />
+  <img src="assets/media/logo2.png" alt="logo" width="200" height="auto" />
     <h1><a href="https://github.com/ScottKirvan/ScooterUtils">ScottKirvan/ScooterUtils</a></h1>
   <h3>A collection of editor tools for Unreal Engine</h3>
   
@@ -44,44 +44,33 @@
   </h4>
 </div>
 
- **ScooterUtils** is an Unreal Engine editor plugin which contains miscellaneous
+ **ScooterUtils** is an Unreal Engine editor plugin (**Scooter Utilities**) which contains miscellaneous
  artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and 
- to help keep some setting persistent between restarts in the editor.
+ to help keep some settings persistent between restarts in the editor.
 
-If common tasks can be automated or streamlined, they may end up in ScooterUtils. Generally, the 
-plugin includes things that make Unreal Engine a bit quicker to use, especially if you're 
+If common tasks can be automated or streamlined, they may end up in **ScooterUtils**. Generally, the 
+plugin is a Swiss Army Knife of tools and includes things that make Unreal Engine a bit quicker to 
+use, especially if you're 
 creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
-good candidate for an addition here, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
+good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
 This plugin currently contains:
 - Menus:
   - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
   - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
 - Persistent Settings:
+  - *Editor Scale (Applicaiton Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
+  - *Show FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   
 In Windows, the persistent editor Settings, are stored in this config file:  
 ```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 
 ## Getting up and running
 
-### Max FPS
-The **Max FPS** (Maximum Frames Per Second)
-setting is found in the Main Menu bar; **Edit > Editor Preferences**, 
-then selecting **Plugins/Scooter Utilities**.
-
-**Max FPS** overrides the console variable setting, ```t.MaxFPS```, which sets
-the engine's maximum editor frame rate.
-The **ScooterUtils Max FPS** setting is persistent and will
-stay set across all projects and restarts.
-Set it to ```0``` to let the
-system and it's console settings take over again.
-
-Turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under
-**Edit > Project Preferences**, **General Settings/Framerate** if you need to 
-unclamp the system and run it as freewheeling as possible (These
-are off by default).
+Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
+With the plugin enabled, you'll be able to find the following new tools:
 
 ### Restart Editor...
 **Restart Editor** is found in the Main Menu bar, under
@@ -109,7 +98,47 @@ the Launcher and you need to know where it's actually stored on disk.  You can
 also do this by right clicking on assets in the content browser, which will 
 take you do your project's content folder, but this menu makes it a bit quicker to get to.
 
-### Installation
+### Screen Real Estate: Persistent Editor Scale
+Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Screen Real Estate** section.
+
+The *Persistent Editor Scale* value is a percentage relative to the default 
+screen size of elements like fonts, buttons, and other widgets in the Unreal 
+Engine UI.  I like to work with all the fluff scaled down to about 80% of 
+what's considered "normal," so I set the Persistent Editor Scale to *0.8*.
+
+As of **Unreal Engine 5.4** there is an Application Scale setting under **Editor Preferences/Appearance**, 
+which works great, but resets between different projects.  The setting in **Scooter Utilities** is persistent
+and works globally across all projects. 
+
+> [!NOTE]
+> This setting overrides the setting in **Editor Preferences/Appearance**, but note, when you disable this setting,
+> the editor will default back to the normal 1.0 setting as a scale value.  You may need to restart the editor
+> to get the system to recognize that you'd rather use the **Editor Prefernces/Appearance** setting.
+
+### Max FPS
+Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
+
+*Persistent Editor Max FPS Setting* overrides the console variable setting, ```t.MaxFPS```, which sets
+the engine's maximum editor frame rate.
+The *Max FPS* setting is persistent and will
+stay set across all projects and restarts.
+Set it to ```0``` to let the
+system and it's console settings take over again.
+
+To ensure the system is running as freewheeling as possible, turn off **Smooth Frame Rate** and **Used Fixed Frame Rate** under
+**Edit > Project Preferences**, **General Settings/Framerate** (These
+are typically  off by default).
+
+### Show FPS
+Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Show FPS Onscreen** section.
+
+*Viewport Toggle: Show FPS* turns on the FPS display in the editor viewport, and keeps it on between restarts.  
+
+This is the same functionality as the viewport hamburger menu's **Show FPS** setting, but this will stay enabled
+between engine/editor restarts.
+
+
+## Installation
 
 This is kind of standard practice for GitHub Unreal plugins; it goes
 like this:
@@ -128,18 +157,6 @@ that you can edit and build the code outside of Unreal.
 > to build.  Once it's built, you can copy/paste the plugin to other projects 
 > (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
 
-## Where did "Persistent Editor Scale" go?  
-
-This was my first plugin in Unreal Engine.
-It was inspired by a [declined Epic Games Github Pull
-Request](https://github.com/EpicGames/UnrealEngine/pull/7436). 
-
-I wanted that feature myself, so I took the opportunity to teach myself plugin 
-programming and implemented it as a feature called 
-*Persistent Editor Scale*. Since that time (as of UE 5.4)
-Epic [implemented the feature!](https://github.com/EpicGames/UnrealEngine/pull/7436#issuecomment-2068361921), and it can be found by navigating to
-**Edit > Editor Preferences...**, **General - Appearance / User Interface / Application Scale**. 
-I've removed the functionality from ScooterUtils to avoid any conflicts or confusion.
 
 ## Supported Platforms
 
@@ -157,7 +174,7 @@ and I'll try get you a build.  If you need an older build or another
 platform, I won't be able to build it for you, so you're going to have to get in touch with someone that can
 help you (See the Support/Contacts section below).
 
-The source requires Visual Studio (I;ve used the free 2019 & 2022 community version)
+The source requires Visual Studio (I've used the free 2019 & 2022 community version)
 and either an Unreal C++ code (rather than blueprint) project or the full
 Unreal Engine 4 source code from GitHub (just use the project-based
 approach, it's so easy). 

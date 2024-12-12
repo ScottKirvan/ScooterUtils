@@ -6,6 +6,8 @@
 #include "ISettingsSection.h"
 #include "ScooterUtilsMenu.h"
 #include "LevelEditor.h"
+#include "Editor/UnrealEdEngine.h"
+#include "UnrealEdGlobals.h"
 
 #define LOCTEXT_NAMESPACE "FScooterUtilsModule"
 
@@ -17,13 +19,14 @@ void FScooterUtilsModule::AddModuleListeners()
 void FScooterUtilsModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
+	MyHandle = FCoreDelegates::OnEndFrame.AddRaw(this, &FScooterUtilsModule::EditorIsFullyLoaded);
 
 	ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
 	if (SettingsModule != nullptr)
 	{
 		TSharedPtr<ISettingsSection> SettingsSection =
-			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE4_Utils", // Editor Preferences->Plugins->Scooter Utilities...
+			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE_Utils", // Editor Preferences->Plugins->Scooter Utilities...
 											 FText::FromString("Scooter Utilities"),
 											 FText::FromString("Miscellaneous Editor Preferences"),
 											 GetMutableDefault<UScooterUtilsSettings>());
@@ -31,6 +34,7 @@ void FScooterUtilsModule::StartupModule()
 		if (SettingsSection.IsValid())
 		{
 			GetMutableDefault<UScooterUtilsSettings>()->LoadConfig();
+			GetMutableDefault<UScooterUtilsSettings>()->UpdateApplicationScale();
 			GetMutableDefault<UScooterUtilsSettings>()->UpdateMaxFPS();
 			// GetMutableDefault<UScooterUtilsSettings>()->UpdateShowFPS();
 
@@ -78,6 +82,27 @@ void FScooterUtilsModule::ShutdownModule()
 void FScooterUtilsModule::AddMenuExtension(const FMenuExtensionDelegate &extensionDelegate, FName extensionHook, const TSharedPtr<FUICommandList> &CommandList, EExtensionHook::Position position)
 {
 	MenuExtender->AddMenuExtension(extensionHook, position, CommandList, extensionDelegate);
+}
+
+void FScooterUtilsModule::EditorIsFullyLoaded() const
+{
+	if (GEngine && GUnrealEd)
+	{
+		FCoreDelegates::OnEndFrame.Remove(MyHandle);
+		if (GetMutableDefault<UScooterUtilsSettings>()->GetShowViewportFPS())
+		{
+			ShowViewportFPS();
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FPS in Viewport: GEngine or GUnrealEd is still do not exist for whatever reason..."));
+	}
+}
+void FScooterUtilsModule::ShowViewportFPS()
+{
+	const FString FPS = "FPS";
+	GEngine->ExecEngineStat(GUnrealEd->GetWorld(), GUnrealEd->GetWorld()->GetGameViewport(), *FPS);
 }
 
 #undef LOCTEXT_NAMESPACE

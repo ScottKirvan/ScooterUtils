@@ -6,11 +6,12 @@
 [Unreleased]
 ============
 - ***Added***
-    - Icon for the plugin prefs dialog
+    - Icon for the plugin prefs dialog.
+    - persistent *Show FPS* viewport setting.
+    - a checkbox for *Persistent Editor Scale* - this now overrides the setting in **Editor Preferences/Appearance**
 - ***Refactored***
     - massive changes to README.md
-- ***Removed*** 
-    - removed *Screen Real Estate* - historically found in the **Editor Preferences** under **Plugins/Scooter Utilities** - **[UPDATE]** I just found out that Epic's implementation of Application Scale is scoped to the project and isn't actually an editor setting - I'm going to have to roll all this code back in and do some thinking on how to deal with the potential weirdness/conflict of having the same setting in two places (one of which will be ignored for now)
+    - Application scale was reworked due to Epic's implementation of this in Editor Prefs - **ScooterUtil**'s setting is global to all editor instances, not tied to a project
 
 [1.1.0] - 2023-10-17
 --------------------
