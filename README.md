@@ -55,13 +55,12 @@ creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
 good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
-This plugin currently contains:
 ## Features
 - Menus:
   - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
   - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
-- Persistent Settings:
-  - *Editor Scale (Applicaiton Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
+- Persistent Settings (settings that don't change between editor restarts/launches):
+  - *Editor Scale (Application Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Show FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   
@@ -78,13 +77,13 @@ With the plugin enabled, you'll be able to find the following new tools:
   **File > Restart Editor...**.
 
 This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload 
-your project on restart.  This is the same behavior you see when you enable or disable a plugin.
+your project on restart.  This is the same behavior you see when, for example, you enable or disable a plugin.
 
-This is for developers that need to frequently restart the engine to test code changes, clear 
+This is for anyone that frequently restarts the engine to test code changes, clear 
 undo stacks, refresh the system, etc.  It's also 
 nice for those times you've been working in the editor for a while and things just start to feel... um...
-off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no 
-launcher popping up and prompting 
+off.  Just hit **Restart Editor...** and you're project will shutdown and 
+restart -- no launcher popping up and prompting 
 for a project to load, and no searching in file explorer to find the uproject file to open.
 
 ### Show Project in Explorer
@@ -114,7 +113,7 @@ and works globally across all projects.
 > [!NOTE]
 > This setting overrides the setting in **Editor Preferences/Appearance**, but note, when you disable this setting,
 > the editor will default back to the normal 1.0 setting as a scale value.  You may need to restart the editor
-> to get the system to recognize that you'd rather use the **Editor Prefernces/Appearance** setting.
+> to get the system to recognize that you'd rather use the **Editor Preferences/Appearance** setting.
 
 ### Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
@@ -152,7 +151,7 @@ like this:
 2. Optional:  Use or convert your unreal project to a C++ project so
 that you can edit and build the code outside of Unreal.
 
-> [!WARNING]
+> [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins from source is no longer 
 > working - You need to be using a C++ based Unreal project for the source 
 > to build.  Once it's built, you can copy/paste the plugin to other projects 
