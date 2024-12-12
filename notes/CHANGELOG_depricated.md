@@ -5,10 +5,15 @@
 
 [Unreleased]
 ============
+[Released]
+==========
+
+[1.2.0] - 2024-12-12
+--------------------
 - ***Added***
     - Icon for the plugin prefs dialog.
     - persistent *Show FPS* viewport setting.
-    - a checkbox for *Persistent Editor Scale* - this now overrides the setting in **Editor Preferences/Appearance**
+    - a checkbox for *Persistent Editor Scale* - this now overrides the setting in **Editor Preferences/Appearance** (UE 5.4+)
 - ***Refactored***
     - massive changes to README.md
     - Application scale was reworked due to Epic's implementation of this in Editor Prefs - **ScooterUtil**'s setting is global to all editor instances, not tied to a project
@@ -20,9 +25,6 @@
 
 - ***Fixed***
     - [update] Depricated API. FEditorStyle::GetStyleSetName() -> AppStyle::GetAppStyleSetName()
-
-[Released]
-==========
 
 [1.0.1] - 2023-10-17
 --------------------

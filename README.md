@@ -55,13 +55,12 @@ creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
 good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
-This plugin currently contains:
 ## Features
 - Menus:
   - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
   - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
-- Persistent Settings:
-  - *Editor Scale (Applicaiton Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
+- Persistent Settings (settings that don't change between editor restarts/launches):
+  - *Editor Scale (Application Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Show FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   
@@ -73,21 +72,21 @@ In Windows, the persistent editor Settings, are stored in this config file:
 Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 With the plugin enabled, you'll be able to find the following new tools:
 
-### Restart Editor...
+### File Menu: Restart Editor...
 **Restart Editor** is found in the Main Menu bar, under
   **File > Restart Editor...**.
 
 This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload 
-your project on restart.  This is the same behavior you see when you enable or disable a plugin.
+your project on restart.  This is the same behavior you see when, for example, you enable or disable a plugin.
 
-This is for developers that need to frequently restart the engine to test code changes, clear 
+This is for anyone that frequently restarts the engine to test code changes, clear 
 undo stacks, refresh the system, etc.  It's also 
 nice for those times you've been working in the editor for a while and things just start to feel... um...
-off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no 
-launcher popping up and prompting 
+off.  Just hit **Restart Editor...** and you're project will shutdown and 
+restart -- no launcher popping up and prompting 
 for a project to load, and no searching in file explorer to find the uproject file to open.
 
-### Show Project in Explorer
+### File Menu: Show Project in Explorer
 **Show Project in Explorer** is found in the Main Menu bar, under
   **File > Show Project in Explorer**.
 
@@ -99,7 +98,7 @@ the Launcher and you need to know where it's actually stored on disk.  You can
 also do this by right clicking on assets in the content browser, which will 
 take you do your project's content folder, but this menu makes it a bit quicker to get to.
 
-### Screen Real Estate: Persistent Editor Scale
+### Prefs: Screen Real Estate: Persistent Editor Scale
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Screen Real Estate** section.
 
 The *Persistent Editor Scale* value is a percentage relative to the default 
@@ -114,9 +113,9 @@ and works globally across all projects.
 > [!NOTE]
 > This setting overrides the setting in **Editor Preferences/Appearance**, but note, when you disable this setting,
 > the editor will default back to the normal 1.0 setting as a scale value.  You may need to restart the editor
-> to get the system to recognize that you'd rather use the **Editor Prefernces/Appearance** setting.
+> to get the system to recognize that you'd rather use the **Editor Preferences/Appearance** setting.
 
-### Max FPS
+### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
 
 *Persistent Editor Max FPS Setting* overrides the console variable setting, ```t.MaxFPS```, which sets
@@ -130,7 +129,7 @@ To ensure the system is running as freewheeling as possible, turn off **Smooth F
 **Edit > Project Preferences**, **General Settings/Framerate** (These
 are typically  off by default).
 
-### Show FPS
+### Prefs: Show FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Show FPS Onscreen** section.
 
 *Viewport Toggle: Show FPS* turns on the FPS display in the editor viewport, and keeps it on between restarts.  
@@ -152,7 +151,7 @@ like this:
 2. Optional:  Use or convert your unreal project to a C++ project so
 that you can edit and build the code outside of Unreal.
 
-> [!WARNING]
+> [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins from source is no longer 
 > working - You need to be using a C++ based Unreal project for the source 
 > to build.  Once it's built, you can copy/paste the plugin to other projects 
