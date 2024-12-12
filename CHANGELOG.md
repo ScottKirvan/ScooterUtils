@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ScottKirvan/ScooterUtils/compare/v1.2.0...v1.2.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* move generated CHANGELOG.md to notes folder ([a4dfe0c](https://github.com/ScottKirvan/ScooterUtils/commit/a4dfe0c4616e347cc96902dcfce50216b61f62b7))
+
 ## 1.2.0 (2024-12-12)
 
 
