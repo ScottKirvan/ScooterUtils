@@ -56,6 +56,7 @@ got something you're repeatedly turning off or resetting every time you open  yo
 good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
 This plugin currently contains:
+## Features
 - Menus:
   - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
   - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
@@ -67,7 +68,7 @@ This plugin currently contains:
 In Windows, the persistent editor Settings, are stored in this config file:  
 ```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 
-## Getting up and running
+## Usage
 
 Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 With the plugin enabled, you'll be able to find the following new tools:
@@ -222,14 +223,11 @@ over a month when I first wrote this.  I am so totally blown away.
 Epic's training material is outstanding - The sheer amount of material
 available, directly from Unreal, and being produced by end users, artists,
 and programmers is unlike anything I've ever experienced in the industry.
-- Again, thanks to [Caio Liberali](https://github.com/caioliberali) for
-the original [Pull Request](https://github.com/EpicGames/UnrealEngine/p)
-on Github.  I had been hacking around in the engine source trying to
-accomplish the same thing when the Pull Request came in.  Had it not
-been declined, I probably never would have said, "hey, why not make it
-a plugin?"
+- Thanks to [Caio Liberali](https://github.com/caioliberali) for
+the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/p)
+that inspired this project.  
 
-## Credits
+---
 
 **Copyright (c) (2020):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
 *ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md).*  
