@@ -72,7 +72,7 @@ In Windows, the persistent editor Settings, are stored in this config file:
 Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 With the plugin enabled, you'll be able to find the following new tools:
 
-### Restart Editor...
+### File Menu: Restart Editor...
 **Restart Editor** is found in the Main Menu bar, under
   **File > Restart Editor...**.
 
@@ -86,7 +86,7 @@ off.  Just hit **Restart Editor...** and you're project will shutdown and
 restart -- no launcher popping up and prompting 
 for a project to load, and no searching in file explorer to find the uproject file to open.
 
-### Show Project in Explorer
+### File Menu: Show Project in Explorer
 **Show Project in Explorer** is found in the Main Menu bar, under
   **File > Show Project in Explorer**.
 
@@ -98,7 +98,7 @@ the Launcher and you need to know where it's actually stored on disk.  You can
 also do this by right clicking on assets in the content browser, which will 
 take you do your project's content folder, but this menu makes it a bit quicker to get to.
 
-### Screen Real Estate: Persistent Editor Scale
+### Prefs: Screen Real Estate: Persistent Editor Scale
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Screen Real Estate** section.
 
 The *Persistent Editor Scale* value is a percentage relative to the default 
@@ -115,7 +115,7 @@ and works globally across all projects.
 > the editor will default back to the normal 1.0 setting as a scale value.  You may need to restart the editor
 > to get the system to recognize that you'd rather use the **Editor Preferences/Appearance** setting.
 
-### Max FPS
+### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
 
 *Persistent Editor Max FPS Setting* overrides the console variable setting, ```t.MaxFPS```, which sets
@@ -129,7 +129,7 @@ To ensure the system is running as freewheeling as possible, turn off **Smooth F
 **Edit > Project Preferences**, **General Settings/Framerate** (These
 are typically  off by default).
 
-### Show FPS
+### Prefs: Show FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Show FPS Onscreen** section.
 
 *Viewport Toggle: Show FPS* turns on the FPS display in the editor viewport, and keeps it on between restarts.  
