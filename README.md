@@ -33,14 +33,14 @@
    
 <h4>
     <!--
-    <a href="https://github.com/ScottKirvan/ScooterUtils/">View Demo</a>
+    <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
   -->
     <a href="https://scottkirvan.com/ScooterUtils">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">Report Bug</a>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">Request Feature</a>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D">Request Feature</a>
   </h4>
 </div>
 
@@ -195,14 +195,9 @@ ever developed plugins for other applications, you should check it out.
 
 ## Contributions
 
-- Please [file an
-issue](https://github.com/ScottKirvan/UE4-ScooterUtils/issues),
-or grab a fork, hack away, and submit some [pull
-requests](https://github.com/ScottKirvan/UE4-ScooterUtils/pulls?q=is%3Aopen+is%3Apr).
-- Contact me at
-[linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
-- You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB)
-server, I'm cptvideo.
+- Please [file an issue](https://github.com/ScottKirvan/ScooterUtils/issues/new), or [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls).
+- Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
+- You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB) server, I'm cptvideo.
 
 To locate other developers, I'd like to recommend the **# cpp**, **# plugin-dev** and **#
 engine-source** channels on the **Unreal Slackers** Discord server, but recently
