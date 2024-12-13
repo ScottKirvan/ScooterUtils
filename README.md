@@ -55,6 +55,21 @@ creating and maintaining several projects. If you've
 got something you're repeatedly turning off or resetting every time you open  your projects, that might be a 
 good candidate for an addition to **ScooterUtils**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/).
 
+## Table of Contents
+
+- [Features](#features)
+- [Usage](#usage)
+  - [File Menu: Restart Editor...](#file-menu-restart-editor)
+  - [File Menu: Show Project in Explorer](#file-menu-show-project-in-explorer)
+  - [Prefs: Screen Real Estate: Persistent Editor Scale](#prefs-screen-real-estate-persistent-editor-scale)
+  - [Prefs: Max FPS](#prefs-max-fps)
+  - [Prefs: Show FPS](#prefs-show-fps)
+- [Installation](#installation)
+- [Supported Platforms](#supported-platforms)
+- [Dependencies](#dependencies)
+- [Contributions](#contributions)
+- [References / Inspirations / Credits](#references--inspirations--credits)
+
 ## Features
 - Menus:
   - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
