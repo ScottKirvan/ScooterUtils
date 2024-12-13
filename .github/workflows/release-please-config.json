@@ -2,7 +2,7 @@
   "release-type": "simple",
   "packages": {
     "crates/slain-backend": {
-      "changelog-path": "/CHANGELOG.md"
+      "changelog-path": "/notes/CHANGELOG.md"
     }
   }
 }
