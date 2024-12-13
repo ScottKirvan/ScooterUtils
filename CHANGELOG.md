@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.3](https://github.com/ScottKirvan/ScooterUtils/compare/v1.2.2...v1.2.3) (2024-12-13)
+
+
+### Bug Fixes
+
+* Update release-please-config.json - another incorrect path... grrr... ([036b0d4](https://github.com/ScottKirvan/ScooterUtils/commit/036b0d4ace579c69867dfa9a9383ca0e66e4b485))
+* Update release.yml - typo in path to config ([7f393c4](https://github.com/ScottKirvan/ScooterUtils/commit/7f393c4b975f0b097803eee10ce7b9a5f7eeaca7))
+
 ## [1.2.2](https://github.com/ScottKirvan/ScooterUtils/compare/v1.2.1...v1.2.2) (2024-12-12)
 
 
