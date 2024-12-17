@@ -140,6 +140,33 @@ ApplicationScale=0.800000
 MaxFPS=200
 ShowViewportFPS=False
 ```
+## Supported Platforms
+
+Supported Unreal Engine versions: **4.25-5.5**<sup>*</sup>
+
+For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
+
+<sup>*</sup> *If you are building this repo/plugin from source, with an engine version prior to UE 5.5, please make sure you clone/download the correct branch/version.*
+
+## Dependencies
+
+The source requires Visual Studio (I've used the free 2019 & 2022 community version)
+and either an Unreal C++ code (rather than blueprint) project or the full
+Unreal Engine 4 source code from GitHub.
+approach, it's so easy). 
+
+Building it inside a project is dead simple.  Clone the repository
+into the *Plugins* directory of your Unreal C++ based project. Go to
+**File**, and select **Update Visual Studio Project**.  From there,
+the plugin should be buildable, and once compiled, can be left in your
+project directory for the project you're working on, or copied into
+your Engine's main *Plugins* folder so it's available to all your future
+editing sessions.  
+
+If you are new to programming in UE,
+please see the official [Programming Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html). 
+The plugin development workflow is really very impressive, and if you've
+ever developed plugins for other applications, you should check it out.  
 
 Contributions / Contact
 -----------------------

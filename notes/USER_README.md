@@ -2,7 +2,7 @@
 <div align="center">
 
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
-    <h1><a href="https://www.scottkirvan.com/ScooterUtils/notes/TODO.html">Scooter Utilities</a></h1>
+    <h1><a href="https://www.scottkirvan.com/ScooterUtils/notes/TODO.html">Scooter Utilities Plugin</a></h1>
   <h3>A collection of editor tools for Unreal Engine</h3>
   
 <!-- Badges -->
@@ -72,23 +72,18 @@ Think of **Scooter Utilities** as a Swiss Army Knife of tools that includes thin
   - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   - *Show FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
   
-In Windows, the persistent editor Settings, are stored in this config file:  
-```C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\Windows\EditorSettings.ini```
 ## Installation
 >[!NOTE]
 >This plugin isn't yet available on fab.com as of this writing, but it is aniticpated that it will be soon.
 
-If you've gotten **Scooter Utilities** through fab, downloading and installing is handles through fab.com and the unreal marketplace.
+If you've gotten **Scooter Utilities** through Fab Marketplace, downloading and installing is handled through fab.com and the unreal marketplace.
 
 - from fab.com, after purchase, click the `Download` link on the [**Scooter Utilities**]() product listing.
 - A web pop-up will appear, with a link to the `Epic Games Launcher` - click that link and open the **Epic Games Launcher**.
 - In the Launcher, scroll down to your **Fab Library**, and find, "**Scooter Utilities**," and click `Install to Engine`.
-- If prompted, select the engine version that you wa:w
-nt the plugin installed to, and you should be good to go.
+- If prompted, select the engine version that you want the plugin installed to, and you should be good to go.
 
-If you've gotten, or plan to get, a source-code version of **Scooter Utilities**, 
-and need to install it manually, please follow the Installation Instructions in the 
-[Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
+If you've gotten, or plan to get, a source-code version of **Scooter Utilities**, and need to install it manually, please follow the Installation Instructions in the [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
 
 ## Enable the Scooter Utilities Plugin
 TODO:
@@ -97,9 +92,6 @@ TODO:
 1. First open the Plugins menu by going to **Edit** > **Plugins**.
     
     [![](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f85a1c35-3a29-4f34-b90e-9243244b22f6/01-edit-plugins.png)](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f85a1c35-3a29-4f34-b90e-9243244b22f6/01-edit-plugins.png)
-    
-    Click image for full size.
-    
 2. In the Plugins menu, locate the **FX** section. You will see Niagara listed in this section. If the checkbox is checked, Niagara is already enabled. If the checkbox is unchecked, click on it to enable Niagara.
     
     [![](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f391cb7e-c521-4988-9ce9-c93d9c448c77/02-fx-plugins-niagara.png)](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f391cb7e-c521-4988-9ce9-c93d9c448c77/02-fx-plugins-niagara.png)
@@ -112,33 +104,16 @@ TODO:
     
     Click image for full size.
 
-## End Result
+## Enable the Scooter Utilities plugin
 
-Once the UE4 Editor has restarted, when you right-click in the **Content Browser** you will have a new **FX** section that will have all of the Niagara options.
+Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 
+## Verify the Scooter Utilities Plugin in Unreal
 
-
-This is kind of standard practice for GitHub Unreal plugins; it goes
-like this:
-
-1. Create a new Unreal project.
-1. Create a ```Plugins``` folder in your project directory.
-1. Clone the GitHub repository (or grab and unzip the project) into your
-```Plugins``` folder.
-1. Launch Unreal; You should be prompted to build the plugin.
-2. Optional:  Use or convert your unreal project to a C++ project so
-that you can edit and build the code outside of Unreal.
-
-> [!NOTE]
-> As of UE 5.5.0, the automatic building of plugins from source is no longer 
-> working - You need to be using a C++ based Unreal project for the source 
-> to build.  Once it's built, you can copy/paste the plugin to other projects 
-> (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
-
+If the plugin is installed, enabled, and working properly, when you left click the `File` menu, you should see `Restart Unreal Engine...` after the `TODO TODO TODO` menu options.
 
 ## Usage
 
-Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
 With the plugin enabled, you'll be able to find the following new tools:
 
 ### File Menu: Restart Editor...
@@ -207,40 +182,6 @@ This is the same functionality as the viewport hamburger menu's **Show FPS** set
 between engine/editor restarts.
 
 
-
-## Supported Platforms
-
-Supported Unreal Engine versions: **4.25-5.5**<sup>*</sup>
-
-For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
-
-<sup>*</sup> *If you are building this repo/plugin from source, with an engine version prior to UE 5.5, please make sure you clone/download the correct branch/version.*
-
-## Dependencies
-
-This plugin is source code only - I'm not currently providing binaries.
-If you're looking for binaries for the Windows version, contact me
-and I'll try get you a build.  If you need an older build or another
-platform, I won't be able to build it for you, so you're going to have to get in touch with someone that can
-help you (See the Support/Contacts section below).
-
-The source requires Visual Studio (I've used the free 2019 & 2022 community version)
-and either an Unreal C++ code (rather than blueprint) project or the full
-Unreal Engine 4 source code from GitHub (just use the project-based
-approach, it's so easy). 
-
-Building it inside a project is dead simple.  Clone the repository
-into the *Plugins* directory of your Unreal C++ based project. Go to
-**File**, and select **Update Visual Studio Project**.  From there,
-the plugin should be buildable, and once compiled, can be left in your
-project directory for the project you're working on, or copied into
-your Engine's main *Plugins* folder so it's available to all your future
-editing sessions.  
-
-If you are new to programming in UE,
-please see the official [Programming Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html). 
-The plugin development workflow is really very impressive, and if you've
-ever developed plugins for other applications, you should check it out.  
 
 ## Contributions / Contact
 
