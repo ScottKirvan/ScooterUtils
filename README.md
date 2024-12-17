@@ -47,7 +47,7 @@
 
 If common tasks can be automated or streamlined, they may end up in **ScooterUtils**. Generally, the plugin is a Swiss Army Knife of tools and includes things that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning off or resetting every time you open  your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
 
-If you're looking for information on how to use the plugin, please check out the [User Documentation](https://github.com/ScottKirvan/ScooterUtils/blob/master/README.md). This document is for people using the [GitHub repository](https://github.com/ScottKirvan/ScooterUtils).
+If you're looking for information on how to use the plugin, please check out the [User Documentation](https://www.scottkirvan.com/ScooterUtils/notes/USER_README). This document is for people using the source code in the [GitHub repository](https://github.com/ScottKirvan/ScooterUtils).
 
 Branches
 --------
@@ -84,7 +84,7 @@ ScooterUtils
 │   └───media
 └───notes
 ```
-The `_layouts` and `assets/css` folders help support the look of the repo when rended to GitHub Pages (Deployment Workflow).  You can see an example of this repo processed using Jekyll and published at [ScottKirvan.com](https://www.scottkirvan.com/ScooterUtils/).  You have to enable **Pages** in your repo's settings.  Details [here](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll).
+The `_layouts` and `assets/css` folders help support the look of the repo when rended to GitHub Pages (Deployment Workflow).  You can see an example of this repo processed using Jekyll and published at [ScottKirvan.com](https://www.scottkirvan.com/ScooterUtils/). 
 
 The css file creates a page that is styled similar to GitHub's [Dark High Contrast](https://github.blog/changelog/2021-08-25-dark-high-contrast-theme-ga/) theme.
 
@@ -114,6 +114,8 @@ that you can edit and build the code outside of Unreal.
 
 > [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins within blueprint-only projects is no longer working - You need to be using a C++ based Unreal project for the source to build.  Once it's built, you can copy/paste the plugin to other projects (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
+> 
+> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the plugin available on the [Fab Marketplace](fab.com).
 
 
 Features / Usage
@@ -122,8 +124,22 @@ For documentation on what the plugin does, installing from fab, enabling, and us
 
 Developer Notes
 --------
-TODO:
-- [ ] put some docs in here explaining how the plugin works, where data is stored, how to build it, what modules are implemented, etc.
+ScooterUtils is implemented in a single module: "ScooterUtils." It's an editor-only plugin (no runtime functionality), and uses an OnEndFrame callback to execute certain functionality when we're confident the engine (and our module) is fully loaded (PostEngineInit).
+
+FScooterUtilsModule is the main module implementation, and that's where all the functionality of ScooterUtilsMenu (for restart, and open explorer) happen, and ScooterUtilsSettings (for all the Editor Preferences settings) are handled.
+
+ScooterUtils preferences are written to disk at:
+```
+c:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
+```
+The ScooterUtils section of EngineSettings.ini will look something like:
+```ini
+[/Script/ScooterUtils.ScooterUtilsSettings]
+bOverrideUEApplicationScale=True
+ApplicationScale=0.800000
+MaxFPS=200
+ShowViewportFPS=False
+```
 
 Contributions / Contact
 -----------------------
