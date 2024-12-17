@@ -128,7 +128,7 @@ ScooterUtils is implemented in a single module: "ScooterUtils." It's an editor-o
 
 FScooterUtilsModule is the main module implementation, and that's where all the functionality of ScooterUtilsMenu (for restart, and open explorer) happen, and ScooterUtilsSettings (for all the Editor Preferences settings) are handled.
 
-ScooterUtils preferences are written to disk at:
+ScooterUtils preferences (engine install) are written to disk at:
 ```
 c:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
 ```
@@ -158,8 +158,7 @@ approach, it's so easy).
 Building it inside a project is dead simple.  Clone the repository
 into the *Plugins* directory of your Unreal C++ based project. Go to
 **File**, and select **Update Visual Studio Project**.  From there,
-the plugin should be buildable, and once compiled, can be left in your
-project directory for the project you're working on, or copied into
+the plugin should be buildable, and once compiled, can be left in *Plugins* directory for the project you're working on, or copied into
 your Engine's main *Plugins* folder so it's available to all your future
 editing sessions.  
 
