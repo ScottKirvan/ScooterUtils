@@ -6,3 +6,5 @@ WHITEBOARD
 > These notes are ***not*** important and can be erased at any time.
 
 
+ maybe what I've got as "features" in the readme should be more like a quickstart section and features should just outline what's included and briefly what they do
+

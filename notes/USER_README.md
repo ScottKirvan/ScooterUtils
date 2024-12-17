@@ -2,7 +2,13 @@
 <div align="center">
 
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
-    <h1><a href="https://www.scottkirvan.com/ScooterUtils/notes/TODO.html">Scooter Utilities Plugin</a></h1>
+
+<!--
+- TODO TODO TODO - update the link here with a link to the plugin in fab
+-->
+
+
+    <h1><a href="https://www.scottkirvan.com/ScooterUtils/notes/USER_README.html">Scooter Utilities Plugin</a></h1>
   <h3>A collection of editor tools for Unreal Engine</h3>
   
 <!-- Badges -->
@@ -44,7 +50,7 @@
   </h4>
 </div>
 
- **Scooter Utilities** is an Unreal Engine editor plugin which contains miscellaneous artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and to help keep some settings persistent between restarts in the editor.
+ **Scooter Utilities** is an Unreal Engine editor plugin which contains miscellaneous artist/developer utilities, allowing you to quickly navigate to disk files, restart/reload your projects, and to help keep some settings persistent between restarts in the editor.
 
 Think of **Scooter Utilities** as a Swiss Army Knife of tools that includes things that make the Unreal editor a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning off or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
 
@@ -85,25 +91,6 @@ If you've gotten **Scooter Utilities** through Fab Marketplace, downloading and 
 
 If you've gotten, or plan to get, a source-code version of **Scooter Utilities**, and need to install it manually, please follow the Installation Instructions in the [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
 
-## Enable the Scooter Utilities Plugin
-TODO:
-- [ ] update this with images and wording for Scooter Utils, rather than Niagara
-
-1. First open the Plugins menu by going to **Edit** > **Plugins**.
-    
-    [![](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f85a1c35-3a29-4f34-b90e-9243244b22f6/01-edit-plugins.png)](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f85a1c35-3a29-4f34-b90e-9243244b22f6/01-edit-plugins.png)
-2. In the Plugins menu, locate the **FX** section. You will see Niagara listed in this section. If the checkbox is checked, Niagara is already enabled. If the checkbox is unchecked, click on it to enable Niagara.
-    
-    [![](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f391cb7e-c521-4988-9ce9-c93d9c448c77/02-fx-plugins-niagara.png)](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/f391cb7e-c521-4988-9ce9-c93d9c448c77/02-fx-plugins-niagara.png)
-    
-    Click image for full size.
-    
-3. If you had to enable Niagara, it will prompt you that a restart is required. Click **Restart Now** to relaunch the Unreal Editor with the Niagara plugin enabled.
-    
-    [![](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/41cf6946-845d-4c8a-9579-613278e3326a/03-warning-restart.png)](https://d1iv7db44yhgxn.cloudfront.net/documentation/images/41cf6946-845d-4c8a-9579-613278e3326a/03-warning-restart.png)
-    
-    Click image for full size.
-
 ## Enable the Scooter Utilities plugin
 
 Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
@@ -114,18 +101,15 @@ If the plugin is installed, enabled, and working properly, when you left click t
 
 ## Usage
 
-With the plugin enabled, you'll be able to find the following new tools:
+With the plugin enabled, you will have the following new tools:
 
 ### File Menu: Restart Editor...
 **Restart Editor** is found in the Main Menu bar, under
   **File > Restart Editor...**.
 
-This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload 
-your project on restart.  This is the same behavior you see when, for example, you enable or disable a plugin.
+This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload your project on restart.  This is the same behavior you see when, for example, you enable or disable a plugin.
 
-This is for anyone that frequently restarts the engine to test code changes, clear 
-undo stacks, refresh the system, etc.  It's also 
-nice for those times you've been working in the editor for a while and things just start to feel... um...
+This feature is for anyone that frequently restarts the engine to test code changes, clear undo stacks, refresh the system, etc.  It's also nice for those times you've been working in the editor for a while and things just start to feel... um...
 off.  Just hit **Restart Editor...** and you're project will shutdown and 
 restart -- no launcher popping up and prompting 
 for a project to load, and no searching in file explorer to find the uproject file to open.
@@ -137,10 +121,7 @@ for a project to load, and no searching in file explorer to find the uproject fi
 This will open file explorer focused on  your main project folder -- i.e. the same 
 folder as your project's `.uproject` file.
 
-Being able to open the project in Explorer is nice for when you've opened a project from 
-the Launcher and you need to know where it's actually stored on disk.  You can 
-also do this by right clicking on assets in the content browser, which will 
-take you do your project's content folder, but this menu makes it a bit quicker to get to.
+Being able to open the project in Explorer is nice for when you've opened a project from the Launcher and need to know where it's actually stored on disk.  You can also do this by right clicking on assets in the content browser, which will take you do your project's content folder, but this menu makes takes you directly to the project root.
 
 ### Prefs: Screen Real Estate: Persistent Editor Scale
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Screen Real Estate** section.
@@ -155,9 +136,9 @@ which works great, but resets between different projects.  The setting in **Scoo
 and works globally across all projects. 
 
 > [!NOTE]
-> This setting overrides the setting in **Editor Preferences/Appearance**, but note, when you disable this setting,
-> the editor will default back to the normal 1.0 setting as a scale value.  You may need to restart the editor
-> to get the system to recognize that you'd rather use the **Editor Preferences/Appearance** setting.
+> This setting overrides the setting in **Editor Preferences/Appearance**, but when you disable this setting,
+> the editor will default back to the normal 1.0 setting as a scale value.  
+> If your setting under **Editor Preferences/Appearance** is not 1.0, you may need to restart the editor to get the sytem to pick up the correct Application Scale.
 
 ### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
@@ -182,13 +163,14 @@ This is the same functionality as the viewport hamburger menu's **Show FPS** set
 between engine/editor restarts.
 
 
+Contributions
+-----------------------
+Do you know how to code up a cool tool or feature that would be good to include in this project? Interested in contributing with writing documentation or anything else? Did you find a bug?! Come up with a new idea?! Please help out!
 
-## Contributions / Contact
+- [report any issues](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20).
+- [request new features](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20).
+- To show your support for my work, Throw me a bone!  please TODO TODO - rate/review the plugin on [fab](http://fab.com), and/or [donate]() to my GitHub projects.
 
-- Please [file an issue](https://github.com/ScottKirvan/ScooterUtils/issues/new).
-- Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
-- You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB) server, I'm cptvideo.
-- If you're a developer, and want to contribute directly to this project, please check out the [developer documentation](notes/DEV_README.md), [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls). 
 
 ## Contributing
 Do you know how to code up a cool tool or feature that would be good to include in this project? Interested in contributing with writing documentation or anything else? Did you find a bug?! Come up with a new idea?! Please help out!
@@ -197,9 +179,12 @@ If you lean into the technical side of things and are comfortable using GitHub, 
 
 If you really don't want to have to learn GitHub, but would still like to contribute, just follow these links to [report a bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D) or [request something new](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D) you'd like to see.
 
+- To show your support for my work, Throw me a bone!  please TODO TODO - rate/review the plugin on [fab](http://fab.com), and/or [donate]() to my GitHub projects.
+
 ## Support/Contact
 - Feel free to reach out to me on the [Unreal Slackers](https://discord.gg/unreal-slackers) discord. I'm @Fragmanget_. There is a ton of other Unreal programmers up there, so if I'm not around to help, someone else may be able to get you going.
 - You can also reach me on my personal [Discord Server](https://discord.gg/TSKHvVFYxB) (@cptvideo), via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto:ScooterUtils@skvfx.com).
+
 ## Credits
 
 **Copyright (c) (2020-2024):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   

@@ -9,6 +9,10 @@ TODO
 - [ ] Look into persisting some viewport settings [#13](https://github.com/ScottKirvan/ScooterUtils/issues/13) [#12](https://github.com/ScottKirvan/ScooterUtils/issues/12) [#11](https://github.com/ScottKirvan/ScooterUtils/issues/11)
 - [ ] update the installation docs with something clearer - I like how BrightEye does it
 - [ ] break documentation up so there's github savvy docs and user docs
+- [ ] Doublecheck TOC in all readmes
+- [ ] maybe what I've got as "features" in the readme should be more like a quickstart section and features should just outline what's included and briefly what they do
+- [ ] check the _layout css - I think I have to modify this to work better/differently on mobile (low priority - no one is using unreal engine on mobile, so it's reasonable to consider this an edge use)
+
 
 In Progress
 -----------
