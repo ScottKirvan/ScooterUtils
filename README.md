@@ -54,15 +54,15 @@ Branches
 
 ```
 master
-└─── main development branch - supports the latest version of Unreal
+     └─── main development branch - supports the latest version of Unreal
 All-Versions-Prior-to-5.1
-└─── These are the UE4.x versions. Tested back to 4.25, may work in earlier versions.
+     └─── These are the UE4.x versions. Tested back to 4.25, may work in earlier versions.
 UE-5.1-to-5.2
-└─── tested and working in UE-5.1-to-5.2
+     └─── tested and working in UE-5.1-to-5.2
 UE-5.3-to-5.4
-└─── tested and working in UE-5.3-to-5.4
+     └─── tested and working in UE-5.3-to-5.4
 release-please--branches--master
-└─── used by Please-Release GitHub action.
+     └─── used by Please-Release GitHub action.
 ```
 New features are added to the `master` branch.  Older branches may not have the same feature support.
 
@@ -115,7 +115,7 @@ that you can edit and build the code outside of Unreal.
 > [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins within blueprint-only projects is no longer working - You need to be using a C++ based Unreal project for the source to build.  Once it's built, you can copy/paste the plugin to other projects (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
 > 
-> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the plugin available on the [Fab Marketplace](http://fab.com).
+> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the precompiled version(s) of the plugin available on the [Fab Marketplace](http://fab.com).
 
 
 Features / Usage
@@ -126,9 +126,9 @@ Developer Notes
 --------
 ScooterUtils is implemented in a single module: "ScooterUtils." It's an editor-only plugin (no runtime functionality), and uses an OnEndFrame callback to execute certain functionality when we're confident the engine (and our module) is fully loaded (PostEngineInit).
 
-FScooterUtilsModule is the main module implementation, and that's where all the functionality of ScooterUtilsMenu (for restart, and open explorer) happen, and ScooterUtilsSettings (for all the Editor Preferences settings) are handled.
+FScooterUtilsModule is the main module implementation, and that's where all the functionality of ScooterUtilsMenu (for restart, and open explorer) happen, and ScooterUtilsSettings (for all the Persistent Editor Preferences settings) are handled.
 
-ScooterUtils preferences (engine install) are written to disk at:
+ScooterUtils preferences (engine install: `[UE_PATH]/Engine/Plugins/Marketplace`) are written to disk at:
 ```
 c:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
 ```
@@ -146,14 +146,13 @@ Supported Unreal Engine versions: **4.25-5.5**<sup>*</sup>
 
 For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
 
-<sup>*</sup> *If you are building this repo/plugin from source, with an engine version prior to UE 5.5, please make sure you clone/download the correct branch/version.*
+<sup>*</sup> *If you are building this repo/plugin from source, with an engine version prior to UE 5.5, please make sure you clone/download the correct [branch](#branches).*
 
 ## Dependencies
 
 The source requires Visual Studio (I've used the free 2019 & 2022 community version)
 and either an Unreal C++ code (rather than blueprint) project or the full
 Unreal Engine 4 source code from GitHub.
-approach, it's so easy). 
 
 Building it inside a project is dead simple.  Clone the repository
 into the *Plugins* directory of your Unreal C++ based project. Go to
@@ -164,22 +163,26 @@ editing sessions.
 
 If you are new to programming in UE,
 please see the official [Programming Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html). 
-The plugin development workflow is really very impressive, and if you've
-ever developed plugins for other applications, you should check it out.  
 
-Contributions / Contact
+Contributions
 -----------------------
-- Please [report any issues](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20), request a [new feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20), or [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls).
-- Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
-- You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB) server, I'm cptvideo.
+- [report any issues](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20).
+- [request new features](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20).
+- Developers:  [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and toss in a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls) with your changes.
+- To show your support for my work, Throw me a bone!  please TODO TODO [star]() this repo, and rate/review the plugin on [fab](http://fab.com), and/or [donate]() to my GitHub projects.
 
-To locate other developers, I'd like to recommend the **# cpp**, **# plugin-dev** and **# engine-source** channels on the **Unreal Slackers** Discord server, but recently there's a lot more trolls than helpful people up there.  It used to be better, but give it a shot.  You may have better luck than me :-)
+Contact
+-------
+- Feel free to reach out to me on the [Unreal Slackers](https://discord.gg/unreal-slackers) discord. I'm @Fragmanget_. There is a ton of other Unreal programmers up there, so if I'm not around to help, someone else may be able to get you going.
+- You can also reach me on my personal [Discord Server](https://discord.gg/TSKHvVFYxB) (@cptvideo),
+via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto://ScooterUtils@skvfx.com).
+
 
 References / Inspirations / Credits
 -----------------------------------
-- <strike>To learn c++ coding plugins in Unreal, sign into the Unreal Engine [Learning & Support](https://www.unrealengine.com/en-US/learn) area and take the *Best Practices for Creating and Using Plugins* course - it's great!</strike> *Anyone know where this went?*
+- <strike>To learn c++ coding plugins in Unreal, sign into the Unreal Engine [Learning & Support](https://www.unrealengine.com/en-US/learn) area and take the *Best Practices for Creating and Using Plugins* course - it's great!</strike> *Anyone know where this went? It's out of date, but it still had a lot of great info.*
 - Another resource for creating Editor (not runtime) specific tools is [this tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang.
-- This blog post on [custom project settings](http://www.mov-eax-rgb.net/blog/custom-settings-object/) is short, but it saved me when I got stuck
+- This blog post on [custom project settings](http://www.mov-eax-rgb.net/blog/custom-settings-object/) is short, but it saved me when I got stuck.
 - Huge thanks to the Unreal Team!  I had only been learning Unreal for a little over a month when I first wrote this.  I am so totally blown away.  Epic's training material is outstanding - The sheer amount of material available, directly from Unreal, and being produced by end users, artists, and programmers is unlike anything I've ever experienced in the industry.
 - Thanks, also, to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.  
 
