@@ -115,7 +115,7 @@ that you can edit and build the code outside of Unreal.
 > [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins within blueprint-only projects is no longer working - You need to be using a C++ based Unreal project for the source to build.  Once it's built, you can copy/paste the plugin to other projects (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
 > 
-> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the plugin available on the [Fab Marketplace](fab.com).
+> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the plugin available on the [Fab Marketplace](http://fab.com).
 
 
 Features / Usage
@@ -143,7 +143,7 @@ ShowViewportFPS=False
 
 Contributions / Contact
 -----------------------
-- Please [file an issue](https://github.com/ScottKirvan/ScooterUtils/issues/new), or [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls).
+- Please [report any issues](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20), request a [new feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20), or [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls).
 - Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/)
 - You can also contact me at my [discord](https://discord.gg/TSKHvVFYxB) server, I'm cptvideo.
 
@@ -151,15 +151,11 @@ To locate other developers, I'd like to recommend the **# cpp**, **# plugin-dev*
 
 References / Inspirations / Credits
 -----------------------------------
-- To learn c++ coding plugins in Unreal, sign into the Unreal Engine [Learning &
-Support](https://www.unrealengine.com/en-US/learn) area and take the
-*Best Practices for Creating and Using Plugins* course - it's great!
+- <strike>To learn c++ coding plugins in Unreal, sign into the Unreal Engine [Learning & Support](https://www.unrealengine.com/en-US/learn) area and take the *Best Practices for Creating and Using Plugins* course - it's great!</strike> *Anyone know where this went?*
 - Another resource for creating Editor (not runtime) specific tools is [this tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang.
 - This blog post on [custom project settings](http://www.mov-eax-rgb.net/blog/custom-settings-object/) is short, but it saved me when I got stuck
 - Huge thanks to the Unreal Team!  I had only been learning Unreal for a little over a month when I first wrote this.  I am so totally blown away.  Epic's training material is outstanding - The sheer amount of material available, directly from Unreal, and being produced by end users, artists, and programmers is unlike anything I've ever experienced in the industry.
-- Thanks, also, to [Caio Liberali](https://github.com/caioliberali) for
-the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/p)
-that inspired this project.  
+- Thanks, also, to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.  
 
 ---
 **Copyright (c) (2020):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
