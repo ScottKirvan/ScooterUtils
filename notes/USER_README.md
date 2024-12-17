@@ -91,6 +91,8 @@ and need to install it manually, please follow the Installation Instructions in 
 [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
 
 ## Enable the Scooter Utilities Plugin
+TODO:
+- [ ] update this with images and wording for Scooter Utils, rather than Niagara
 
 1. First open the Plugins menu by going to **Edit** > **Plugins**.
     

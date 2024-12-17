@@ -99,8 +99,6 @@ Table of Contents
 - [Contributions / Contact](#contributions--contact)
 - [References / Inspirations / Credits](#references--inspirations--credits)
 
-Features
---------
 Installation
 ------------
 This is kind of standard practice for GitHub Unreal plugins<sup>*</sup>; it goes
@@ -121,6 +119,11 @@ that you can edit and build the code outside of Unreal.
 Features / Usage
 -----
 For documentation on what the plugin does, installing from fab, enabling, and using it, see the [User Documentation](https://github.com/ScottKirvan/ScooterUtils/blob/master/README.md).
+
+Developer Notes
+--------
+TODO:
+- [ ] put some docs in here explaining how the plugin works, where data is stored, how to build it, what modules are implemented, etc.
 
 Contributions / Contact
 -----------------------
