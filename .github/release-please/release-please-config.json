@@ -6,7 +6,8 @@
   "packages": {
     ".": {
       "extra-files": [
-        "notes/VERSION.md"
+        "notes/VERSION.md",
+        "Source/Public/ScooterUtilsVersion.h"
       ]
     }
   }
