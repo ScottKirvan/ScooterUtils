@@ -25,7 +25,7 @@ TODO
 	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
 	- [ ] *NOTE* Although you need to test compilation of your plugin by building it, please do not send the output of this packaged version of the plugin to the Marketplace team, as we're also going to compile your plugin on our build farm. We prefer to only receive the source folders and files of your plugin (such as Config, Content, Resources, Source folders and the .uplugin), not any folders generated from the packaging process (such as Binaries, Build, Intermediate, or Saved).
 	- [ ] add copyright notice to all cpp/h files: ie. // Copyright 2020 MyCompany Inc. All Rights Reserved.
-
+- [ ] I've got the version number automation all working in the PleaseReleaseTest project - roll all that code into here now.
 
 
 
