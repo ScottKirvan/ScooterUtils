@@ -1,12 +1,12 @@
 {
 	"FileVersion": 3,
-	"Version": 2024121201,
-	"VersionName": "v1.2.0.2024121201",
+	"Version": 1002021,
+	"VersionName": "v1.2.21",
 	"FriendlyName": "Scooter Utilities",
 	"Description": "Miscellaneous Utilities for Unreal Engine",
 	"Category": "Utility",
 	"CreatedBy": "Scott Kirvan",
-	"CreatedByURL": "https://www.ScottKirvan.com",
+	"CreatedByURL": "https://www.skvfx.com",
 	"DocsURL": "https://www.scottkirvan.com/ScooterUtils/notes/USER_README",
 	"MarketplaceURL": "",
 	"FabURL" : "com.epicgames.launcher://ue/Fab/product/TODO TODO TODO TODO",
@@ -19,7 +19,7 @@
 			"Name": "ScooterUtils",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
-			"PlatformAllowList": [ "Win64", "Win32", "Mac", "Linux" ]
+			"WhitelistPlatforms": [ "Win64", "Win32", "Mac", "Linux" ]
 		}
 	],
 	"IsBetaVersion": false,
