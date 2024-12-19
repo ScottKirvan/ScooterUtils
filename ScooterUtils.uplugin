@@ -7,9 +7,10 @@
 	"Category": "Utility",
 	"CreatedBy": "Scott Kirvan",
 	"CreatedByURL": "https://www.ScottKirvan.com",
-	"DocsURL": "https://github.com/ScottKirvan/ScooterUtils#readme",
+	"DocsURL": "https://www.scottkirvan.com/ScooterUtils/notes/USER_README",
 	"MarketplaceURL": "",
-	"SupportURL": "https://github.com/ScottKirvan/ScooterUtils#contributions",
+	"FabURL" : "com.epicgames.launcher://ue/Fab/product/TODO TODO TODO TODO",
+	"SupportURL": "https://github.com/ScottKirvan/ScooterUtils/discussions",
 	"EngineVersion": "5.5.0",
 	"CanContainContent": false,
 	"Installed": true,
@@ -18,6 +19,7 @@
 			"Name": "ScooterUtils",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
+			"PlatformAllowList": [ "Win64", "Win32", "Mac", "Linux" ]
 		}
 	],
 	"IsBetaVersion": false,
