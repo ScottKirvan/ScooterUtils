@@ -13,7 +13,7 @@ TODO
 - [ ] maybe what I've got as "features" in the readme should be more like simple descriptions of what things do, not what they are.
 - [ ] check the _layout css - I think I have to modify this to work better/differently on mobile (low priority - no one is using unreal engine on mobile, so it's reasonable to consider this an edge use)
 - [ ] Fab prep
-	- [ ] plugin manifest
+	- [ ] plugin manifest?
 	- [ ] user docs
 	- [ ] thumbnail image 1920x1080 < 3MB
 	- [ ] media gallery image(s) 1920x1080 < 3MB
@@ -25,6 +25,7 @@ TODO
 	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
 	- [ ] *NOTE* Although you need to test compilation of your plugin by building it, please do not send the output of this packaged version of the plugin to the Marketplace team, as we're also going to compile your plugin on our build farm. We prefer to only receive the source folders and files of your plugin (such as Config, Content, Resources, Source folders and the .uplugin), not any folders generated from the packaging process (such as Binaries, Build, Intermediate, or Saved).
 	- [ ] add copyright notice to all cpp/h files: ie. // Copyright 2020 MyCompany Inc. All Rights Reserved.
+	- [ ] can I retarget this stuff off of scottkirvan.com and over to skvfx.com?
 - [ ] I've got the version number automation all working in the PleaseReleaseTest project - roll all that code into here now.
 
 
