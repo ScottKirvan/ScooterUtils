@@ -18,10 +18,15 @@ TODO
 	- [ ] thumbnail image 1920x1080 < 3MB
 	- [ ] media gallery image(s) 1920x1080 < 3MB
 	- [ ] come up with a naming convention for the release binaries
+		- [ ] platform, version, ue version
 	- [ ] upload package(s) to bluehost
 	- [ ] upload images to fab and add product files
 	- [ ] fab creator profile wants a website... *sigh*... I have to do something, I guess :-)
 	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
+	- [ ] *NOTE* Although you need to test compilation of your plugin by building it, please do not send the output of this packaged version of the plugin to the Marketplace team, as we're also going to compile your plugin on our build farm. We prefer to only receive the source folders and files of your plugin (such as Config, Content, Resources, Source folders and the .uplugin), not any folders generated from the packaging process (such as Binaries, Build, Intermediate, or Saved).
+	- [ ] add copyright notice to all cpp/h files: ie. // Copyright 2020 MyCompany Inc. All Rights Reserved.
+
+
 
 
 In Progress
