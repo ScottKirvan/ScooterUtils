@@ -6,14 +6,14 @@
 </td></tr></table>
 
 <div align="center">
-  <h1><a href="https://www.fab.com/sellers/SKVFX">Scooter Utilities Plugin</a></h1>A collection of editor tools for Unreal Engine<br><br>
+  <h1><a href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>A collection of editor tools for Unreal Engine<br><br>
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
 <h4>
     <!--
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
   -->
-    <a href="https://scottkirvan.com/ScooterUtils">Documentation</a>
+    <a href="https://scottkirvan.com/ScooterUtils">User Documentation</a>
   <span> · </span>
     <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D">Report Bug</a>
   <span> · </span>
@@ -93,10 +93,7 @@ As of **Unreal Engine 5.4** there is an Application Scale setting under **Editor
 which works great, but resets between different projects.  The setting in **Scooter Utilities** is persistent
 and works globally across all projects. 
 
-> [!NOTE]
-> This setting overrides the setting in **Editor Preferences/Appearance**, but when you disable this setting,
-> the editor will default back to the normal 1.0 setting as a scale value.  
-> If your setting under **Editor Preferences/Appearance** is not 1.0, you may need to restart the editor to get the sytem to pick up the correct Application Scale.
+> [!NOTE] This setting overrides the setting in Editor Preferences > Appearance, but when you disable this setting, the editor will default back to the normal 1.0 setting as a scale value.  If your setting under Editor Preferences > Appearance is not 1.0, you may need to restart the editor to get the system to pick up the correct Application Scale.
 
 ### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
