@@ -7,7 +7,7 @@
     ".": {
       "extra-files": [
         "notes/VERSION.md",
-        "Source/Public/ScooterUtilsVersion.h"
+        "Source/ScooterUtils/Public/ScooterUtilsVersion.h"
       ]
     }
   }
