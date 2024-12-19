@@ -3,6 +3,7 @@
 #include "ScooterUtilsSettings.h"
 #include "Editor/UnrealEdEngine.h"
 #include "UnrealEdGlobals.h"
+#include "ScooterUtilsVersion.h"
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -10,6 +11,7 @@ UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectIni
 	ApplicationScale = 1.0f;
 	MaxFPS = 0;
 	ShowViewportFPS = false;
+	ScooterUtilsVersion = FString::Printf(TEXT("%d.%d.%d"), SCOOTER_UTILS_VERSION_MAJOR, SCOOTER_UTILS_VERSION_MINOR, SCOOTER_UTILS_VERSION_PATCH);
 }
 
 void UScooterUtilsSettings::Init()

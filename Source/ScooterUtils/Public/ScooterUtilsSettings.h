@@ -73,6 +73,9 @@ public:
 	UPROPERTY(EditAnywhere, config, Category = "Show FPS Onscreen", meta = (DisplayName = "Viewport toggle:  Show FPS"))
 	bool ShowViewportFPS;
 
+	UPROPERTY(VisibleAnywhere, config, Category = "About", meta = (DisplayName = "Scooter Utilities Version"))
+	FString ScooterUtilsVersion = "1.0.0";
+
 	/**
 	 * Returns an event delegate that is executed when a setting has changed.
 	 *
