@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 1002021,
-	"VersionName": "v1.2.21",
+	"Version": 1002004,
+	"VersionName": "v1.2.4",
 	"FriendlyName": "Scooter Utilities",
 	"Description": "Miscellaneous Utilities for Unreal Engine",
 	"Category": "Utility",
