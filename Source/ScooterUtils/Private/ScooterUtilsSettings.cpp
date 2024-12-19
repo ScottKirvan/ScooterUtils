@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved.
 
 #include "ScooterUtilsSettings.h"
 #include "Editor/UnrealEdEngine.h"
