@@ -1,0 +1,75 @@
+name: Update Version Header
+on:
+  workflow_run:
+    workflows: ["Release Please Workflow"]
+    types:
+      - completed
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Check out the release-please--branches--main branch
+        uses: actions/checkout@v4
+        with:
+          ref: release-please--branches--main
+      
+      
+      - name: Update Version Header
+        run: |
+          # Read version string and split into components
+          VERSION=$(jq -r '.version' version.json)
+          echo "Version: $VERSION"
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          PATCH=$(echo $VERSION | cut -d. -f3)
+          echo "Major: $MAJOR, Minor: $MINOR, Patch: $PATCH"
+
+          # Print the contents of the header file before updating
+          echo "Contents of Source/ScooterUtils/Public/ScooterUtilsVersion.h before update:"
+          cat Source/ScooterUtils/Public/ScooterUtilsVersion.h
+          
+
+          # Update the header file
+          echo "Updating Source/ScooterUtils/Public/ScooterUtilsVersion.h"
+
+          echo "sed -i 's/#define VERSION_MAJOR [0-9]*/#define VERSION_MAJOR '"$MAJOR"'/' Source/ScooterUtils/Public/ScooterUtilsVersion.h"
+          sed -i 's/#define VERSION_MAJOR [0-9]*/#define VERSION_MAJOR '"$MAJOR"'/' Source/ScooterUtils/Public/ScooterUtilsVersion.h
+          if [ $? -eq 0 ]; then echo "VERSION_MAJOR updated successfully"; else echo "Failed to update VERSION_MAJOR"; fi
+          
+          echo "sed -i 's/#define VERSION_MINOR [0-9]*/#define VERSION_MINOR '"$MINOR"'/' Source/ScooterUtils/Public/ScooterUtilsVersion.h"
+          sed -i 's/#define VERSION_MINOR [0-9]*/#define VERSION_MINOR '"$MINOR"'/' Source/ScooterUtils/Public/ScooterUtilsVersion.h
+          if [ $? -eq 0 ]; then echo "VERSION_MINOR updated successfully"; else echo "Failed to update VERSION_MINOR"; fi
+          
+          echo "sed -i 's/#define VERSION_PATCH [0-9]*/#define VERSION_PATCH '"$PATCH"'/' Source/ScooterUtils/Public/ScooterUtilsVersion.h"
+          if [ $? -eq 0 ]; then echo "VERSION_PATCH updated successfully"; else echo "Failed to update VERSION_PATCH"; fi
+
+          # build a multiplied version number for the uplugin file
+          MULTIPLIED_VERSION=$((MAJOR * 1000000 + MINOR * 1000 + PATCH))
+          echo "Multiplied Version: $MULTIPLIED_VERSION"
+
+          echo "sed -i 's/"Version": [0-9]*/"Version": '"$MULTIPLIED_VERSION"'/' ScooterUtils.uplugin"
+          sed -i 's/"Version": [0-9]*/"Version": '"$MULTIPLIED_VERSION"'/' ScooterUtils.uplugin
+          if [ $? -eq 0 ]; then echo "uplugin Version updated successfully"; else echo "Failed to update uplugin Version"; fi
+
+          echo 'sed -i "s/\"VersionName\": \"v[0-9]*\.[0-9]*\.[0-9]*\"/\"VersionName\": \"v$VERSION\"/" ScooterUtils.uplugin'
+          sed -i "s/\"VersionName\": \"v[0-9]*\.[0-9]*\.[0-9]*\"/\"VersionName\": \"v$VERSION\"/" ScooterUtils.uplugin
+          if [ $? -eq 0 ]; then echo "uplugin VersionName updated successfully"; else echo "Failed to update upluginVersionName"; fi
+       
+          
+          # Print the contents of the header file after updating
+          echo "Contents of Source/ScooterUtils/Public/ScooterUtilsVersion.h after update:"
+          cat Source/ScooterUtils/Public/ScooterUtilsVersion.h
+
+          echo "Update complete"
+
+      
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Source/ScooterUtils/Public/ScooterUtilsVersion.h
+          git add ScooterUtils.uplugin
+          git commit -m "chore: Update version header file"
+          git push origin release-please--branches--main

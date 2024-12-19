@@ -10,8 +10,23 @@ TODO
 - [ ] update the installation docs with something clearer - I like how BrightEye does it
 - [ ] break documentation up so there's github savvy docs and user docs
 - [ ] Doublecheck TOC in all readmes
-- [ ] maybe what I've got as "features" in the readme should be more like a quickstart section and features should just outline what's included and briefly what they do
+- [ ] maybe what I've got as "features" in the readme should be more like simple descriptions of what things do, not what they are.
 - [ ] check the _layout css - I think I have to modify this to work better/differently on mobile (low priority - no one is using unreal engine on mobile, so it's reasonable to consider this an edge use)
+- [ ] Fab prep
+	- [ ] plugin manifest
+	- [ ] user docs
+	- [ ] thumbnail image 1920x1080 < 3MB
+	- [ ] media gallery image(s) 1920x1080 < 3MB
+	- [ ] come up with a naming convention for the release binaries
+		- [ ] platform, version, ue version
+	- [ ] upload package(s) to bluehost
+	- [ ] upload images to fab and add product files
+	- [ ] fab creator profile wants a website... *sigh*... I have to do something, I guess :-)
+	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
+	- [ ] *NOTE* Although you need to test compilation of your plugin by building it, please do not send the output of this packaged version of the plugin to the Marketplace team, as we're also going to compile your plugin on our build farm. We prefer to only receive the source folders and files of your plugin (such as Config, Content, Resources, Source folders and the .uplugin), not any folders generated from the packaging process (such as Binaries, Build, Intermediate, or Saved).
+	- [ ] add copyright notice to all cpp/h files: ie. // Copyright 2020 MyCompany Inc. All Rights Reserved.
+- [ ] I've got the version number automation all working in the PleaseReleaseTest project - roll all that code into here now.
+
 
 
 In Progress

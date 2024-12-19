@@ -1,48 +1,19 @@
 
+<table border=0><tr><td valign=center>
+<img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo.png" alt="logo" width="20" height="auto" />
+</td><td valign=top>
+<a style="color:#ffffff" href="http://skvfx.com">skvfx.com</a> / <a style="color:#ffffff" href="http://skvfx.com/ScooterUtils">ScooterUtils</a>
+</td></tr></table>
+
 <div align="center">
-
+  <h1><a href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>A collection of editor tools for Unreal Engine<br><br>
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
-
-<!--
-- TODO TODO TODO - update the link here with a link to the plugin in fab
--->
-
-
-    <h1><a href="https://www.scottkirvan.com/ScooterUtils/notes/USER_README.html">Scooter Utilities Plugin</a></h1>
-  <h3>A collection of editor tools for Unreal Engine</h3>
-  
-<!-- Badges -->
-<p>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/ScottKirvan/ScooterUtils" alt="contributors" />
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/github/last-commit/ScottKirvan/ScooterUtils" alt="last update" />
-  </a>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/network/members">
-    <img src="https://img.shields.io/github/forks/ScottKirvan/ScooterUtils" alt="forks" />
-  </a>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/stargazers">
-    <img src="https://img.shields.io/github/stars/ScottKirvan/ScooterUtils" alt="stars" />
-  </a>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">
-    <img src="https://img.shields.io/github/issues/ScottKirvan/ScooterUtils" alt="open issues" />
-  </a>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/ScottKirvan/ScooterUtils.svg" alt="license" />
-  </a>
-  <a href="https://discord.gg/gQH4mXWQRT">
-    <!--<img src="https://img.shields.io/discord/704680098577514527?style=flat-square&label=%F0%9F%92%AC%20discord&color=00ACD7">-->
-    <img src="https://img.shields.io/discord/1052011377415438346?style=flat-square&label=discord&color=00ACD7">
-  </a>
-</p>
-   
 <h4>
     <!--
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
   -->
-    <a href="https://scottkirvan.com/ScooterUtils">Documentation</a>
+    <a href="https://scottkirvan.com/ScooterUtils">User Documentation</a>
   <span> · </span>
     <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D">Report Bug</a>
   <span> · </span>
@@ -51,8 +22,6 @@
 </div>
 
  **Scooter Utilities** is an Unreal Engine editor plugin which contains miscellaneous artist/developer utilities, allowing you to quickly navigate to disk files, restart/reload your projects, and to help keep some settings persistent between restarts in the editor.
-
-Think of **Scooter Utilities** as a Swiss Army Knife of tools that includes things that make the Unreal editor a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning off or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
 
 ## Table of Contents
 
@@ -70,40 +39,29 @@ Think of **Scooter Utilities** as a Swiss Army Knife of tools that includes thin
 - [References / Inspirations / Credits](#references--inspirations--credits)
 
 ## Features
-- Menus:
-  - *Restart Editor* - From the Main Menu bar, choose **File > Restart Editor...**
-  - *Show Project in Explorer* - From the Main Menu bar, choose **File > Show Project in Explorer**
-- Persistent Settings (settings that don't change between editor restarts/launches):
-  - *Editor Scale (Application Scale)* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
-  - *Maximum FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
-  - *Show FPS* - found in **Editor Preferences** under **Plugins/Scooter Utilities**
-  
-## Installation
->[!NOTE]
->This plugin isn't yet available on fab.com as of this writing, but it is aniticpated that it will be soon.
+- Restart the editor from the **File** menu.
+- Open your project folder in File Explorer from the **File** menu.
+- Adjust the size of the Unreal Editor interface fonts and widgets to what's comfortable or for doing presentations.
+- Set the Maximum FPS value, and have that always set as you default inside Unreal Engine's Editor.
+- Turn on the viewport fps display and have it stay on after restarting the engine.
+## Download and Install from FAB
+>[!WARNING] This plugin isn't yet available on fab.com as of this writing, but it is aniticpated that it will be soon.  The documentation written here assumes you've downloaded and installed the plugin from Fab.
 
 If you've gotten **Scooter Utilities** through Fab Marketplace, downloading and installing is handled through fab.com and the unreal marketplace.
 
-- from fab.com, after purchase, click the `Download` link on the [**Scooter Utilities**]() product listing.
+- From fab.com, after purchase, click the `Download` link on the [**Scooter Utilities**]() product listing.
 - A web pop-up will appear, with a link to the `Epic Games Launcher` - click that link and open the **Epic Games Launcher**.
 - In the Launcher, scroll down to your **Fab Library**, and find, "**Scooter Utilities**," and click `Install to Engine`.
 - If prompted, select the engine version that you want the plugin installed to, and you should be good to go.
 
 If you've gotten, or plan to get, a source-code version of **Scooter Utilities**, and need to install it manually, please follow the Installation Instructions in the [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
 
-## Enable the Scooter Utilities plugin
-
-Navigate to the **Edit > Plugins** menu. Search for **Scooter Utilities**, and enable the plugin (restart required). 
-
-## Verify the Scooter Utilities Plugin in Unreal
-
-If the plugin is installed, enabled, and working properly, when you left click the `File` menu, you should see `Restart Unreal Engine...` after the `TODO TODO TODO` menu options.
-
 ## Usage
+> [!NOTE] Make sure you enable the Scooter Utilities plugin.  You can do this by navigating to Edit > Plugins and searching for Scooter Utilities.
 
-With the plugin enabled, you will have the following new tools:
+With the plugin enabled, you will have the following new tools in the Unreal Engine Editor:
 
-### File Menu: Restart Editor...
+### File > Restart Editor...
 **Restart Editor** is found in the Main Menu bar, under
   **File > Restart Editor...**.
 
@@ -135,10 +93,7 @@ As of **Unreal Engine 5.4** there is an Application Scale setting under **Editor
 which works great, but resets between different projects.  The setting in **Scooter Utilities** is persistent
 and works globally across all projects. 
 
-> [!NOTE]
-> This setting overrides the setting in **Editor Preferences/Appearance**, but when you disable this setting,
-> the editor will default back to the normal 1.0 setting as a scale value.  
-> If your setting under **Editor Preferences/Appearance** is not 1.0, you may need to restart the editor to get the sytem to pick up the correct Application Scale.
+> [!NOTE] This setting overrides the setting in Editor Preferences > Appearance, but when you disable this setting, the editor will default back to the normal 1.0 setting as a scale value.  If your setting under Editor Preferences > Appearance is not 1.0, you may need to restart the editor to get the system to pick up the correct Application Scale.
 
 ### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
