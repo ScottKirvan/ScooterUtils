@@ -10,8 +10,18 @@ TODO
 - [ ] update the installation docs with something clearer - I like how BrightEye does it
 - [ ] break documentation up so there's github savvy docs and user docs
 - [ ] Doublecheck TOC in all readmes
-- [ ] maybe what I've got as "features" in the readme should be more like a quickstart section and features should just outline what's included and briefly what they do
+- [ ] maybe what I've got as "features" in the readme should be more like simple descriptions of what things do, not what they are.
 - [ ] check the _layout css - I think I have to modify this to work better/differently on mobile (low priority - no one is using unreal engine on mobile, so it's reasonable to consider this an edge use)
+- [ ] Fab prep
+	- [ ] plugin manifest
+	- [ ] user docs
+	- [ ] thumbnail image 1920x1080 < 3MB
+	- [ ] media gallery image(s) 1920x1080 < 3MB
+	- [ ] come up with a naming convention for the release binaries
+	- [ ] upload package(s) to bluehost
+	- [ ] upload images to fab and add product files
+	- [ ] fab creator profile wants a website... *sigh*... I have to do something, I guess :-)
+	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
 
 
 In Progress
