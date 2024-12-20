@@ -28,7 +28,7 @@ void FScooterUtilsModule::StartupModule()
 		TSharedPtr<ISettingsSection> SettingsSection =
 			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE_Utils", // Editor Preferences->Plugins->Scooter Utilities...
 											 FText::FromString("Scooter Utilities"),
-											 FText::FromString("Miscellaneous Editor Preferences"),
+											 FText::FromString("Persistent settings for Unreal Editor"),
 											 GetMutableDefault<UScooterUtilsSettings>());
 
 		if (SettingsSection.IsValid())
@@ -64,6 +64,18 @@ void FScooterUtilsModule::StartupModule()
 			ModuleListeners[i]->OnStartupModule();
 		}
 	}
+	/* for future reference when I get to working on plugin management -
+	   from: PluginBrowserModule.cpp
+
+	// Find all the plugins that are installed
+	for(const TSharedRef<IPlugin>& Plugin : IPluginManager::Get().GetDiscoveredPlugins())
+	{
+		if(Plugin->GetDescriptor().bInstalled)
+		{
+			InstalledPlugins.Add(Plugin->GetName());
+		}
+	}
+	*/
 }
 
 void FScooterUtilsModule::ShutdownModule()
