@@ -11,7 +11,7 @@ UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectIni
 	ApplicationScale = 1.0f;
 	MaxFPS = 0;
 	ShowViewportFPS = false;
-	ScooterUtilsVersion = FString::Printf(TEXT("%d.%d.%d"), SCOOTER_UTILS_VERSION_MAJOR, SCOOTER_UTILS_VERSION_MINOR, SCOOTER_UTILS_VERSION_PATCH);
+	ScooterUtilsVersion = FString::Printf(TEXT("v%d.%d.%d"), SCOOTER_UTILS_VERSION_MAJOR, SCOOTER_UTILS_VERSION_MINOR, SCOOTER_UTILS_VERSION_PATCH);
 }
 
 void UScooterUtilsSettings::Init()
