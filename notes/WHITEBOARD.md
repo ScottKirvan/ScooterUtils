@@ -44,6 +44,10 @@ for a documentation style guide, look at how [take recorder](https://dev.epicgam
 - They use a "card" metaphor when listing chapters or sections:
 ![](assets/media/Pasted%20image%2020241218171425.png)
 
+Epic branding page: https://www.unrealengine.com/en-US/branding   
+There's links here to a box account with their print-ready logos
+
+
 
 ----
 
