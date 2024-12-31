@@ -4,7 +4,7 @@
 	"VersionName": "v1.2.5",
 	"FriendlyName": "Scooter Utilities",
 	"Description": "Your Swiss Army Knife of Editor Utilities for Unreal Engine",
-	"Category": "Utility",
+	"Category": "Editor",
 	"CreatedBy": "Scott Kirvan",
 	"CreatedByURL": "https://www.skvfx.com",
 	"DocsURL": "https://www.scottkirvan.com/ScooterUtils/notes/USER_README",

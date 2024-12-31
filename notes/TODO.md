@@ -37,6 +37,7 @@ In Progress
 	- [x] add copyright notice to all cpp/h files: ie. // Copyright 2020 MyCompany Inc. All Rights Reserved.
 	- [ ] can I retarget this stuff off of scottkirvan.com and over to skvfx.com?
 - [x] add binaries to the github releases - use unreal's "package" function to build them.  For simplicity, I may keep github source-only, and just host binaries on fab.
+- [ ] Update the image in the user docs under "enable the plugin" - the image is from before I changed the category from Utility to Editor 
 
 Done ✓
 ------
