@@ -35,7 +35,7 @@
 <h4>
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
-    <a href="https://www.github.com/ScottKirvan/ScooterUtils/notes/USER_README">User Documentation</a>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/notes/USER_README.md">User Documentation</a>
   <span> · </span>
     <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20">Report Bug</a>
   <span> · </span>
