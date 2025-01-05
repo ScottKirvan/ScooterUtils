@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved.
 
 #pragma once
 
@@ -45,8 +45,19 @@ public:
 	 * [/Script/ScooterUtils.ScooterUtilsSettings]
 	 * ApplicationScale=0.800000
 	 */
-	UPROPERTY(EditAnywhere, config, Category = "Screen Real Estate", meta = (EditCondition = "bOverrideUEApplicationScale", DisplayName = "Persistent Editor Scale (Editor Preferences > General > Appearance: Application Scale)", ClampMin = 0.5, ClampMax = 3.0))
+	UPROPERTY(EditAnywhere, config, Category = "Screen Real Estate", meta = (EditCondition = "bOverrideUEApplicationScale", DisplayName = "Application Scale", ClampMin = 0.5, ClampMax = 3.0))
 	float ApplicationScale;
+
+	/**
+	 * Controls whether or not, by default, the FPS is shown in the editor viewport.
+	 *
+	 * C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
+	 *
+	 * [/Script/ScooterUtils.ScooterUtilsSettings]
+	 * ShowViewportFPS=True
+	 */
+	UPROPERTY(EditAnywhere, config, Category = "FPS", meta = (DisplayName = "Show Viewport FPS"))
+	bool ShowViewportFPS;
 
 	/**
 	 * Controls the Maximum FPS the system can run at.  By default, when you start up, this is set
@@ -59,19 +70,13 @@ public:
 	 * [/Script/ScooterUtils.ScooterUtilsSettings]
 	 * MaxFPS=1000
 	 */
-	UPROPERTY(EditAnywhere, config, Category = "Max FPS", meta = (DisplayName = "Persistent Editor Max FPS setting.  Console default:  t.MaxFPS 0"))
+	UPROPERTY(EditAnywhere, config, Category = "FPS", meta = (DisplayName = "Max FPS (Console default:  t.MaxFPS 0)"))
 	int MaxFPS;
 
-	/**
-	 * Controls whether or not, by default, the FPS is shown in the editor viewport.
-	 *
-	 * C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
-	 *
-	 * [/Script/ScooterUtils.ScooterUtilsSettings]
-	 * ShowViewportFPS=True
-	 */
-	UPROPERTY(EditAnywhere, config, Category = "Show FPS Onscreen", meta = (DisplayName = "Viewport toggle:  Show FPS"))
-	bool ShowViewportFPS;
+	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Version"))
+	FString ScooterUtilsVersion = "v11.0.0";
+	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Copyright"))
+	FString ScooterUtilsCopyright = "Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved";
 
 	UPROPERTY(VisibleAnywhere, config, Category = "About", meta = (DisplayName = "Scooter Utilities Version"))
 	FString ScooterUtilsVersion = "1.0.0";

@@ -1,3 +1,4 @@
+// Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved.
 
 #include "ScooterUtilsMenu.h"
 #include "ScooterUtils.h"

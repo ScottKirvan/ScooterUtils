@@ -1,3 +1,5 @@
+// Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved.
+
 #pragma once
 
 #include "ScooterUtils.h"

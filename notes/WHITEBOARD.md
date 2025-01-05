@@ -38,9 +38,34 @@ for a documentation style guide, look at how [take recorder](https://dev.epicgam
     
 2. From the **Main Toolbar**, click the **Possess** button (1), then click the **Resume** button (2).
 
-- note in the example above, they numbered the buttons to indicate a sequence.
+- note in the example above, they numbered the buttons to indicate a sequence and so they could reference them in the text.
 - they do refer, by name, to the **Main Toolbar** and **Main Menu**
 - words like "button," "icon," "property," etc., are not bolded: ie. "Click the **Stop** button."
 - They use a "card" metaphor when listing chapters or sections:
 ![](assets/media/Pasted%20image%2020241218171425.png)
+
+Epic branding page: https://www.unrealengine.com/en-US/branding
+There's links here to a box account with their print-ready logos.
+I'm guessing they'd push back on my UE/SKVFX logo - I have to change that before moving forward - fugg.
+
+
+
+
+----
+
+![](assets/media/Pasted%20image%2020241219163032.png)
+![](assets/media/Pasted%20image%2020241219163107.png)
+![](assets/media/Pasted%20image%2020241219163251.png)
+![](assets/media/Pasted%20image%2020241219163348.png)
+
+
+![](assets/media/Pasted%20image%2020241219163854.png)
+
+
+
+
+![](assets/media/vp_banner2.png)![](assets/media/Pasted%20image%2020241219164345.png)
+![](assets/media/Pasted%20image%2020241219165132.png)
+
+
 

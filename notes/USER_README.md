@@ -6,7 +6,7 @@
 </td></tr></table>
 
 <div align="center">
-  <h1><a href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>A collection of editor tools for Unreal Engine<br><br>
+  <h1><a style="color:#ffffff" href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>Your Swiss Army Knife of editor tools for Unreal Engine<br><br>
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
 <h4>
     <!--
@@ -56,32 +56,54 @@ If you've gotten **Scooter Utilities** through Fab Marketplace, downloading and 
 
 If you've gotten, or plan to get, a source-code version of **Scooter Utilities**, and need to install it manually, please follow the Installation Instructions in the [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/).
 
-## Usage
+## Enable Scooter Utilities
+To enable ScooterUtils in your project, navigate to **Edit > Plugins**, click the checkbox next to the plugin's icon to enable it for your project.   
+
+![](assets/media/plugin.png)
+## Menus
 > [!NOTE] Make sure you enable the Scooter Utilities plugin.  You can do this by navigating to Edit > Plugins and searching for Scooter Utilities.
 
-With the plugin enabled, you will have the following new tools in the Unreal Engine Editor:
+Two menus items are added to the **Main Menu*** -- these are **Restart Editor...** and **Show Project in Explorer**.  Both are found under the **File Menu**.
 
 ### File > Restart Editor...
-**Restart Editor** is found in the Main Menu bar, under
-  **File > Restart Editor...**.
 
 This will shutdown and restart unreal engine, prompting you to save any unsaved changes, and reload your project on restart.  This is the same behavior you see when, for example, you enable or disable a plugin.
 
-This feature is for anyone that frequently restarts the engine to test code changes, clear undo stacks, refresh the system, etc.  It's also nice for those times you've been working in the editor for a while and things just start to feel... um...
-off.  Just hit **Restart Editor...** and you're project will shutdown and 
-restart -- no launcher popping up and prompting 
-for a project to load, and no searching in file explorer to find the uproject file to open.
+This feature is for anyone that frequently restarts the engine to test code changes, clear undo stacks, refresh the system, etc.  It's also nice for those times you've been working in the editor for a while and things just start to feel... um...  off.  Just hit **Restart Editor...** and you're project will shutdown and restart -- no launcher popping up and prompting for a project to load, and no searching in file explorer to find the uproject file to open.
 
-### File Menu: Show Project in Explorer
-**Show Project in Explorer** is found in the Main Menu bar, under
-  **File > Show Project in Explorer**.
+### File > Show Project in Explorer
 
 This will open file explorer focused on  your main project folder -- i.e. the same 
 folder as your project's `.uproject` file.
 
 Being able to open the project in Explorer is nice for when you've opened a project from the Launcher and need to know where it's actually stored on disk.  You can also do this by right clicking on assets in the content browser, which will take you do your project's content folder, but this menu makes takes you directly to the project root.
 
+## Persistent Editor Properties
+
+Scooter Utilities Editor Preferences are used to configure settings that don't reset every time you restart the editor or create a new project.
+
+To view Scooter Utilities' Editor Preferences, navigate to **Edit > Editor Preferences…** in Unreal Engine's top menu bar. Next, select **Scooter Utilities** in the sidebar in the **Plugins** category.
+
+![](assets/media/prefs2.png)
+
+| Name                  | Description                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Screen Real Estate    |                                                                                                                    |
+| **Application Scale** | Adjust the size of the Unreal Editor interface fonts and widgets to what's comfortable or for doing presentations. |
+| FPS                   |                                                                                                                    |
+| **Show Viewport FPS** |                                                                                                                    |
+| **Max FPS**           |                                                                                                                    |
+| About                 |                                                                                                                    |
+| **Version**           | Scooter Utilities Version (read-only)                                                                              |
+|                       |                                                                                                                    |
+|                       |                                                                                                                    |
+
+
+
+
 ### Prefs: Screen Real Estate: Persistent Editor Scale
+> [!NOTE] This setting overrides the setting in Editor Preferences > Appearance, but when you disable this setting, the editor will default back to the normal 1.0 setting as a scale value.  If your setting under Editor Preferences > Appearance is not 1.0, you may need to restart the editor to get the system to pick up the correct Application Scale.
+
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Screen Real Estate** section.
 
 The *Persistent Editor Scale* value is a percentage relative to the default 
@@ -93,7 +115,6 @@ As of **Unreal Engine 5.4** there is an Application Scale setting under **Editor
 which works great, but resets between different projects.  The setting in **Scooter Utilities** is persistent
 and works globally across all projects. 
 
-> [!NOTE] This setting overrides the setting in Editor Preferences > Appearance, but when you disable this setting, the editor will default back to the normal 1.0 setting as a scale value.  If your setting under Editor Preferences > Appearance is not 1.0, you may need to restart the editor to get the system to pick up the correct Application Scale.
 
 ### Prefs: Max FPS
 Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and select **Plugins/Scooter Utilities** -- this setting is in the **Max FPS** section.
