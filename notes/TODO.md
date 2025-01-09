@@ -18,19 +18,16 @@ In Progress
 	- [ ] user docs
 		- [ ] change formatting to epic's documentation style
 		- [ ] update TOC
-		- [ ] 
-	- [ ] thumbnail image 1920x1080 < 3MB
-	- [ ] media gallery image(s) 1920x1080 < 3MB
-	- [ ] come up with a naming convention for the release binaries
-		- [ ] platform, version, ue version - ScooterUtils_Win64_UE_5.5_v1.0.0.zip
-		- [ ] maybe put together a script that can pull and build multiple versions so these aren't maintained by hand
-			- [ ] for each platform:
-				- [ ] build
-				- [ ] delete artifacts
-				- [ ] zip
-				- [ ] upload
-	- [ ] upload package(s) to bluehost
+	- [ ] thumbnail image 1920x1080 < 3MB for the product page
+	- [ ] media gallery image(s) 1920x1080 < 3MB for the product page
 	- [ ] upload images to fab and add product files
+	- [ ]  put together a batch script that can pull and build multiple versions so these aren't maintained and renamed by hand
+		- [ ] for each platform:
+			- [ ] build
+			- [ ] delete artifacts
+			- [ ] zip
+			- [ ] rename - platform, version, ue version - ScooterUtils_Win64_UE_5.5_v1.0.0.zip
+			- [ ] upload to google drive or bluehost
 	- [ ] fab creator profile wants a website... *sigh*... I have to do something, I guess :-)
 	- [ ] build a decent sized logo so I can reuse this thing - haha :-)
 	- [ ] *NOTE* Although you need to test compilation of your plugin by building it, please do not send the output of this packaged version of the plugin to the Marketplace team, as we're also going to compile your plugin on our build farm. We prefer to only receive the source folders and files of your plugin (such as Config, Content, Resources, Source folders and the .uplugin), not any folders generated from the packaging process (such as Binaries, Build, Intermediate, or Saved).
@@ -48,6 +45,8 @@ Done ✓
 - [x] WIP (stuck) on making fps persistent and ran into some engine startup timing issues.  Detailed in [#3](https://github.com/ScottKirvan/ScooterUtils/issues/3)
 - [x] reimplement the **Persistent Editor Scale** settings - Epics implementation is project based, not an editor setting. fml.
 - [x] update documentation with better engine installation instructions since UE5 is more restrictive on where you install plugins.  See issue [#14](https://github.com/ScottKirvan/ScooterUtils/issues/14)
+- [x] come up with a naming convention for the release binaries
+	- [x] platform, version, ue version - ScooterUtils_Win64_UE_5.5_v1.0.0.zip
 
 Not Gonna Do ✓
 ------
