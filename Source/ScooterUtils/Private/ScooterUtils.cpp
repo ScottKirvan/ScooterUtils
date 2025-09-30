@@ -1,4 +1,4 @@
-// Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved.
+// Copyright (c) 2020-2025 Scott Kirvan. All Rights Reserved.
 
 #include "ScooterUtils.h"
 #include "ISettingsModule.h"

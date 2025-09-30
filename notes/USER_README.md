@@ -163,7 +163,7 @@ If you really don't want to have to learn GitHub, but would still like to contri
 
 ## Credits
 
-**Copyright (c) (2020-2024):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
+**Copyright (c) (2020-2025):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
 *ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md).*  
 
 Project Link:  [ScottKirvan/ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
