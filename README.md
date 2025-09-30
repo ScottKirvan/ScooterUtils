@@ -88,7 +88,7 @@ The `_layouts` and `assets/css` folders help support the look of the repo when r
 
 The css file creates a page that is styled similar to GitHub's [Dark High Contrast](https://github.blog/changelog/2021-08-25-dark-high-contrast-theme-ga/) theme.
 
-The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, version numbering, and updating the [CHANGELOG](notes/CHANGELOG.md).
+The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, semantic versioning, and updating the [CHANGELOG](notes/CHANGELOG.md).  Release-Please uses the following: `fix:` triggers a patch release, `feat:` triggers a minor release, and `feat!:`, or `fix!:`, `refactor!:`, etc., are all considered breakers and trigger a new ve
 
 Table of Contents
 -----------------
@@ -115,7 +115,7 @@ that you can edit and build the code outside of Unreal.
 > [!NOTE]
 > As of UE 5.5.0, the automatic building of plugins within blueprint-only projects is no longer working - You need to be using a C++ based Unreal project for the source to build.  Once it's built, you can copy/paste the plugin to other projects (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
 > 
-> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is why I've made the precompiled version(s) of the plugin available on the [Fab Marketplace](http://fab.com).
+> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is ~~why I've made the precompiled version(s) of the plugin available on the [Fab Marketplace](http://fab.com).~~ (WIP)
 
 
 Features / Usage
