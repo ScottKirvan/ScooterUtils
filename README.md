@@ -88,7 +88,7 @@ The `_layouts` and `assets/css` folders help support the look of the repo when r
 
 The css file creates a page that is styled similar to GitHub's [Dark High Contrast](https://github.blog/changelog/2021-08-25-dark-high-contrast-theme-ga/) theme.
 
-The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, semantic versioning, and updating the [CHANGELOG](notes/CHANGELOG.md).  Release-Please uses the following: `fix:` triggers a patch release, `feat:` triggers a minor release, and `feat!:`, or `fix!:`, `refactor!:`, etc., are all considered breakers and trigger a new major version.
+The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, semantic versioning, and updating the [CHANGELOG](notes/CHANGELOG.md).  Release-Please uses the following: `fix:` triggers a patch release, `feat:` triggers a minor release, and `feat!:`, or `fix!:`, `refactor!:`, etc., are all considered breakers and trigger a new major version.  Some common commit prefixes are: `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`.
 
 Table of Contents
 -----------------
