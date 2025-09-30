@@ -11,7 +11,6 @@
 	"MarketplaceURL": "",
 	"FabURL": "com.epicgames.launcher://ue/Fab/product/TODO TODO TODO TODO",
 	"SupportURL": "https://github.com/ScottKirvan/ScooterUtils/discussions",
-	"EngineVersion": "5.5.0",
 	"CanContainContent": false,
 	"Installed": true,
 	"Modules": [

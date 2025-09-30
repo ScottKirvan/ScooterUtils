@@ -78,8 +78,8 @@ public:
 	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Copyright"))
 	FString ScooterUtilsCopyright = "Copyright (c) 2020-2024 Scott Kirvan. All Rights Reserved";
 
-	UPROPERTY(VisibleAnywhere, config, Category = "About", meta = (DisplayName = "Scooter Utilities Version"))
-	FString ScooterUtilsVersion = "1.0.0";
+	// UPROPERTY(VisibleAnywhere, config, Category = "About", meta = (DisplayName = "Scooter Utilities Version"))
+	// FString ScooterUtilsVersion = "1.0.0";
 
 	/**
 	 * Returns an event delegate that is executed when a setting has changed.
