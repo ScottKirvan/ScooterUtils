@@ -78,7 +78,7 @@ folder as your project's `.uproject` file.
 
 Being able to open the project in Explorer is nice for when you've opened a project from the Launcher and need to know where it's actually stored on disk.  You can also do this by right clicking on assets in the content browser, which will take you do your project's content folder, but this menu makes takes you directly to the project root.
 
-## Persistent Editor Properties
+## Editor Preferences > Persistent Editor Properties
 
 Scooter Utilities Editor Preferences are used to configure settings that don't reset every time you restart the editor or create a new project.
 
@@ -86,17 +86,17 @@ To view Scooter Utilities' Editor Preferences, navigate to **Edit > Editor Prefe
 
 ![](assets/media/prefs2.png)
 
-| Name                  | Description                                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Screen Real Estate    |                                                                                                                    |
-| **Application Scale** | Adjust the size of the Unreal Editor interface fonts and widgets to what's comfortable or for doing presentations. |
-| FPS                   |                                                                                                                    |
-| **Show Viewport FPS** |                                                                                                                    |
-| **Max FPS**           |                                                                                                                    |
-| About                 |                                                                                                                    |
-| **Version**           | Scooter Utilities Version (read-only)                                                                              |
-|                       |                                                                                                                    |
-|                       |                                                                                                                    |
+| Section            | Name                  | Description                                                                                                                               |
+| ------------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Screen Real Estate |                       |                                                                                                                                           |
+|                    | **Application Scale** | Adjust the size of the Unreal Editor interface fonts and widgets to what's comfortable or for doing presentations.                        |
+| FPS                |                       |                                                                                                                                           |
+|                    | **Show Viewport FPS** | This shows the current fps in the editor viewport, just like the `stat fps` command, but when you use this, it stays on between restarts. |
+|                    | **Max FPS**           | Same as `t.MaxFPS`, but persistent                                                                                                        |
+| About              |                       |                                                                                                                                           |
+|                    | **Version**           | Scooter Utilities Version (read-only)                                                                                                     |
+|                    |                       |                                                                                                                                           |
+|                    |                       |                                                                                                                                           |
 
 
 
@@ -138,6 +138,19 @@ Choose **Edit > Editor Preferences** from the Main Menu bar, scroll down and sel
 This is the same functionality as the viewport hamburger menu's **Show FPS** setting, but this will stay enabled
 between engine/editor restarts.
 
+## Blueprint Nodes
+Blueprint nodes are found under the **Scooter Utilities** section in the blueprint node browser.  The following nodes are currently available:
+- **Scooter Utilities**
+  * Get Global Config File String
+  * Get Global Config File Float
+  * Get Global Config File Int
+  * Get Global Config File Bool
+  * Set Global Config File String
+  * Set Global Config File Float
+  * Set Global Config File Int
+  * Set Global Config File Bool  
+	
+These nodes all get and set values from your Global Configuration Files (i. e. `DefaultEngine.ini`).  Each takes a **Section** and a **Key** argument.  The *Set* version also take the value you want to change the Config setting to as an argument.  **Section** is of the format, `/Script/AndroidRuntimeSettings.AndroidRuntimeSettings`, and **Key** would be of the format, `VersionDisplayName`.  These **Section** and **Key** values can all be found by looking at the `ini` file in question (`DefaultEngine.ini`), and looking up the value you need.    
 
 Contributions
 -----------------------
