@@ -5,6 +5,24 @@
 ## [1.3.0](https://github.com/ScottKirvan/ScooterUtils/compare/v1.2.5...v1.3.0) (2025-10-01)
 
 
+### New Features
+* Add Blueprint nodes - supports reading and writing unreal global ini files  
+  * GetGlobalConfigFileString
+  * GetGlobalConfigFileFloat
+  * GetGlobalConfigFileInt
+  * GetGlobalConfigFileBool
+  * SetGlobalConfigFileString
+  * SetGlobalConfigFileFloat
+  * SetGlobalConfigFileInt
+  * SetGlobalConfigFileBool  
+
+  Each takes a section and key, and either retrieves or sets the corresponding value in the global ini file.
+  These are all found under Scooter Utilities in the blueprint node menu.
+
+### Bug Fixes
+* Fix: broke code into separate modules due to different loadtime requirements for the different extension types.
+
+
 ### Miscellaneous Chores
 
 * release 1.3.0 ([a091057](https://github.com/ScottKirvan/ScooterUtils/commit/a09105705e410168dd924d0ac20bed0050102eab))
