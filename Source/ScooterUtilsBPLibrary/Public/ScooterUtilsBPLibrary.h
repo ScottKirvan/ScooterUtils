@@ -28,9 +28,12 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "deleteme sample test testing"), Category = "deletemeTesting")
+	static float deletemeSampleFunction(float Param);
+
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// String version
-	UFUNCTION(BlueprintPure, Category = "ScooterUtils")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
 	static FString GetGlobalConfigFileString(const FString &Section, const FString &Key)
 	{
 		FString Value;
@@ -40,7 +43,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Float version
-	UFUNCTION(BlueprintPure, Category = "ScooterUtils")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
 	static float GetGlobalConfigFileFloat(const FString &Section, const FString &Key)
 	{
 		float Value = 0.0f;
@@ -50,7 +53,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Bool version
-	UFUNCTION(BlueprintPure, Category = "ScooterUtils")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
 	static bool GetGlobalConfigFileBool(const FString &Section, const FString &Key)
 	{
 		bool Value = false;
@@ -60,7 +63,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Int version
-	UFUNCTION(BlueprintPure, Category = "ScooterUtils")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
 	static int32 GetGlobalConfigFileInt(const FString &Section, const FString &Key)
 	{
 		int32 Value = 0;
@@ -70,7 +73,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// String version
-	UFUNCTION(BlueprintCallable, Category = "ScooterUtils")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
 	static void SetGlobalConfigFileString(const FString &Section, const FString &Key, const FString &Value)
 	{
 		GConfig->SetString(*Section, *Key, *Value, GEngineIni);
@@ -79,7 +82,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Float version
-	UFUNCTION(BlueprintCallable, Category = "ScooterUtils")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
 	static void SetGlobalConfigFileFloat(const FString &Section, const FString &Key, float Value)
 	{
 		GConfig->SetFloat(*Section, *Key, Value, GEngineIni);
@@ -88,7 +91,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Bool version
-	UFUNCTION(BlueprintCallable, Category = "ScooterUtils")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
 	static void SetGlobalConfigFileBool(const FString &Section, const FString &Key, bool Value)
 	{
 		GConfig->SetBool(*Section, *Key, Value, GEngineIni);
@@ -97,7 +100,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Int version
-	UFUNCTION(BlueprintCallable, Category = "ScooterUtils")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
 	static void SetGlobalConfigFileInt(const FString &Section, const FString &Key, int32 Value)
 	{
 		GConfig->SetInt(*Section, *Key, Value, GEngineIni);

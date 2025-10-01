@@ -24,6 +24,11 @@
 				"Mac",
 				"Linux"
 			]
+		},
+		{
+			"Name": "ScooterUtilsBPLibraryModule",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"IsBetaVersion": false,
