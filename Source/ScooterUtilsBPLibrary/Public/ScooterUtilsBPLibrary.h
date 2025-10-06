@@ -31,9 +31,17 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "deleteme sample test testing"), Category = "deletemeTesting")
 	static float deletemeSampleFunction(float Param);
 
+	// Write a string to a file in the Saved folder
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
+	static bool SaveStringToFile(FString FileName, FString String, FString &OutFilePath);
+
+	// Read a string from a file in the Saved folder
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
+	static bool LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath);
+
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// String version
-	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config")
 	static FString GetGlobalConfigFileString(const FString &Section, const FString &Key)
 	{
 		FString Value;
@@ -43,7 +51,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Float version
-	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config")
 	static float GetGlobalConfigFileFloat(const FString &Section, const FString &Key)
 	{
 		float Value = 0.0f;
@@ -53,7 +61,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Bool version
-	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config")
 	static bool GetGlobalConfigFileBool(const FString &Section, const FString &Key)
 	{
 		bool Value = false;
@@ -63,7 +71,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// Int version
-	UFUNCTION(BlueprintPure, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config")
 	static int32 GetGlobalConfigFileInt(const FString &Section, const FString &Key)
 	{
 		int32 Value = 0;
@@ -73,7 +81,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// String version
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config")
 	static void SetGlobalConfigFileString(const FString &Section, const FString &Key, const FString &Value)
 	{
 		GConfig->SetString(*Section, *Key, *Value, GEngineIni);
@@ -82,7 +90,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Float version
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config")
 	static void SetGlobalConfigFileFloat(const FString &Section, const FString &Key, float Value)
 	{
 		GConfig->SetFloat(*Section, *Key, Value, GEngineIni);
@@ -91,7 +99,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Bool version
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config")
 	static void SetGlobalConfigFileBool(const FString &Section, const FString &Key, bool Value)
 	{
 		GConfig->SetBool(*Section, *Key, Value, GEngineIni);
@@ -100,7 +108,7 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 
 	// Set a value in the global config file (e.g. DefaultEngine.ini).
 	// Int version
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities")
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config")
 	static void SetGlobalConfigFileInt(const FString &Section, const FString &Key, int32 Value)
 	{
 		GConfig->SetInt(*Section, *Key, Value, GEngineIni);
