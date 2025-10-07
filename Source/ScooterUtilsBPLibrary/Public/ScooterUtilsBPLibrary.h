@@ -28,12 +28,13 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "deleteme sample test testing"), Category = "deletemeTesting")
-	static float deletemeSampleFunction(float Param);
-
 	// Write a string to a file in the Saved folder
 	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
 	static bool SaveStringToFile(FString FileName, FString String, FString &OutFilePath);
+
+	// Save a string to a file in the Documents folder (requires storage permissions)
+	UFUNCTION(BlueprintCallable, Category = "File IO|Save")
+	static bool SaveStringToDocuments(FString String, FString FileName, FString &OutFilePath);
 
 	// Read a string from a file in the Saved folder
 	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
