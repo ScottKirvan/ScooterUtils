@@ -28,18 +28,6 @@ class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	// Write a string to a file in the Saved folder
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
-	static bool SaveStringToFile(FString FileName, FString String, FString &OutFilePath);
-
-	// Save a string to a file in the Documents folder (requires storage permissions)
-	UFUNCTION(BlueprintCallable, Category = "File IO|Save")
-	static bool SaveStringToDocuments(FString String, FString FileName, FString &OutFilePath);
-
-	// Read a string from a file in the Saved folder
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
-	static bool LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath);
-
 	// Read a value from the global config file (e.g. DefaultEngine.ini).
 	// String version
 	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config")
