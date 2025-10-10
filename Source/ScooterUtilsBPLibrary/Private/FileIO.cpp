@@ -4,39 +4,61 @@
 #include "ScooterUtilsBPLibraryModule.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
-
-bool UFileIO::SaveStringToFile(FString FileName, FString String, FString &OutFilePath)
-{
-    OutFilePath = FPaths::ProjectSavedDir() + FileName;
-    return FFileHelper::SaveStringToFile(String, *OutFilePath);
-}
-
-bool UFileIO::SaveStringToDocuments(FString String, FString FileName, FString &OutFilePath)
-{
-    // Android Documents directory path
-    // Try common Android Documents locations
-    TArray<FString> PossiblePaths = {
-        TEXT("/sdcard/Documents/"),
-        TEXT("/storage/emulated/0/Documents/"),
-        FPaths::ProjectSavedDir() + TEXT("../../../Documents/")};
-
-    // Try each path until one works
-    for (const FString &BasePath : PossiblePaths)
-    {
-        OutFilePath = BasePath + FileName;
-        if (FFileHelper::SaveStringToFile(String, *OutFilePath))
-        {
-            return true;
-        }
-    }
-
-    // If all fail, fall back to saved directory
-    OutFilePath = FPaths::ProjectSavedDir() + FileName;
-    return FFileHelper::SaveStringToFile(String, *OutFilePath);
-}
+#include "HAL/PlatformProcess.h"
 
 bool UFileIO::LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath)
 {
     OutFilePath = FPaths::ProjectSavedDir() + FileName;
     return FFileHelper::LoadFileToString(OutString, *OutFilePath);
+}
+
+bool UFileIO::SaveStringToFileFunction(
+    EFileLocation Location,
+    const FString &FileName,
+    const FString &TextToSave,
+    FString &OutFullPath,
+    uint32 WriteFlags)
+{
+    // Determine base directory based on selected location
+    FString BaseDirectory;
+
+    switch (Location)
+    {
+    case EFileLocation::ProjectSaved:
+        BaseDirectory = FPaths::ProjectSavedDir();
+        break;
+
+    case EFileLocation::UserDocuments:
+#if PLATFORM_ANDROID
+        BaseDirectory = TEXT("/storage/emulated/0/Documents/");
+#else
+        BaseDirectory = FPlatformProcess::UserDir();
+#endif
+        break;
+
+    case EFileLocation::ProjectContent:
+        BaseDirectory = FPaths::ProjectContentDir();
+        break;
+
+    default:
+        BaseDirectory = FPaths::ProjectSavedDir();
+        break;
+    }
+
+    // Combine base directory with filename
+    OutFullPath = FPaths::Combine(BaseDirectory, FileName);
+
+    // Save the file
+    bool bSuccess = FFileHelper::SaveStringToFile(TextToSave, *OutFullPath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), WriteFlags);
+
+    if (bSuccess)
+    {
+        UE_LOG(LogTemp, Log, TEXT("Successfully saved file to: %s"), *OutFullPath);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("Failed to save file to: %s"), *OutFullPath);
+    }
+
+    return bSuccess;
 }
