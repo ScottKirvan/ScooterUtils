@@ -82,7 +82,9 @@ inline void DebugPrintImpl(const FString &LogFile, EDebugLevel Level,
                                           Message);
 
     // Output to UE log (stdout equivalent)
+#if WITH_EDITOR
     FMsg::Logf(__FILE__, __LINE__, LogDebugPrint.GetCategoryName(), Verbosity, TEXT("%s"), *FullMessage);
+#endif // WITH_EDITOR
 
     // Append to log file if specified
     if (!LogFile.IsEmpty())
