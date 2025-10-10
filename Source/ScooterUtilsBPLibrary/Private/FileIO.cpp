@@ -12,6 +12,30 @@ bool UFileIO::LoadFileToString(FString FileName, FString &OutString, FString &Ou
     return FFileHelper::LoadFileToString(OutString, *OutFilePath);
 }
 
+bool UFileIO::SaveTextToFile(EFileLocation SaveLocation, const FString &FileName, const FString &Content, FString &OutFullPath)
+{
+    return SaveStringToFileFunction(
+        SaveLocation,
+        FileName,
+        Content,
+        OutFullPath);
+}
+
+bool UFileIO::AppendTextToFile(EFileLocation SaveLocation, const FString &FileName, const FString &Content, FString &OutFullPath, const bool bAddLineBreak)
+{
+    FString TextToWrite = Content;
+    if (bAddLineBreak)
+    {
+        TextToWrite.Append(TEXT("\n"));
+    }
+    return SaveStringToFileFunction(
+        SaveLocation,
+        FileName,
+        TextToWrite,
+        OutFullPath,
+        FILEWRITE_Append);
+}
+
 bool UFileIO::SaveStringToFileFunction(
     EFileLocation Location,
     const FString &FileName,

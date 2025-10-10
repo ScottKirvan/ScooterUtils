@@ -10,16 +10,45 @@ class ULoremIpsumGenerator : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 public:
-    // Generate lorem ipsum text with specified parameters
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum")
+    /**
+     * Generates placeholder text in the Lorem Ipsum style, organized into paragraphs
+     * 
+     * @param NumParagraphs              Number of paragraphs to generate (default: 3)
+     * @param MinSentencesPerParagraph   Minimum sentences in each paragraph (default: 4)
+     * @param MaxSentencesPerParagraph   Maximum sentences in each paragraph (default: 8)
+     * @return                           A string containing the generated Lorem Ipsum text with paragraphs separated by newlines
+     * 
+     * Example: Use this to create placeholder text for UI design, text blocks, or document templates
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum",
+              meta = (ToolTip = "Generates Lorem Ipsum placeholder text with customizable length",
+                     Keywords = "lorem,ipsum,text,generate,placeholder,dummy,paragraph"))
     static FString GenerateLoremIpsum(int32 NumParagraphs = 3, int32 MinSentencesPerParagraph = 4, int32 MaxSentencesPerParagraph = 8);
 
-    // Generate a specific number of sentences
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum")
+    /**
+     * Generates a specific number of Lorem Ipsum sentences
+     * 
+     * @param NumSentences    The number of sentences to generate
+     * @return               A string containing the generated sentences with proper punctuation
+     * 
+     * Example: Use this when you need a specific amount of sentences, like for a character dialogue
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum",
+              meta = (ToolTip = "Generates a specific number of Lorem Ipsum sentences",
+                     Keywords = "lorem,ipsum,text,generate,sentence,dialogue"))
     static FString GenerateSentences(int32 NumSentences);
 
-    // Generate a specific number of words
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum")
+    /**
+     * Generates a specific number of Lorem Ipsum words
+     * 
+     * @param NumWords    The number of words to generate
+     * @return           A space-separated string of random Lorem Ipsum words
+     * 
+     * Example: Use this for shorter placeholder text like button labels or short descriptions
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Lorem Ipsum",
+              meta = (ToolTip = "Generates a specific number of Lorem Ipsum words",
+                     Keywords = "lorem,ipsum,text,generate,words,label"))
     static FString GenerateWords(int32 NumWords);
 
 private:
