@@ -43,20 +43,13 @@ public:
         EFileLocation SaveLocation,
         const FString &FileName,
         const FString &Content,
-        FString &OutFullPath)
-    {
-        return SaveStringToFileFunction(
-            SaveLocation,
-            FileName,
-            Content,
-            OutFullPath);
-    }
+        FString &OutFullPath);
 
     /**
      * Appends text content to a file at the specified location.
      *
      * NOTE: Creates parent directories automatically if they don't exist
-     * 
+     *
      * @param SaveLocation - The base directory location (Project, Saved, etc.)
      * @param FileName - Name of the file including extension
      * @param Content - The text content to write to the file
@@ -73,20 +66,7 @@ public:
         const FString &FileName,
         const FString &Content,
         FString &OutFullPath,
-        const bool bAddLineBreak = true)
-    {
-        FString TextToWrite = Content;
-        if (bAddLineBreak)
-        {
-            TextToWrite.Append(TEXT("\n"));
-        }
-        return SaveStringToFileFunction(
-            SaveLocation,
-            FileName,
-            TextToWrite,
-            OutFullPath,
-            FILEWRITE_Append);
-    }
+        const bool bAddLineBreak = true);
 
 private:
     static bool SaveStringToFileFunction(
