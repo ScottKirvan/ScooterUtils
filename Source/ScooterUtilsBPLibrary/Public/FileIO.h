@@ -19,8 +19,22 @@ class UFileIO : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 public:
-    // Read a string from a file in the Saved folder
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO")
+    /**
+     * Reads the contents of a text file and returns it as a string
+     *
+     * @param FileName     The name of the file to read (with extension). Example: "MyData.txt" or "Config/Settings.ini"
+     * @param OutString    Returns the contents of the file as a string
+     * @param OutFilePath  Returns the full path where the file was found
+     * @return            True if the file was read successfully, false if the file couldn't be found or read
+     * 
+     * Example Usage in Blueprint:
+     * - FileName: "SaveGame/PlayerData.txt"
+     * - OutString will contain the file contents
+     * - OutFilePath might be "C:/MyGame/Saved/SaveGame/PlayerData.txt"
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO", 
+              meta = (ToolTip = "Reads a text file's contents into a string",
+                     Keywords = "load,read,text,file,string,disk"))
     static bool LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath);
 
     /**
