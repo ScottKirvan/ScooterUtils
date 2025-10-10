@@ -2,102 +2,101 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Misc/DateTime.h"
 #include "HAL/PlatformFilemanager.h"
-#include "GenericPlatform/GenericPlatformFile.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "ScooterUtilsBPLibrary.h"
+#include "DebugPrint.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogDebugPrint, Log, All);
 
+UENUM(BlueprintType)
 enum class EDebugLevel : uint8
 {
-    Info,
-    Warning,
-    Error,
-    Critical
+    Info UMETA(DisplayName = "Info"),
+    Warning UMETA(DisplayName = "Warning"),
+    Error UMETA(DisplayName = "Error"),
+    Critical UMETA(DisplayName = "Critical")
 };
 
-// Macro to automatically capture file and line
-#define DebugPrint(LogFile, Level, Format, ...) \
-    DebugPrintImpl(LogFile, Level, __FILE__, __LINE__, Format, ##__VA_ARGS__)
-
-// Implementation function
-inline void DebugPrintImpl(const FString &LogFile, EDebugLevel Level,
-                           const char *File, int32 Line, const TCHAR *Format, ...)
+UCLASS()
+class USUDebugPrint : public UBlueprintFunctionLibrary
 {
-    // Get timestamp in stardate style (YYYY.DDD.HHMMSS)
-    FDateTime Now = FDateTime::Now();
-    int32 DayOfYear = Now.GetDayOfYear();
-    FString Timestamp = FString::Printf(TEXT("%04d.%03d.%02d%02d%02d"),
-                                        Now.GetYear(),
-                                        DayOfYear,
-                                        Now.GetHour(),
-                                        Now.GetMinute(),
-                                        Now.GetSecond());
+    GENERATED_BODY()
 
-    // Get filename only (not full path)
-    FString FileName = FPaths::GetCleanFilename(ANSI_TO_TCHAR(File));
+public:
+    /**
+     * Writes a debug message to both the Output Log window and optionally to a file
+     *
+     * @param LogFile    Name of the log file to write to. Leave empty ("") to only write to Output Log.
+     *                   File will be created in your Project's Saved/Logs directory.
+     *                   Example: "MyGame.log" or "Debug/Testing.log"
+     *
+     * @param Level      Severity level of the message. Use:
+     *                   - Info: General information and status updates
+     *                   - Warning: Non-critical issues that should be reviewed
+     *                   - Error: Problems that need immediate attention
+     *                   - Critical: Severe issues that might crash the game
+     *
+     * @param Content    The actual message to log. Can be any text or value converted to string.
+     *                   Examples: "Player spawned", "Health is low: 25", "Loading complete"
+     *
+     * @param Context    Optional. Add extra information about where the message came from.
+     *                   Examples: "PlayerController", "SaveGame", "Level1_Blueprint"
+     *
+     * @return          True if the message was logged successfully (and written to file if specified)
+     *                  False if there was an error writing to the log file
+     *
+     * Example: "LogMessage("Game.log", Info, "Player joined: " + PlayerName, "Multiplayer")"
+     * Output:  "[2025.283.143052] Multiplayer: INFO: Player joined: Steve"
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Debug Print",
+              meta = (AdvancedDisplay = "Context",
+                      ToolTip = "Logs a debug message to the Output Log and optionally to a file with timestamp",
+                      Keywords = "debug,log,print,output,file,console,message"))
+    static bool LogMessage(const FString &LogFile,
+                           EDebugLevel Level,
+                           const FString &Content,
+                           const FString &Context = TEXT(""));
 
-    // Get level string
-    FString LevelStr;
-    ELogVerbosity::Type Verbosity;
-    switch (Level)
+#define SCOOTER_DEBUG_PRINT(LogFile, Level, Format, ...) \
+    USUDebugPrint::DebugPrintInternal(LogFile, Level, TEXT(__FILE__), __LINE__, Format, ##__VA_ARGS__)
+
+    /**
+     * Internal implementation with file and line tracking
+     */
+    static bool FORCEINLINE DebugPrintInternal(const TCHAR *LogFile, EDebugLevel Level, const TCHAR *File, int32 Line, const TCHAR *Format, ...)
     {
-    case EDebugLevel::Info:
-        LevelStr = TEXT("INFO");
-        Verbosity = ELogVerbosity::Log;
-        break;
-    case EDebugLevel::Warning:
-        LevelStr = TEXT("WARNING");
-        Verbosity = ELogVerbosity::Warning;
-        break;
-    case EDebugLevel::Error:
-        LevelStr = TEXT("ERROR");
-        Verbosity = ELogVerbosity::Error;
-        break;
-    case EDebugLevel::Critical:
-        LevelStr = TEXT("CRITICAL");
-        Verbosity = ELogVerbosity::Fatal;
-        break;
-    default:
-        LevelStr = TEXT("UNKNOWN");
-        Verbosity = ELogVerbosity::Log;
-        break;
+        TCHAR TempStr[4096];
+        va_list Args;
+        va_start(Args, Format);
+        FCString::GetVarArgs(TempStr, UE_ARRAY_COUNT(TempStr), Format, Args);
+        va_end(Args);
+        return LogMessage(LogFile, Level, TempStr, *FString::Printf(TEXT("%s:%d"), File, Line));
     }
 
-    // Format the user message
-    TCHAR Message[2048];
-    va_list Args;
-    va_start(Args, Format);
-    FCString::GetVarArgs(Message, UE_ARRAY_COUNT(Message), Format, Args);
-    va_end(Args);
-
-    // Create the full log message (compiler-style format)
-    FString FullMessage = FString::Printf(TEXT("[%s] %s:%d: %s: %s"),
-                                          *Timestamp,
-                                          *FileName,
-                                          Line,
-                                          *LevelStr,
-                                          Message);
-
-    // Output to UE log (stdout equivalent)
-#if WITH_EDITOR
-    FMsg::Logf(__FILE__, __LINE__, LogDebugPrint.GetCategoryName(), Verbosity, TEXT("%s"), *FullMessage);
-#endif // WITH_EDITOR
-
-    // Append to log file if specified
-    if (!LogFile.IsEmpty())
+    /**
+     * C++ friendly varargs version for formatted debug messages (Legacy support)
+     */
+    static bool FORCEINLINE DebugPrint(const TCHAR *LogFile, EDebugLevel Level, const TCHAR *Format, ...)
     {
-        FString MyLogPath = FPaths::ProjectLogDir() / LogFile;
-
-        // Append newline to message
-        FString FileMessage = FullMessage + TEXT("\n");
-
-        // Append to file (thread-safe)
-        FFileHelper::SaveStringToFile(FileMessage, *MyLogPath,
-                                      FFileHelper::EEncodingOptions::AutoDetect,
-                                      &IFileManager::Get(),
-                                      FILEWRITE_Append);
+        TCHAR TempStr[4096];
+        va_list Args;
+        va_start(Args, Format);
+        FCString::GetVarArgs(TempStr, UE_ARRAY_COUNT(TempStr), Format, Args);
+        va_end(Args);
+        return LogMessage(LogFile, Level, TempStr, TEXT(""));
     }
-}
+
+private:
+    /** Gets the verbosity level based on debug level */
+    static ELogVerbosity::Type GetVerbosityForLevel(EDebugLevel Level);
+
+    /** Gets the string representation of the debug level */
+    static FString GetLevelString(EDebugLevel Level);
+
+    /** Formats the timestamp in YYYY.DDD.HHMMSS format */
+    static FString GetFormattedTimestamp();
+};
