@@ -73,6 +73,22 @@ public:
 	UPROPERTY(EditAnywhere, config, Category = "FPS", meta = (DisplayName = "Max FPS (Console default:  t.MaxFPS 0)"))
 	int MaxFPS;
 
+	/**
+	 * Enable hotkey for restarting the editor.
+	 * When enabled, you can press the configured hotkey to quickly restart the editor.
+	 */
+	UPROPERTY(EditAnywhere, config, Category = "Hotkeys", meta = (DisplayName = "Enable Restart Editor Hotkey"))
+	bool bEnableRestartEditorHotkey;
+
+	/**
+	 * Hotkey to restart the editor.
+	 * Default: Ctrl+Shift+Alt+R
+	 * 
+	 * NOTE: Changes to this setting require an editor restart to take effect.
+	 */
+	UPROPERTY(EditAnywhere, config, Category = "Hotkeys", meta = (EditCondition = "bEnableRestartEditorHotkey", DisplayName = "Restart Editor Hotkey"))
+	FInputChord RestartEditorHotkey;
+
 	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Version"))
 	FString ScooterUtilsVersion = "v11.0.0";
 	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Copyright"))
