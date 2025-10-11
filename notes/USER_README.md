@@ -47,7 +47,7 @@ For source-code installation or manual setup, please follow the Installation Ins
 
 To enable ScooterUtils in your project, navigate to **Edit > Plugins**, then search for and check the box next to "Scooter Utilities" to enable it for your project.
 
-![Plugin Enable Screenshot](assets/media/plugin.png)
+![Plugin Enable Screenshot](../assets/media/plugin.png)
 
 
 ## Menus
@@ -75,7 +75,7 @@ Scooter Utilities' Editor Preferences let you configure settings that persist ac
 
 To access these settings: **Edit > Editor Preferences...** → **Plugins** section → **Scooter Utilities**.
 
-![Preferences Screenshot](assets/media/prefs2.png)
+![Preferences Screenshot](../assets/media/prefs2.png)
 
 | Section            | Name                  | Description                                                                               |
 | ------------------ | --------------------- | ----------------------------------------------------------------------------------------- |
@@ -255,7 +255,7 @@ Rate/review the plugin on [fab.com](http://fab.com/) or donate to support develo
 ## Credits
 
 **Copyright © 2020-2025:** [Scott Kirvan](https://github.com/ScottKirvan) - All rights reserved  
-_ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md)._
+_ScooterUtils is licensed under the [BSD 3-Clause License](../LICENSE.md)._
 
 **Project Link:** [ScottKirvan/ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
-[CHANGELOG](notes/CHANGELOG.md) | [TODO](notes/TODO.md)
+[CHANGELOG](CHANGELOG.md) | [TODO](TODO.md)
