@@ -1,5 +1,5 @@
 
-<table border=0><tr><td valign=center> <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo.png" alt="logo" width="20" height="auto" /> </td><td valign=top> <a style="color:#ffffff" href="http://skvfx.com">skvfx.com</a> / <a style="color:#ffffff" href="http://skvfx.com/ScooterUtils">ScooterUtils</a> </td></tr></table> <div align="center"> <h1><a style="color:#ffffff" href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>Your Swiss Army Knife of editor tools for Unreal Engine<br><br> <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" /> <h4> <!-- <a href="https://tinyurl.com/3vf7whyd">View Demo</a> <span> · </span> --> <a href="https://scottkirvan.com/ScooterUtils">User Documentation</a> <span> · </span> <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D">Report Bug</a> <span> · </span> <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D">Request Feature</a> </h4> </div>
+<table border=0><tr><td valign=center> <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo.png" alt="logo" width="20" height="auto" /> </td><td valign=top> <a style="color:#ffffff" href="http://skvfx.com">skvfx.com</a> / <a style="color:#ffffff" href="http://skvfx.com/ScooterUtils">ScooterUtils</a> </td></tr></table> <div align="center"> <h1><a style="color:#ffffff" href="https://www.fab.com/sellers/SKVFX">Scooter Utilities</a></h1>Your Swiss Army Knife of editor tools for Unreal Engine<br><br> <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" /> <h4> <!-- <a href="https://tinyurl.com/3vf7whyd">View Demo</a> <span> · </span> --> <a href="https://scottkirvan.com/ScooterUtils/notes/USER_README.html">User Documentation</a> <span> · </span> <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D">Report Bug</a> <span> · </span> <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D">Request Feature</a> </h4> </div>
 
 **Scooter Utilities** is an Unreal Engine editor plugin that bundles essential quality-of-life tools for artists and developers. Quickly navigate to disk files, restart/reload your projects with a single click, and keep important settings persistent between editor sessions.
 
@@ -9,10 +9,10 @@
 - [Download and Install from FAB](#download-and-install-from-fab)
 - [Enable Scooter Utilities](#enable-scooter-utilities)
 - [Menus](#menus)
-    - [File > Restart Editor...](file--restart-editor)
+    - [File > Restart Editor...](#file--restart-editor)
     - [File > Show Project in Explorer](#file--show-project-in-explorer)
 - [Editor Preferences > Persistent Editor Properties](#editor-preferences--persistent-editor-properties)
-    - [Screen Real Estate: Persistent Editor Scale](#prefs:-screen-real-estate-persistent-editor-scale)
+    - [Screen Real Estate: Persistent Editor Scale](#prefs-screen-real-estate-persistent-editor-scale)
     - [Max FPS](#prefs-max-fps)
     - [Show FPS](#prefs-show-fps)
 - [Blueprint Nodes](#blueprint-nodes)
