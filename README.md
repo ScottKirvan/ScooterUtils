@@ -189,7 +189,7 @@ References / Inspirations / Credits
 - Thanks, also, to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.  
 
 ---
-**Copyright (c) (2020):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
+**Copyright (c) (2020-2025):** [Scott Kirvan](https://github.com/ScottKirvan)  - All rights reserved   
 *ScooterUtils is licensed under the [BSD 3-Clause License](../LICENSE.md).*  
 
 Project Link:  [ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
