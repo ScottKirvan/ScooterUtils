@@ -5,20 +5,20 @@
 
 ## Table of Contents
 
-- [Features](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#features)
-- [Download and Install from FAB](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#download-and-install-from-fab)
-- [Enable Scooter Utilities](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#enable-scooter-utilities)
-- [Menus](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#menus)
-    - [File > Restart Editor...](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#file--restart-editor)
-    - [File > Show Project in Explorer](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#file--show-project-in-explorer)
-- [Editor Preferences > Persistent Editor Properties](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#editor-preferences--persistent-editor-properties)
-    - [Screen Real Estate: Persistent Editor Scale](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#prefs-screen-real-estate-persistent-editor-scale)
-    - [Max FPS](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#prefs-max-fps)
-    - [Show FPS](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#prefs-show-fps)
-- [Blueprint Nodes](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#blueprint-nodes)
-- [Contributing](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#contributing)
-- [Support/Contact](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#supportcontact)
-- [Credits](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740#credits)
+- [Features](#features)
+- [Download and Install from FAB](#download-and-install-from-fab)
+- [Enable Scooter Utilities](#enable-scooter-utilities)
+- [Menus](#menus)
+    - [File > Restart Editor...](file--restart-editor)
+    - [File > Show Project in Explorer](#file--show-project-in-explorer)
+- [Editor Preferences > Persistent Editor Properties](#editor-preferences--persistent-editor-properties)
+    - [Screen Real Estate: Persistent Editor Scale](#prefs:-screen-real-estate-persistent-editor-scale)
+    - [Max FPS](#prefs-max-fps)
+    - [Show FPS](#prefs-show-fps)
+- [Blueprint Nodes](#blueprint-nodes)
+- [Contributing](#contributing)
+- [Support/Contact](#supportcontact)
+- [Credits](#credits)
 
 ## Features
 
@@ -36,7 +36,7 @@
 
 If you've gotten **Scooter Utilities** through Fab Marketplace, downloading and installing is handled through fab.com and the Unreal Marketplace:
 
-1. From fab.com, after purchase, click the `Download` link on the [**Scooter Utilities**](https://claude.ai/chat/6072da1b-3385-40a4-a13f-b12a3501f740) product listing
+1. From fab.com, after purchase, click the `Download` link on the [**Scooter Utilities**]() product listing
 2. A web pop-up will appear with a link to the `Epic Games Launcher`—click that link to open the launcher
 3. In the Launcher, scroll down to your **Fab Library**, find "**Scooter Utilities**," and click `Install to Engine`
 4. If prompted, select the engine version you want the plugin installed to
@@ -47,7 +47,8 @@ For source-code installation or manual setup, please follow the Installation Ins
 
 To enable ScooterUtils in your project, navigate to **Edit > Plugins**, then search for and check the box next to "Scooter Utilities" to enable it for your project.
 
-![Plugin Enable Screenshot](https://claude.ai/chat/assets/media/plugin.png)
+![Plugin Enable Screenshot](assets/media/plugin.png)
+
 
 ## Menus
 
@@ -74,17 +75,17 @@ Scooter Utilities' Editor Preferences let you configure settings that persist ac
 
 To access these settings: **Edit > Editor Preferences...** → **Plugins** section → **Scooter Utilities**.
 
-![Preferences Screenshot](https://claude.ai/chat/assets/media/prefs2.png)
+![Preferences Screenshot](assets/media/prefs2.png)
 
-|Section|Name|Description|
-|---|---|---|
-|Screen Real Estate|||
-||**Application Scale**|Adjust the size of editor interface fonts and widgets for comfort or presentations|
-|FPS|||
-||**Show Viewport FPS**|Shows current FPS in the editor viewport (like `stat fps`), but persists between restarts|
-||**Max FPS**|Same as `t.MaxFPS`, but persistent across sessions|
-|About|||
-||**Version**|Scooter Utilities Version (read-only)|
+| Section            | Name                  | Description                                                                               |
+| ------------------ | --------------------- | ----------------------------------------------------------------------------------------- |
+| Screen Real Estate |                       |                                                                                           |
+|                    | **Application Scale** | Adjust the size of editor interface fonts and widgets for comfort or presentations        |
+| FPS                |                       |                                                                                           |
+|                    | **Show Viewport FPS** | Shows current FPS in the editor viewport (like `stat fps`), but persists between restarts |
+|                    | **Max FPS**           | Same as `t.MaxFPS`, but persistent across sessions                                        |
+| About              |                       |                                                                                           |
+|                    | **Version**           | Scooter Utilities Version (read-only)                                                     |
 
 ### Prefs: Screen Real Estate: Persistent Editor Scale
 
@@ -235,7 +236,7 @@ _Need examples?_ If you'd like code snippets or visual Blueprint graphs for any 
 Got a cool tool or feature idea? Found a bug? Want to help with documentation? We'd love your contributions!
 
 **For technical contributors:**  
-Check the [issues](https://github.com/ScottKirvan/ScooterUtils/issues) page to find something to tackle. The best way to contribute is directly to the code or documentation: [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork) and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls). See our [developer documentation](https://claude.ai/chat/notes/DEV_README.md) for technical details.
+Check the [issues](https://github.com/ScottKirvan/ScooterUtils/issues) page to find something to tackle. The best way to contribute is directly to the code or documentation: [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork) and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls). See our [Developer Documentation](https://www.scottkirvan.com/ScooterUtils/)  for technical details.
 
 **For everyone else:**  
 You don't need to know GitHub to help! Just follow these links:
@@ -254,7 +255,7 @@ Rate/review the plugin on [fab.com](http://fab.com/) or donate to support develo
 ## Credits
 
 **Copyright © 2020-2025:** [Scott Kirvan](https://github.com/ScottKirvan) - All rights reserved  
-_ScooterUtils is licensed under the [BSD 3-Clause License](https://claude.ai/chat/LICENSE.md)._
+_ScooterUtils is licensed under the [BSD 3-Clause License](LICENSE.md)._
 
 **Project Link:** [ScottKirvan/ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
-[CHANGELOG](https://claude.ai/chat/notes/CHANGELOG.md) | [TODO](https://claude.ai/chat/notes/TODO.md)
+[CHANGELOG](notes/CHANGELOG.md) | [TODO](notes/TODO.md)
