@@ -139,18 +139,95 @@ This is the same functionality as the viewport hamburger menu's **Show FPS** set
 between engine/editor restarts.
 
 ## Blueprint Nodes
-Blueprint nodes are found under the **Scooter Utilities** section in the blueprint node browser.  The following nodes are currently available:
-- **Scooter Utilities**
-  * Get Global Config File String
-  * Get Global Config File Float
-  * Get Global Config File Int
-  * Get Global Config File Bool
-  * Set Global Config File String
-  * Set Global Config File Float
-  * Set Global Config File Int
-  * Set Global Config File Bool  
-	
-These nodes all get and set values from your Global Configuration Files (i. e. `DefaultEngine.ini`).  Each takes a **Section** and a **Key** argument.  The *Set* version also take the value you want to change the Config setting to as an argument.  **Section** is of the format, `/Script/AndroidRuntimeSettings.AndroidRuntimeSettings`, and **Key** would be of the format, `VersionDisplayName`.  These **Section** and **Key** values can all be found by looking at the `ini` file in question (`DefaultEngine.ini`), and looking up the value you need.    
+
+Blueprint nodes are found under the **Scooter Utilities** section in the Blueprint node browser. The plugin exposes several small, practical helpers grouped by purpose. Each node includes a helpful tooltip and search keywords in the editor.
+
+### Global Config (DefaultEngine.ini)
+Nodes (Category: "Scooter Utilities|Global Config"):
+- Get Global Config File String (Section, Key) -> String
+- Get Global Config File Float (Section, Key) -> Float
+- Get Global Config File Int (Section, Key) -> Int
+- Get Global Config File Bool (Section, Key) -> Bool
+- Set Global Config File String (Section, Key, Value)
+- Set Global Config File Float (Section, Key, Value)
+- Set Global Config File Int (Section, Key, Value)
+- Set Global Config File Bool (Section, Key, Value)
+
+Description:
+These nodes read and write values from your engine global configuration files (for example `DefaultEngine.ini`). Pass the INI section (for example `/Script/Engine.GameEngine`) and the Key name to read or write. The Set nodes flush changes to disk immediately.
+
+Quick example (Blueprint pseudo-steps):
+1. Call `Get Global Config File String` with Section `/Script/Engine.Engine` and Key `GameViewportClientClassName`.
+2. Inspect the returned string or call `Set Global Config File String` to update it.
+
+Notes:
+- Section strings are exactly as they appear in the INI file (e.g. `/Script/AndroidRuntimeSettings.AndroidRuntimeSettings`).
+- Use these carefully: changing engine config values can affect editor behavior. Prefer using project-specific config files when possible.
+
+### File IO (Saved / Content / Documents)
+Nodes (Category: "Scooter Utilities|File IO"):
+- Load File To String(FileName) -> OutString, OutFilePath, Bool
+- Save Text To File(SaveLocation, FileName, Content) -> OutFullPath, Bool
+- Append Text To File(SaveLocation, FileName, Content, bAddLineBreak) -> OutFullPath, Bool
+
+Description:
+Simple file read/write helpers. `Load File To String` looks for files in typical project locations and returns the full path it read from. `Save Text To File` and `Append Text To File` create parent directories as needed and will overwrite (or append to) files.
+
+Example usage:
+- Save a debug dump: call `Save Text To File` with `SaveLocation = ProjectSaved`, `FileName = "Logs/DebugDump.txt"`, and `Content` set to your text. The node returns the full path it wrote to.
+
+Warnings:
+- Save operations will overwrite files without additional confirmation. Use `Append Text To File` if you want to preserve content.
+
+### Debug Print / Logging
+Node (Category: "Scooter Utilities|Debug Print"):
+- Log Message(LogFile, Level, Content, Context) -> Bool
+
+Description:
+Writes a message to the editor Output Log and optionally to a file under your project's `Saved/Logs` folder. The node supports a severity level (Info, Warning, Error, Critical) and an optional Context string. Timestamps and file/line (when called from C++ helpers) are included in the output.
+
+Example (Blueprint):
+1. Call `Log Message` with `LogFile = "MyGame.log"`, `Level = Info`, `Content = "Player joined: " + PlayerName`, `Context = "Multiplayer"`.
+2. The message will appear in the Output Log and be written to `Saved/Logs/MyGame.log`.
+
+Notes:
+- Leave `LogFile` empty to only write to the Output Log.
+- The LogMessage node includes an informative tooltip in-editor describing these options.
+
+### Blueprint Reflection
+Nodes (Category: "Scooter Utilities|Blueprint Reflection"):
+- Get Calling Blueprint Name(WorldContextObject) -> String
+- Get Calling Blueprint Path(WorldContextObject) -> String (Editor-only)
+- Get Calling Blueprint Info(WorldContextObject) -> OutBlueprintName, OutContentPath, OutFullPath, OutFullReferencePath (Editor-only)
+
+Description:
+Utility nodes that make it easy to discover which Blueprint called a function. `Get Calling Blueprint Name` is useful for runtime logging; `Get Calling Blueprint Path` and `Get Calling Blueprint Info` provide editor-only package and content paths for debugging and tooling.
+
+Example:
+- From any Blueprint, pass `self` into `Get Calling Blueprint Name` to retrieve the Blueprint class name (eg `BP_PlayerCharacter`).
+
+Notes:
+- `Get Calling Blueprint Path` and `Get Calling Blueprint Info` return the most useful results in editor builds (they may return empty strings or limited information in packaged/shipping builds).
+
+### Lorem Ipsum / Placeholder Text
+Nodes (Category: "Scooter Utilities|Lorem Ipsum"):
+- Generate Lorem Ipsum(NumParagraphs, MinSentences, MaxSentences) -> String
+- Generate Sentences(NumSentences) -> String
+- Generate Words(NumWords) -> String
+
+Description:
+Quickly generate dummy placeholder text for UI mockups, art passes, or layout testing. These nodes are handy for designers and UI artists who need realistic-looking text blocks without copying real content.
+
+Example:
+- Call `Generate Lorem Ipsum` with 2 paragraphs to populate a UI text block for layout testing.
+
+### Where to find nodes and tooltips
+- Open the Blueprint editor and press the node browser (right-click on the canvas). Search for "Scooter Utilities" or use keywords like "config", "log", "file", "lorem" to find the nodes quickly. Each node contains a short tooltip describing parameters and behavior.
+
+### Editor-only behavior and packaging
+- Some functions expose editor-only information (paths and Blueprint internals). These will behave best in editor builds and may return reduced data or empty strings in packaged/Shipping builds.
+
+If you'd like snippets or ready-to-paste Blueprint graphs for any of the above nodes, open an issue or request an example in the repo and I'll add a few visual examples.
 
 Contributions
 -----------------------
