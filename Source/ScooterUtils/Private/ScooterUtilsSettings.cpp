@@ -4,6 +4,7 @@
 #include "Editor/UnrealEdEngine.h"
 #include "UnrealEdGlobals.h"
 #include "ScooterUtilsVersion.h"
+#include "InputCoreTypes.h"
 
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -12,6 +13,10 @@ UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectIni
 	MaxFPS = 0;
 	ShowViewportFPS = false;
 	ScooterUtilsVersion = FString::Printf(TEXT("v%d.%d.%d"), SCOOTER_UTILS_VERSION_MAJOR, SCOOTER_UTILS_VERSION_MINOR, SCOOTER_UTILS_VERSION_PATCH);
+	
+	// Initialize hotkey settings
+	bEnableRestartEditorHotkey = true;
+	RestartEditorHotkey = FInputChord(EModifierKey::Control | EModifierKey::Shift | EModifierKey::Alt, EKeys::R);
 }
 
 void UScooterUtilsSettings::Init()
@@ -49,6 +54,13 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ShowViewportFPS))
 	{
 		SetShowViewportFPS(ShowViewportFPS);
+	}
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bEnableRestartEditorHotkey) ||
+		PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, RestartEditorHotkey))
+	{
+		// Notify user that editor restart is required for hotkey changes
+		UE_LOG(LogTemp, Warning, TEXT("ScooterUtils: Hotkey settings changed. Please restart the editor for changes to take effect."));
 	}
 
 	SaveConfig();

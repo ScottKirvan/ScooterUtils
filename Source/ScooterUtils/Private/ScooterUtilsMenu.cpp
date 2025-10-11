@@ -2,7 +2,9 @@
 
 #include "ScooterUtilsMenu.h"
 #include "ScooterUtils.h"
+#include "ScooterUtilsSettings.h"
 #include "EditorStyleSet.h"
+#include "LevelEditor.h"
 
 #define LOCTEXT_NAMESPACE "ScooterUtilsMenu"
 
@@ -21,9 +23,14 @@ public:
 
 	virtual void RegisterCommands() override
 	{
-		UI_COMMAND(MenuRestartEditor, "Restart Editor...", "Restart the editor, re-opening the current project. - ScooterUtils", EUserInterfaceActionType::Button, FInputChord());
+		// Get the hotkey from settings
+		const UScooterUtilsSettings* Settings = GetDefault<UScooterUtilsSettings>();
+		FInputChord RestartHotkey = Settings && Settings->bEnableRestartEditorHotkey 
+			? Settings->RestartEditorHotkey 
+			: FInputChord();
+
+		UI_COMMAND(MenuRestartEditor, "Restart Editor...", "Restart the editor, re-opening the current project. - ScooterUtils", EUserInterfaceActionType::Button, RestartHotkey);
 		UI_COMMAND(MenuShowExplorer, "Show Project in Explorer", "Find this project on disk. - ScooterUtils", EUserInterfaceActionType::Button, FInputChord());
-		// UI_COMMAND(DecreaseBrushFalloff, "Decrease Brush Falloff", "Press this key to decrease brush falloff by a fixed increment.", EUserInterfaceActionType::RadioButton, FInputChord(EModifierKey::Control | EModifierKey::Shift, EKeys::LeftBracket));
 	}
 
 public:
@@ -44,6 +51,11 @@ void ScooterUtilsMenu::OnStartupModule()
 	CommandList = MakeShareable(new FUICommandList);
 	ScooterUtilsMenuCommands::Register();
 	MapCommands();
+	
+	// Register commands with the global editor command list for hotkey to work globally
+	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+	LevelEditorModule.GetGlobalLevelEditorActions()->Append(CommandList.ToSharedRef());
+	
 	FScooterUtilsModule::Get().AddMenuExtension(
 		FMenuExtensionDelegate::CreateRaw(this, &ScooterUtilsMenu::MakeMenuEntry),
 		FName("FileProject"), // trying to place this at the end of the main File/Project menu section
