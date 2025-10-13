@@ -11,6 +11,8 @@
 #include "Misc/MessageDialog.h"
 #include "Misc/Paths.h"
 
+// @TODO - at initialisation, our checkbox for enableing the plugin by default is not being set correctly.  I think it's taking what it says in the ini file and ignoring any initialization or reading of the uplugin file.
+
 UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
 	bOverrideUEApplicationScale = false;
@@ -18,13 +20,28 @@ UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectIni
 	MaxFPS = 0;
 	ShowViewportFPS = false;
 	ScooterUtilsVersion = FString::Printf(TEXT("v%d.%d.%d"), SCOOTER_UTILS_VERSION_MAJOR, SCOOTER_UTILS_VERSION_MINOR, SCOOTER_UTILS_VERSION_PATCH);
-	
+
 	// Initialize hotkey settings
 	bEnableRestartEditorHotkey = true;
 	RestartEditorHotkey = FInputChord(EModifierKey::Control | EModifierKey::Shift | EModifierKey::Alt, EKeys::R);
-	
+
 	// Initialize plugin settings - read current state from .uplugin file
-	bPluginEnabledByDefault = ReadPluginEnabledByDefaultFromFile();
+	// bPluginEnabledByDefault = ReadPluginEnabledByDefaultFromFile();
+}
+
+void UScooterUtilsSettings::PostInitProperties()
+{
+	Super::PostInitProperties();
+
+	// After config is loaded, sync the checkbox with the actual .uplugin file state
+	bool bActualState = ReadPluginEnabledByDefaultFromFile();
+	if (bPluginEnabledByDefault != bActualState)
+	{
+		UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Syncing bPluginEnabledByDefault from .uplugin file: %s"),
+			   bActualState ? TEXT("true") : TEXT("false"));
+		bPluginEnabledByDefault = bActualState;
+		SaveConfig(); // Save the corrected value to ini
+	}
 }
 
 void UScooterUtilsSettings::Init()
@@ -146,20 +163,20 @@ void UScooterUtilsSettings::UpdatePluginEnabledByDefault(bool bEnabled)
 	if (!Plugin.IsValid())
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Could not find ScooterUtils plugin"));
-		FMessageDialog::Open(EAppMsgType::Ok, 
-			FText::FromString(TEXT("Could not locate the ScooterUtils plugin. Please verify the plugin is installed correctly.")));
+		FMessageDialog::Open(EAppMsgType::Ok,
+							 FText::FromString(TEXT("Could not locate the ScooterUtils plugin. Please verify the plugin is installed correctly.")));
 		return;
 	}
 
 	FString PluginDescriptorPath = Plugin->GetDescriptorFileName();
 	UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Plugin descriptor path: %s"), *PluginDescriptorPath);
-	
+
 	// Check if file exists and is writable
 	if (!FPaths::FileExists(PluginDescriptorPath))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Plugin descriptor file does not exist at %s"), *PluginDescriptorPath);
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(FString::Printf(TEXT("Plugin descriptor file not found:\n%s"), *PluginDescriptorPath)));
+							 FText::FromString(FString::Printf(TEXT("Plugin descriptor file not found:\n%s"), *PluginDescriptorPath)));
 		return;
 	}
 
@@ -167,30 +184,30 @@ void UScooterUtilsSettings::UpdatePluginEnabledByDefault(bool bEnabled)
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Plugin descriptor file is read-only at %s"), *PluginDescriptorPath);
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(FString::Printf(
-				TEXT("Cannot update plugin settings - the .uplugin file is read-only.\n\n")
-				TEXT("Location: %s\n\n")
-				TEXT("This may be due to:\n")
-				TEXT("• File permissions (try running editor as administrator)\n")
-				TEXT("• Plugin installed in a protected system directory\n")
-				TEXT("• File system restrictions\n\n")
-				TEXT("Please make the file writable or move the plugin to a user-writable location."),
-				*PluginDescriptorPath)));
+							 FText::FromString(FString::Printf(
+								 TEXT("Cannot update plugin settings - the .uplugin file is read-only.\n\n")
+									 TEXT("Location: %s\n\n")
+										 TEXT("This may be due to:\n")
+											 TEXT("• File permissions (try running editor as administrator)\n")
+												 TEXT("• Plugin installed in a protected system directory\n")
+													 TEXT("• File system restrictions\n\n")
+														 TEXT("Please make the file writable or move the plugin to a user-writable location."),
+								 *PluginDescriptorPath)));
 		// Revert the setting change
 		bPluginEnabledByDefault = !bEnabled;
 		return;
 	}
-	
+
 	// Read the .uplugin file
 	FString JsonString;
 	if (!FFileHelper::LoadFileToString(JsonString, *PluginDescriptorPath))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Failed to read .uplugin file at %s"), *PluginDescriptorPath);
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(FString::Printf(
-				TEXT("Failed to read the plugin descriptor file.\n\nLocation: %s\n\n")
-				TEXT("Please check file permissions and try again."),
-				*PluginDescriptorPath)));
+							 FText::FromString(FString::Printf(
+								 TEXT("Failed to read the plugin descriptor file.\n\nLocation: %s\n\n")
+									 TEXT("Please check file permissions and try again."),
+								 *PluginDescriptorPath)));
 		bPluginEnabledByDefault = !bEnabled;
 		return;
 	}
@@ -202,7 +219,7 @@ void UScooterUtilsSettings::UpdatePluginEnabledByDefault(bool bEnabled)
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Failed to parse .uplugin JSON"));
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(TEXT("Failed to parse the plugin descriptor file. The file may be corrupted.")));
+							 FText::FromString(TEXT("Failed to parse the plugin descriptor file. The file may be corrupted.")));
 		bPluginEnabledByDefault = !bEnabled;
 		return;
 	}
@@ -212,14 +229,14 @@ void UScooterUtilsSettings::UpdatePluginEnabledByDefault(bool bEnabled)
 
 	// Write back to file with pretty formatting
 	FString OutputString;
-	TSharedRef<TJsonWriter<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>> Writer = 
+	TSharedRef<TJsonWriter<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>> Writer =
 		TJsonWriterFactory<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>::Create(&OutputString);
-	
+
 	if (!FJsonSerializer::Serialize(JsonObject.ToSharedRef(), Writer))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Failed to serialize JSON"));
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(TEXT("Failed to serialize the plugin descriptor data.")));
+							 FText::FromString(TEXT("Failed to serialize the plugin descriptor data.")));
 		bPluginEnabledByDefault = !bEnabled;
 		return;
 	}
@@ -229,28 +246,30 @@ void UScooterUtilsSettings::UpdatePluginEnabledByDefault(bool bEnabled)
 	{
 		UE_LOG(LogTemp, Error, TEXT("ScooterUtils: Failed to write .uplugin file at %s"), *PluginDescriptorPath);
 		FMessageDialog::Open(EAppMsgType::Ok,
-			FText::FromString(FString::Printf(
-				TEXT("Failed to save changes to the plugin descriptor file.\n\n")
-				TEXT("Location: %s\n\n")
-				TEXT("Possible causes:\n")
-				TEXT("• Insufficient permissions (try running editor as administrator)\n")
-				TEXT("• Disk is full or write-protected\n")
-				TEXT("• File is locked by another process\n\n")
-				TEXT("The setting has been reverted."),
-				*PluginDescriptorPath)));
+							 FText::FromString(FString::Printf(
+								 TEXT("Failed to save changes to the plugin descriptor file.\n\n")
+									 TEXT("Location: %s\n\n")
+										 TEXT("Possible causes:\n")
+											 TEXT("• Insufficient permissions (try running editor as administrator)\n")
+												 TEXT("• Disk is full or write-protected\n")
+													 TEXT("• File is locked by another process\n\n")
+														 TEXT("The setting has been reverted."),
+								 *PluginDescriptorPath)));
 		bPluginEnabledByDefault = !bEnabled;
 		return;
 	}
 
 	// Success!
-	UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Successfully updated EnabledByDefault to %s in .uplugin file"), 
-		bEnabled ? TEXT("true") : TEXT("false"));
-	
+	UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Successfully updated EnabledByDefault to %s in .uplugin file"),
+		   bEnabled ? TEXT("true") : TEXT("false"));
+
+	/*
 	// Show success notification
 	FText NotificationText = FText::FromString(FString::Printf(
 		TEXT("Plugin 'EnabledByDefault' setting updated to: %s\n\nThis will affect new projects going forward."),
 		bEnabled ? TEXT("Enabled") : TEXT("Disabled")));
 	FMessageDialog::Open(EAppMsgType::Ok, NotificationText);
+	*/
 }
 
 bool UScooterUtilsSettings::ReadPluginEnabledByDefaultFromFile() const
@@ -264,7 +283,7 @@ bool UScooterUtilsSettings::ReadPluginEnabledByDefaultFromFile() const
 	}
 
 	FString PluginDescriptorPath = Plugin->GetDescriptorFileName();
-	
+
 	// Read the .uplugin file
 	FString JsonString;
 	if (!FFileHelper::LoadFileToString(JsonString, *PluginDescriptorPath))
@@ -287,8 +306,8 @@ bool UScooterUtilsSettings::ReadPluginEnabledByDefaultFromFile() const
 	if (JsonObject->HasField(TEXT("EnabledByDefault")))
 	{
 		bEnabledByDefault = JsonObject->GetBoolField(TEXT("EnabledByDefault"));
-		UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Read EnabledByDefault = %s from .uplugin file"), 
-			bEnabledByDefault ? TEXT("true") : TEXT("false"));
+		UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Read EnabledByDefault = %s from .uplugin file"),
+			   bEnabledByDefault ? TEXT("true") : TEXT("false"));
 	}
 	else
 	{
