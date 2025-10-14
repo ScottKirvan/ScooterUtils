@@ -75,6 +75,7 @@ Scooter Utilities' Editor Preferences let you configure settings that persist ac
 
 To access these settings: **Edit > Editor Preferences...** → **Plugins** section → **Scooter Utilities**.
 
+
 ![Preferences Screenshot](../assets/media/prefs2.png)
 
 | Section            | Name                  | Description                                                                               |
