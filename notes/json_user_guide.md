@@ -2,6 +2,37 @@
 
 Welcome to the **JSON Blueprint Library**! This is your one-stop shop for creating, parsing, and manipulating JSON data right in your Unreal Engine blueprints. No more wrestling with complex JSON structures or wishing you could just save some data to a file. We've got you covered! 🎉
 
+## Table of Contents
+
+- [What's This All About?](#whats-this-all-about)
+- [The Quick Start](#the-quick-start)
+- [📝 Creation Nodes](#-creation-nodes)
+  - [Add Field](#add-field)
+  - [Add Array Field](#add-array-field)
+  - [Add Object Field](#add-object-field)
+  - [Add Null Field](#add-null-field)
+  - [Remove Field](#remove-field)
+  - [Merge JSON](#merge-json)
+  - [Pretty Print JSON](#pretty-print-json)
+  - [Minify JSON](#minify-json)
+- [🔍 Parsing Nodes](#-parsing-nodes)
+  - [Is Valid JSON](#is-valid-json)
+  - [Has Field](#has-field)
+  - [Is Field Null](#is-field-null)
+  - [Get String Field](#get-string-field)
+  - [Get Number Field](#get-number-field)
+  - [Get Boolean Field](#get-boolean-field)
+  - [Get Array Field](#get-array-field)
+  - [Get Object Field](#get-object-field)
+  - [Get All Field Names](#get-all-field-names)
+- [🎯 Real-World Examples](#-real-world-examples)
+- [🎓 Tips & Best Practices](#-tips--best-practices)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [🚀 Advanced: C++ Integration](#-advanced-c-integration)
+- [📚 JSON Quick Reference](#-json-quick-reference)
+
+---
+
 ## What's This All About?
 
 JSON (JavaScript Object Notation) is basically the universal language for storing and transmitting data. Think of it as a super-organized notebook where you can write down anything: numbers, text, lists, even nested structures. This library gives you simple blueprint nodes to work with JSON without needing to know any C++ or complicated APIs.
@@ -262,6 +293,40 @@ After:
 - Use this before saving to files for debugging
 - Great for config files humans need to edit
 - Doesn't change the data, just the formatting
+
+---
+
+### Minify JSON
+**Strip All The Whitespace**
+
+Removes all formatting, indentation, and whitespace from JSON. Makes it compact for storage or transmission.
+
+**Parameters:**
+- **JSON String**: The JSON to minify
+
+**Output:**
+- **JSON String Out**: Compacted JSON with no whitespace
+
+**Example:**
+
+```
+Before:
+{
+  "name": "Bob",
+  "position": {
+    "X": 100,
+    "Y": 200
+  }
+}
+
+After: {"name":"Bob","position":{"X":100,"Y":200}}
+```
+
+**💡 Pro Tips:**
+- Use this before saving to disk to reduce file size
+- Perfect for network transmission where size matters
+- Opposite of Pretty Print JSON
+- The data is identical, just the formatting changes
 
 ---
 
@@ -715,5 +780,3 @@ The library uses Unreal's native `FJsonObject` under the hood, so you get full J
 - Curly braces `{}` for objects, square brackets `[]` for arrays
 
 ---
-
-That's it! You're now a JSON wizard 🧙‍♂️ Go forth and structure all the data! If you run into issues, remember: when in doubt, Pretty Print it out!

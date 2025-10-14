@@ -3,6 +3,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
+#include "DebugPrint.h"
 
 // ========== Helper Functions (not class members) ==========
 
@@ -205,15 +206,19 @@ FString UJSONBlueprintLibrary::PrettyPrintJSON(const FString &JSONString)
         return JSONString;
     }
 
+    SCOOTER_DEBUG_PRINT(TEXT(""), EDebugLevel::Info, TEXT(""));
     FString OutputString;
     TSharedRef<TJsonWriter<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>> Writer =
         TJsonWriterFactory<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>::Create(&OutputString);
 
+    SCOOTER_DEBUG_PRINT(TEXT(""), EDebugLevel::Info, TEXT(""));
     if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
     {
+        SCOOTER_DEBUG_PRINT(TEXT(""), EDebugLevel::Info, TEXT("pass"));
         return OutputString;
     }
 
+    SCOOTER_DEBUG_PRINT(TEXT(""), EDebugLevel::Info, TEXT("fail"));
     return JSONString;
 }
 
@@ -403,4 +408,25 @@ bool UJSONBlueprintLibrary::GetAllFieldNames(const FString &JSONString, TArray<F
     }
 
     return true;
+}
+
+FString UJSONBlueprintLibrary::MinifyJSON(const FString &JSONString)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        return JSONString;
+    }
+
+    // Use default compact writer (no pretty print policy)
+    FString OutputString;
+    TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
+
+    if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
+    {
+        return OutputString;
+    }
+
+    return JSONString;
 }
