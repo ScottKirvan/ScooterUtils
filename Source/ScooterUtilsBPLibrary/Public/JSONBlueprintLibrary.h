@@ -7,10 +7,32 @@
 #include "JSONBlueprintLibrary.generated.h"
 
 /**
+ * Enum for JSON field types
+ */
+UENUM(BlueprintType)
+enum class EJSONFieldType : uint8
+{
+    String UMETA(DisplayName = "String"),
+    Number UMETA(DisplayName = "Number"),
+    Boolean UMETA(DisplayName = "Boolean")
+};
+
+/**
+ * Enum for JSON array types
+ */
+UENUM(BlueprintType)
+enum class EJSONArrayType : uint8
+{
+    String UMETA(DisplayName = "String Array"),
+    Number UMETA(DisplayName = "Number Array"),
+    Object UMETA(DisplayName = "Object Array")
+};
+
+/**
  * Blueprint function library for JSON creation and parsing
  */
 UCLASS()
-class UJSONBlueprintLibrary : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API UJSONBlueprintLibrary : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 
@@ -18,91 +40,72 @@ public:
     // ========== JSON Creation Functions ==========
 
     /**
-     * Create an empty JSON object string
-     * @return Empty JSON object "{}"
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString CreateEmptyJSON();
-
-    /**
-     * Add a string field to a JSON string
-     * @param JSONString The existing JSON string
+     * Add a field to a JSON string (type selected via dropdown)
+     * @param FieldType The type of field to add
+     * @param JSONString The existing JSON string (can be empty)
      * @param FieldName The field name to add
-     * @param Value The string value
+     * @param Value The value as a string (will be converted based on FieldType)
      * @return Updated JSON string
      */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddStringField(const FString &JSONString, const FString &FieldName, const FString &Value);
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString AddField(EJSONFieldType FieldType, const FString &JSONString, const FString &FieldName, const FString &Value);
 
     /**
-     * Add an integer field to a JSON string
-     * @param JSONString The existing JSON string
+     * Add an array field to a JSON string (type selected via dropdown)
+     * @param ArrayType The type of array to add
+     * @param JSONString The existing JSON string (can be empty)
      * @param FieldName The field name to add
-     * @param Value The integer value
+     * @param Values The array values as strings (will be converted based on ArrayType)
      * @return Updated JSON string
      */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddIntegerField(const FString &JSONString, const FString &FieldName, int32 Value);
-
-    /**
-     * Add a float field to a JSON string
-     * @param JSONString The existing JSON string
-     * @param FieldName The field name to add
-     * @param Value The float value
-     * @return Updated JSON string
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddFloatField(const FString &JSONString, const FString &FieldName, float Value);
-
-    /**
-     * Add a boolean field to a JSON string
-     * @param JSONString The existing JSON string
-     * @param FieldName The field name to add
-     * @param Value The boolean value
-     * @return Updated JSON string
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddBooleanField(const FString &JSONString, const FString &FieldName, bool Value);
-
-    /**
-     * Add a Vector field to a JSON string (stored as object with X, Y, Z)
-     * @param JSONString The existing JSON string
-     * @param FieldName The field name to add
-     * @param Value The vector value
-     * @return Updated JSON string
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddVectorField(const FString &JSONString, const FString &FieldName, FVector Value);
-
-    /**
-     * Add a Rotator field to a JSON string (stored as object with Pitch, Yaw, Roll)
-     * @param JSONString The existing JSON string
-     * @param FieldName The field name to add
-     * @param Value The rotator value
-     * @return Updated JSON string
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddRotatorField(const FString &JSONString, const FString &FieldName, FRotator Value);
-
-    /**
-     * Add a string array field to a JSON string
-     * @param JSONString The existing JSON string
-     * @param FieldName The field name to add
-     * @param Values The string array
-     * @return Updated JSON string
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
-    static FString AddStringArrayField(const FString &JSONString, const FString &FieldName, const TArray<FString> &Values);
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString AddArrayField(EJSONArrayType ArrayType, const FString &JSONString, const FString &FieldName, const TArray<FString> &Values);
 
     /**
      * Add a nested JSON object field
-     * @param JSONString The existing JSON string
+     * @param JSONString The existing JSON string (can be empty)
      * @param FieldName The field name to add
      * @param NestedJSON The nested JSON string to add
      * @return Updated JSON string
      */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation")
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
     static FString AddObjectField(const FString &JSONString, const FString &FieldName, const FString &NestedJSON);
+
+    /**
+     * Add a null field to a JSON string
+     * @param JSONString The existing JSON string (can be empty)
+     * @param FieldName The field name to add
+     * @return Updated JSON string
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString AddNullField(const FString &JSONString, const FString &FieldName);
+
+    /**
+     * Remove a field from a JSON string
+     * @param JSONString The existing JSON string
+     * @param FieldName The field name to remove
+     * @param bSuccess Whether the field was successfully removed
+     * @return Updated JSON string
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString RemoveField(const FString &JSONString, const FString &FieldName, bool &bSuccess);
+
+    /**
+     * Merge two JSON objects (fields from JSON2 are added to JSON1, overwriting duplicates)
+     * @param JSONString1 The first JSON string (base)
+     * @param JSONString2 The second JSON string (to merge in)
+     * @return Merged JSON string
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString MergeJSON(const FString &JSONString1, const FString &JSONString2);
+
+    /**
+     * Pretty print a JSON string with indentation
+     * @param JSONString The JSON string to format
+     * @return Formatted JSON string
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString PrettyPrintJSON(const FString &JSONString);
 
     // ========== JSON Parsing Functions ==========
 
@@ -115,6 +118,24 @@ public:
     static bool IsValidJSON(const FString &JSONString);
 
     /**
+     * Check if a field exists in a JSON string
+     * @param JSONString The JSON string to check
+     * @param FieldName The field name to look for
+     * @return True if field exists, false otherwise
+     */
+    UFUNCTION(BlueprintPure, Category = "Scooter Utilities|JSON|Parsing")
+    static bool HasField(const FString &JSONString, const FString &FieldName);
+
+    /**
+     * Check if a field is null in a JSON string
+     * @param JSONString The JSON string to check
+     * @param FieldName The field name to check
+     * @return True if field exists and is null, false otherwise
+     */
+    UFUNCTION(BlueprintPure, Category = "Scooter Utilities|JSON|Parsing")
+    static bool IsFieldNull(const FString &JSONString, const FString &FieldName);
+
+    /**
      * Get a string field from a JSON string
      * @param JSONString The JSON string to parse
      * @param FieldName The field name to retrieve
@@ -125,24 +146,14 @@ public:
     static bool GetStringField(const FString &JSONString, const FString &FieldName, FString &OutValue);
 
     /**
-     * Get an integer field from a JSON string
+     * Get a number field from a JSON string
      * @param JSONString The JSON string to parse
      * @param FieldName The field name to retrieve
-     * @param OutValue The retrieved integer value
+     * @param OutValue The retrieved numeric value
      * @return True if field exists and is a number, false otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
-    static bool GetIntegerField(const FString &JSONString, const FString &FieldName, int32 &OutValue);
-
-    /**
-     * Get a float field from a JSON string
-     * @param JSONString The JSON string to parse
-     * @param FieldName The field name to retrieve
-     * @param OutValue The retrieved float value
-     * @return True if field exists and is a number, false otherwise
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
-    static bool GetFloatField(const FString &JSONString, const FString &FieldName, float &OutValue);
+    static bool GetNumberField(const FString &JSONString, const FString &FieldName, float &OutValue);
 
     /**
      * Get a boolean field from a JSON string
@@ -155,34 +166,15 @@ public:
     static bool GetBooleanField(const FString &JSONString, const FString &FieldName, bool &OutValue);
 
     /**
-     * Get a Vector field from a JSON string (reads object with X, Y, Z)
+     * Get an array field from a JSON string (type selected via dropdown)
+     * @param ArrayType The expected type of array
      * @param JSONString The JSON string to parse
      * @param FieldName The field name to retrieve
-     * @param OutValue The retrieved vector value
-     * @return True if field exists and has X, Y, Z components, false otherwise
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
-    static bool GetVectorField(const FString &JSONString, const FString &FieldName, FVector &OutValue);
-
-    /**
-     * Get a Rotator field from a JSON string (reads object with Pitch, Yaw, Roll)
-     * @param JSONString The JSON string to parse
-     * @param FieldName The field name to retrieve
-     * @param OutValue The retrieved rotator value
-     * @return True if field exists and has Pitch, Yaw, Roll components, false otherwise
-     */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
-    static bool GetRotatorField(const FString &JSONString, const FString &FieldName, FRotator &OutValue);
-
-    /**
-     * Get a string array field from a JSON string
-     * @param JSONString The JSON string to parse
-     * @param FieldName The field name to retrieve
-     * @param OutValues The retrieved string array
+     * @param OutValues The retrieved array values as strings
      * @return True if field exists and is an array, false otherwise
      */
     UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
-    static bool GetStringArrayField(const FString &JSONString, const FString &FieldName, TArray<FString> &OutValues);
+    static bool GetArrayField(EJSONArrayType ArrayType, const FString &JSONString, const FString &FieldName, TArray<FString> &OutValues);
 
     /**
      * Get a nested JSON object as a string
@@ -191,7 +183,7 @@ public:
      * @param OutJSON The retrieved nested JSON string
      * @return True if field exists and is an object, false otherwise
      */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing", meta = (DisplayName = "Get Object Field"))
     static bool GetObjectField(const FString &JSONString, const FString &FieldName, FString &OutJSON);
 
     /**
@@ -202,9 +194,4 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
     static bool GetAllFieldNames(const FString &JSONString, TArray<FString> &OutFieldNames);
-
-private:
-    // Helper functions
-    static TSharedPtr<FJsonObject> ParseJSONString(const FString &JSONString);
-    static FString JSONObjectToString(const TSharedPtr<FJsonObject> &JsonObject);
 };

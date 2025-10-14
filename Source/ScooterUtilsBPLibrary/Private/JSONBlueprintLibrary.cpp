@@ -4,24 +4,24 @@
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
 
-// ========== Helper Functions ==========
+// ========== Helper Functions (not class members) ==========
 
-TSharedPtr<FJsonObject> UJSONBlueprintLibrary::ParseJSONString(const FString &JSONString)
+TSharedPtr<FJsonObject> ParseToJSONObject(const FString &JSONString)
 {
-    TSharedPtr<FJsonObject> JsonObject;
+    TSharedPtr<FJsonObject> JSONObject;
     TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(JSONString);
 
-    if (FJsonSerializer::Deserialize(Reader, JsonObject) && JsonObject.IsValid())
+    if (FJsonSerializer::Deserialize(Reader, JSONObject) && JSONObject.IsValid())
     {
-        return JsonObject;
+        return JSONObject;
     }
 
     return nullptr;
 }
 
-FString UJSONBlueprintLibrary::JSONObjectToString(const TSharedPtr<FJsonObject> &JsonObject)
+FString JSONObjectToString(const TSharedPtr<FJsonObject> &JSONObject)
 {
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return TEXT("{}");
     }
@@ -29,7 +29,7 @@ FString UJSONBlueprintLibrary::JSONObjectToString(const TSharedPtr<FJsonObject> 
     FString OutputString;
     TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
 
-    if (FJsonSerializer::Serialize(JsonObject.ToSharedRef(), Writer))
+    if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
     {
         return OutputString;
     }
@@ -37,128 +37,98 @@ FString UJSONBlueprintLibrary::JSONObjectToString(const TSharedPtr<FJsonObject> 
     return TEXT("{}");
 }
 
+TSharedPtr<FJsonObject> ParseJSONString(const FString &JSONString)
+{
+    return ParseToJSONObject(JSONString);
+}
+
 // ========== JSON Creation Functions ==========
 
-FString UJSONBlueprintLibrary::CreateEmptyJSON()
+FString UJSONBlueprintLibrary::AddField(EJSONFieldType FieldType, const FString &JSONString, const FString &FieldName, const FString &Value)
 {
-    return TEXT("{}");
+    TSharedPtr<FJsonObject> JSONObject = ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        JSONObject = MakeShareable(new FJsonObject());
+    }
+
+    switch (FieldType)
+    {
+    case EJSONFieldType::String:
+        JSONObject->SetStringField(FieldName, Value);
+        break;
+
+    case EJSONFieldType::Number:
+    {
+        float NumValue = FCString::Atof(*Value);
+        JSONObject->SetNumberField(FieldName, NumValue);
+    }
+    break;
+
+    case EJSONFieldType::Boolean:
+    {
+        bool BoolValue = Value.ToBool();
+        JSONObject->SetBoolField(FieldName, BoolValue);
+    }
+    break;
+    }
+
+    return ::JSONObjectToString(JSONObject);
 }
 
-FString UJSONBlueprintLibrary::AddStringField(const FString &JSONString, const FString &FieldName, const FString &Value)
+FString UJSONBlueprintLibrary::AddArrayField(EJSONArrayType ArrayType, const FString &JSONString, const FString &FieldName, const TArray<FString> &Values)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
-        JsonObject = MakeShareable(new FJsonObject());
+        JSONObject = MakeShareable(new FJsonObject());
     }
 
-    JsonObject->SetStringField(FieldName, Value);
-    return JSONObjectToString(JsonObject);
-}
+    TArray<TSharedPtr<FJsonValue>> JSONArray;
 
-FString UJSONBlueprintLibrary::AddIntegerField(const FString &JSONString, const FString &FieldName, int32 Value)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
+    switch (ArrayType)
     {
-        JsonObject = MakeShareable(new FJsonObject());
+    case EJSONArrayType::String:
+        for (const FString &Value : Values)
+        {
+            JSONArray.Add(MakeShareable(new FJsonValueString(Value)));
+        }
+        break;
+
+    case EJSONArrayType::Number:
+        for (const FString &Value : Values)
+        {
+            float NumValue = FCString::Atof(*Value);
+            JSONArray.Add(MakeShareable(new FJsonValueNumber(NumValue)));
+        }
+        break;
+
+    case EJSONArrayType::Object:
+        for (const FString &Value : Values)
+        {
+            TSharedPtr<FJsonObject> NestedObject = ::ParseJSONString(Value);
+            if (NestedObject.IsValid())
+            {
+                JSONArray.Add(MakeShareable(new FJsonValueObject(NestedObject)));
+            }
+        }
+        break;
     }
 
-    JsonObject->SetNumberField(FieldName, Value);
-    return JSONObjectToString(JsonObject);
-}
-
-FString UJSONBlueprintLibrary::AddFloatField(const FString &JSONString, const FString &FieldName, float Value)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        JsonObject = MakeShareable(new FJsonObject());
-    }
-
-    JsonObject->SetNumberField(FieldName, Value);
-    return JSONObjectToString(JsonObject);
-}
-
-FString UJSONBlueprintLibrary::AddBooleanField(const FString &JSONString, const FString &FieldName, bool Value)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        JsonObject = MakeShareable(new FJsonObject());
-    }
-
-    JsonObject->SetBoolField(FieldName, Value);
-    return JSONObjectToString(JsonObject);
-}
-
-FString UJSONBlueprintLibrary::AddVectorField(const FString &JSONString, const FString &FieldName, FVector Value)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        JsonObject = MakeShareable(new FJsonObject());
-    }
-
-    TSharedPtr<FJsonObject> VectorObject = MakeShareable(new FJsonObject());
-    VectorObject->SetNumberField(TEXT("X"), Value.X);
-    VectorObject->SetNumberField(TEXT("Y"), Value.Y);
-    VectorObject->SetNumberField(TEXT("Z"), Value.Z);
-
-    JsonObject->SetObjectField(FieldName, VectorObject);
-    return JSONObjectToString(JsonObject);
-}
-
-FString UJSONBlueprintLibrary::AddRotatorField(const FString &JSONString, const FString &FieldName, FRotator Value)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        JsonObject = MakeShareable(new FJsonObject());
-    }
-
-    TSharedPtr<FJsonObject> RotatorObject = MakeShareable(new FJsonObject());
-    RotatorObject->SetNumberField(TEXT("Pitch"), Value.Pitch);
-    RotatorObject->SetNumberField(TEXT("Yaw"), Value.Yaw);
-    RotatorObject->SetNumberField(TEXT("Roll"), Value.Roll);
-
-    JsonObject->SetObjectField(FieldName, RotatorObject);
-    return JSONObjectToString(JsonObject);
-}
-
-FString UJSONBlueprintLibrary::AddStringArrayField(const FString &JSONString, const FString &FieldName, const TArray<FString> &Values)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        JsonObject = MakeShareable(new FJsonObject());
-    }
-
-    TArray<TSharedPtr<FJsonValue>> JsonArray;
-    for (const FString &Value : Values)
-    {
-        JsonArray.Add(MakeShareable(new FJsonValueString(Value)));
-    }
-
-    JsonObject->SetArrayField(FieldName, JsonArray);
-    return JSONObjectToString(JsonObject);
+    JSONObject->SetArrayField(FieldName, JSONArray);
+    return ::JSONObjectToString(JSONObject);
 }
 
 FString UJSONBlueprintLibrary::AddObjectField(const FString &JSONString, const FString &FieldName, const FString &NestedJSON)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-    TSharedPtr<FJsonObject> NestedObject = ParseJSONString(NestedJSON);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> NestedObject = ::ParseJSONString(NestedJSON);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
-        JsonObject = MakeShareable(new FJsonObject());
+        JSONObject = MakeShareable(new FJsonObject());
     }
 
     if (!NestedObject.IsValid())
@@ -166,66 +136,160 @@ FString UJSONBlueprintLibrary::AddObjectField(const FString &JSONString, const F
         NestedObject = MakeShareable(new FJsonObject());
     }
 
-    JsonObject->SetObjectField(FieldName, NestedObject);
-    return JSONObjectToString(JsonObject);
+    JSONObject->SetObjectField(FieldName, NestedObject);
+    return ::JSONObjectToString(JSONObject);
+}
+
+FString UJSONBlueprintLibrary::AddNullField(const FString &JSONString, const FString &FieldName)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        JSONObject = MakeShareable(new FJsonObject());
+    }
+
+    JSONObject->SetField(FieldName, MakeShareable(new FJsonValueNull()));
+    return ::JSONObjectToString(JSONObject);
+}
+
+FString UJSONBlueprintLibrary::RemoveField(const FString &JSONString, const FString &FieldName, bool &bSuccess)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        bSuccess = false;
+        return JSONString;
+    }
+
+    bSuccess = JSONObject->HasField(FieldName);
+    if (bSuccess)
+    {
+        JSONObject->RemoveField(FieldName);
+    }
+
+    return ::JSONObjectToString(JSONObject);
+}
+
+FString UJSONBlueprintLibrary::MergeJSON(const FString &JSONString1, const FString &JSONString2)
+{
+    TSharedPtr<FJsonObject> JSONObject1 = ::ParseJSONString(JSONString1);
+    TSharedPtr<FJsonObject> JSONObject2 = ::ParseJSONString(JSONString2);
+
+    if (!JSONObject1.IsValid())
+    {
+        JSONObject1 = MakeShareable(new FJsonObject());
+    }
+
+    if (!JSONObject2.IsValid())
+    {
+        return ::JSONObjectToString(JSONObject1);
+    }
+
+    // Copy all fields from JSONObject2 into JSONObject1
+    for (const auto &Field : JSONObject2->Values)
+    {
+        JSONObject1->SetField(Field.Key, Field.Value);
+    }
+
+    return ::JSONObjectToString(JSONObject1);
+}
+
+FString UJSONBlueprintLibrary::PrettyPrintJSON(const FString &JSONString)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        return JSONString;
+    }
+
+    FString OutputString;
+    TSharedRef<TJsonWriter<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>> Writer =
+        TJsonWriterFactory<TCHAR, TPrettyJsonPrintPolicy<TCHAR>>::Create(&OutputString);
+
+    if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
+    {
+        return OutputString;
+    }
+
+    return JSONString;
 }
 
 // ========== JSON Parsing Functions ==========
 
 bool UJSONBlueprintLibrary::IsValidJSON(const FString &JSONString)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-    return JsonObject.IsValid();
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+    return JSONObject.IsValid();
+}
+
+bool UJSONBlueprintLibrary::HasField(const FString &JSONString, const FString &FieldName)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        return false;
+    }
+
+    return JSONObject->HasField(FieldName);
+}
+
+bool UJSONBlueprintLibrary::IsFieldNull(const FString &JSONString, const FString &FieldName)
+{
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
+
+    if (!JSONObject.IsValid())
+    {
+        return false;
+    }
+
+    if (!JSONObject->HasField(FieldName))
+    {
+        return false;
+    }
+
+    const TSharedPtr<FJsonValue> *FieldValue = JSONObject->Values.Find(FieldName);
+    if (FieldValue && FieldValue->IsValid())
+    {
+        return (*FieldValue)->IsNull();
+    }
+
+    return false;
 }
 
 bool UJSONBlueprintLibrary::GetStringField(const FString &JSONString, const FString &FieldName, FString &OutValue)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
-    if (JsonObject->HasField(FieldName))
+    if (JSONObject->HasField(FieldName))
     {
-        OutValue = JsonObject->GetStringField(FieldName);
+        OutValue = JSONObject->GetStringField(FieldName);
         return true;
     }
 
     return false;
 }
 
-bool UJSONBlueprintLibrary::GetIntegerField(const FString &JSONString, const FString &FieldName, int32 &OutValue)
+bool UJSONBlueprintLibrary::GetNumberField(const FString &JSONString, const FString &FieldName, float &OutValue)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
-    if (JsonObject->HasField(FieldName))
+    if (JSONObject->HasField(FieldName))
     {
-        OutValue = JsonObject->GetIntegerField(FieldName);
-        return true;
-    }
-
-    return false;
-}
-
-bool UJSONBlueprintLibrary::GetFloatField(const FString &JSONString, const FString &FieldName, float &OutValue)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        return false;
-    }
-
-    if (JsonObject->HasField(FieldName))
-    {
-        OutValue = JsonObject->GetNumberField(FieldName);
+        OutValue = JSONObject->GetNumberField(FieldName);
         return true;
     }
 
@@ -234,99 +298,66 @@ bool UJSONBlueprintLibrary::GetFloatField(const FString &JSONString, const FStri
 
 bool UJSONBlueprintLibrary::GetBooleanField(const FString &JSONString, const FString &FieldName, bool &OutValue)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
-    if (JsonObject->HasField(FieldName))
+    if (JSONObject->HasField(FieldName))
     {
-        OutValue = JsonObject->GetBoolField(FieldName);
+        OutValue = JSONObject->GetBoolField(FieldName);
         return true;
     }
 
     return false;
 }
 
-bool UJSONBlueprintLibrary::GetVectorField(const FString &JSONString, const FString &FieldName, FVector &OutValue)
+bool UJSONBlueprintLibrary::GetArrayField(EJSONArrayType ArrayType, const FString &JSONString, const FString &FieldName, TArray<FString> &OutValues)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
-    if (JsonObject->HasField(FieldName))
+    if (JSONObject->HasField(FieldName))
     {
-        const TSharedPtr<FJsonObject> *VectorObject;
-        if (JsonObject->TryGetObjectField(FieldName, VectorObject))
-        {
-            if ((*VectorObject)->HasField(TEXT("X")) &&
-                (*VectorObject)->HasField(TEXT("Y")) &&
-                (*VectorObject)->HasField(TEXT("Z")))
-            {
-                OutValue.X = (*VectorObject)->GetNumberField(TEXT("X"));
-                OutValue.Y = (*VectorObject)->GetNumberField(TEXT("Y"));
-                OutValue.Z = (*VectorObject)->GetNumberField(TEXT("Z"));
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-bool UJSONBlueprintLibrary::GetRotatorField(const FString &JSONString, const FString &FieldName, FRotator &OutValue)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        return false;
-    }
-
-    if (JsonObject->HasField(FieldName))
-    {
-        const TSharedPtr<FJsonObject> *RotatorObject;
-        if (JsonObject->TryGetObjectField(FieldName, RotatorObject))
-        {
-            if ((*RotatorObject)->HasField(TEXT("Pitch")) &&
-                (*RotatorObject)->HasField(TEXT("Yaw")) &&
-                (*RotatorObject)->HasField(TEXT("Roll")))
-            {
-                OutValue.Pitch = (*RotatorObject)->GetNumberField(TEXT("Pitch"));
-                OutValue.Yaw = (*RotatorObject)->GetNumberField(TEXT("Yaw"));
-                OutValue.Roll = (*RotatorObject)->GetNumberField(TEXT("Roll"));
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-bool UJSONBlueprintLibrary::GetStringArrayField(const FString &JSONString, const FString &FieldName, TArray<FString> &OutValues)
-{
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
-
-    if (!JsonObject.IsValid())
-    {
-        return false;
-    }
-
-    if (JsonObject->HasField(FieldName))
-    {
-        const TArray<TSharedPtr<FJsonValue>> *JsonArray;
-        if (JsonObject->TryGetArrayField(FieldName, JsonArray))
+        const TArray<TSharedPtr<FJsonValue>> *JSONArray;
+        if (JSONObject->TryGetArrayField(FieldName, JSONArray))
         {
             OutValues.Empty();
-            for (const TSharedPtr<FJsonValue> &Value : *JsonArray)
+
+            switch (ArrayType)
             {
-                OutValues.Add(Value->AsString());
+            case EJSONArrayType::String:
+                for (const TSharedPtr<FJsonValue> &Value : *JSONArray)
+                {
+                    OutValues.Add(Value->AsString());
+                }
+                break;
+
+            case EJSONArrayType::Number:
+                for (const TSharedPtr<FJsonValue> &Value : *JSONArray)
+                {
+                    OutValues.Add(FString::SanitizeFloat(Value->AsNumber()));
+                }
+                break;
+
+            case EJSONArrayType::Object:
+                for (const TSharedPtr<FJsonValue> &Value : *JSONArray)
+                {
+                    const TSharedPtr<FJsonObject> *ObjectValue;
+                    if (Value->TryGetObject(ObjectValue))
+                    {
+                        OutValues.Add(::JSONObjectToString(*ObjectValue));
+                    }
+                }
+                break;
             }
+
             return true;
         }
     }
@@ -336,19 +367,19 @@ bool UJSONBlueprintLibrary::GetStringArrayField(const FString &JSONString, const
 
 bool UJSONBlueprintLibrary::GetObjectField(const FString &JSONString, const FString &FieldName, FString &OutJSON)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
-    if (JsonObject->HasField(FieldName))
+    if (JSONObject->HasField(FieldName))
     {
         const TSharedPtr<FJsonObject> *NestedObject;
-        if (JsonObject->TryGetObjectField(FieldName, NestedObject))
+        if (JSONObject->TryGetObjectField(FieldName, NestedObject))
         {
-            OutJSON = JSONObjectToString(*NestedObject);
+            OutJSON = ::JSONObjectToString(*NestedObject);
             return true;
         }
     }
@@ -358,15 +389,15 @@ bool UJSONBlueprintLibrary::GetObjectField(const FString &JSONString, const FStr
 
 bool UJSONBlueprintLibrary::GetAllFieldNames(const FString &JSONString, TArray<FString> &OutFieldNames)
 {
-    TSharedPtr<FJsonObject> JsonObject = ParseJSONString(JSONString);
+    TSharedPtr<FJsonObject> JSONObject = ::ParseJSONString(JSONString);
 
-    if (!JsonObject.IsValid())
+    if (!JSONObject.IsValid())
     {
         return false;
     }
 
     OutFieldNames.Empty();
-    for (const auto &Entry : JsonObject->Values)
+    for (const auto &Entry : JSONObject->Values)
     {
         OutFieldNames.Add(Entry.Key);
     }
