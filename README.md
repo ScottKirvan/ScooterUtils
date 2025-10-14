@@ -75,9 +75,13 @@ ScooterUtils
 │   └───workflows
 ├───Config
 ├───Resources
-├───Source/ScooterUtils
-│   ├───────Private
-│   └───────Public
+├───Source
+│   ├───ScooterUtils
+│   │  ├────Private
+│   │  └────Public
+│   └───ScooterUtilsBPLibrary
+│      ├────Private
+│      └────Public
 ├───_layouts
 ├───assets
 │   ├───css
@@ -92,6 +96,7 @@ The files in the `.github` folder implement and customizes a github action that 
 
 Release-Please creates a pull request in this repo.  Merging that back into `master` will create a new release, and tag it in GitHub.  
 
+The two modules that make up the plugin are in the `Source` folder.  There's *two* modules because one needs to be editor-only, and the other is a runtime (in-game) module.  `ScooterUtils` is the editor-only module, and `ScooterUtilsBPLibrary` is the runtime module. The runtime module only contains Blueprint nodes.
 
 Table of Contents
 -----------------
