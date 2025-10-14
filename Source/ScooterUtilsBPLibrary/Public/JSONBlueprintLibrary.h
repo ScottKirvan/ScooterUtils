@@ -194,4 +194,12 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Parsing")
     static bool GetAllFieldNames(const FString &JSONString, TArray<FString> &OutFieldNames);
+
+    /**
+     * Minify a JSON string by removing all whitespace and formatting
+     * @param JSONString The JSON string to minify
+     * @return Minified JSON string (compact, no whitespace)
+     */
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|JSON|Creation", meta = (ReturnDisplayName = "JSON String Out"))
+    static FString MinifyJSON(const FString &JSONString);
 };
