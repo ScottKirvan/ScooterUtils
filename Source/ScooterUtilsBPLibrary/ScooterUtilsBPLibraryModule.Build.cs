@@ -26,6 +26,10 @@ public class ScooterUtilsBPLibraryModule : ModuleRules
 			new string[]
 			{
 				"Core",
+				"CoreUObject",
+				"Engine",
+				"Json",
+				"JsonUtilities" 
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
