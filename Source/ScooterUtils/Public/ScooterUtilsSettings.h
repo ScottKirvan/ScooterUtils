@@ -12,6 +12,8 @@ public:
 
 	void Init();
 
+	virtual void PostInitProperties() override;
+
 	void SetApplicationScale(float f);
 	float GetApplicationScale();
 	void UpdateApplicationScale();
@@ -21,6 +23,10 @@ public:
 	void SetShowViewportFPS(bool f);
 	bool GetShowViewportFPS();
 	void ToggleViewportFPS();
+
+private:
+	void UpdatePluginEnabledByDefault(bool bEnabled);
+	bool ReadPluginEnabledByDefaultFromFile() const;
 
 protected:
 	// UObject overrides
@@ -83,11 +89,21 @@ public:
 	/**
 	 * Hotkey to restart the editor.
 	 * Default: Ctrl+Shift+Alt+R
-	 * 
+	 *
 	 * NOTE: Changes to this setting require an editor restart to take effect.
 	 */
 	UPROPERTY(EditAnywhere, config, Category = "Hotkeys", meta = (EditCondition = "bEnableRestartEditorHotkey", DisplayName = "Restart Editor Hotkey"))
 	FInputChord RestartEditorHotkey;
+
+	/**
+	 * Controls whether this plugin is enabled by default for new projects.
+	 * When true, the plugin will be automatically enabled in all new projects without requiring manual activation.
+	 * When false, you'll need to enable the plugin manually in each project's plugin settings.
+	 *
+	 * NOTE: Changes to this setting are applied immediately to the .uplugin file.
+	 */
+	UPROPERTY(EditAnywhere, config, Category = "Plugin Settings", meta = (DisplayName = "Enable Plugin By Default For New Projects"))
+	bool bPluginEnabledByDefault;
 
 	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Version"))
 	FString ScooterUtilsVersion = "v11.0.0";
