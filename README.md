@@ -43,7 +43,7 @@
   </h4>
 </div>
 
- **ScooterUtils** is an Unreal Engine editor plugin (**Scooter Utilities**) which contains miscellaneous artist/developer utilities, allowing you to quickly navigate to disk files, restart the system, and to keep some settings persistent between restarts in the editor.
+**Scooter Utilities** is an Unreal Engine editor plugin that bundles essential quality-of-life tools for artists and developers. Quickly navigate to disk files, restart/reload your projects with a single click, and keep important settings persistent between editor sessions.
 
 Think of **ScooterUtils** as a Swiss Army Knife of tools that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning on or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
 
@@ -91,6 +91,7 @@ The css file creates a page that is styled similar to GitHub's [Dark High Contra
 The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, semantic versioning, and updating the [CHANGELOG](notes/CHANGELOG.md).  Release-Please uses the following: `fix:` triggers a patch release, `feat:` triggers a minor release, and `feat!:`, or `fix!:`, `refactor!:`, etc., are all considered breakers and trigger a new major version.  Some common commit prefixes are: `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`.
 
 Release-Please creates a pull request in this repo.  Merging that back into `master` will create a new release, and tag it in GitHub.  
+
 
 Table of Contents
 -----------------
