@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Misc/ConfigCacheIni.h"
 #include "ScooterUtilsBPLibrary.generated.h"
 
 /*

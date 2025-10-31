@@ -8,6 +8,9 @@ public class ScooterUtilsBPLibraryModule : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
+		// Allow this module to be precompiled for all targets (including Android)
+		PrecompileForTargets = PrecompileTargetsType.Any;
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...

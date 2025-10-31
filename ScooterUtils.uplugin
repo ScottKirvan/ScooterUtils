@@ -26,8 +26,14 @@
 		},
 		{
 			"Name": "ScooterUtilsBPLibraryModule",
-			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"Type": "RuntimeAndProgram",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Mac",
+				"Linux",
+				"Android"
+			]
 		}
 	],
 	"IsBetaVersion": false,
