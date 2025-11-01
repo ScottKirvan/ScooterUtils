@@ -5,6 +5,9 @@
 #include "ScooterUtilsSettings.h"
 #include "EditorStyleSet.h"
 #include "LevelEditor.h"
+#include "ToolMenus.h"
+#include "Widgets/Input/SComboButton.h"
+#include "ISettingsModule.h"
 
 #define LOCTEXT_NAMESPACE "ScooterUtilsMenu"
 
@@ -51,15 +54,40 @@ void ScooterUtilsMenu::OnStartupModule()
 	CommandList = MakeShareable(new FUICommandList);
 	ScooterUtilsMenuCommands::Register();
 	MapCommands();
-	
+
 	// Register commands with the global editor command list for hotkey to work globally
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	LevelEditorModule.GetGlobalLevelEditorActions()->Append(CommandList.ToSharedRef());
-	
+
+	// Add menu extension to File menu
 	FScooterUtilsModule::Get().AddMenuExtension(
 		FMenuExtensionDelegate::CreateRaw(this, &ScooterUtilsMenu::MakeMenuEntry),
 		FName("FileProject"), // trying to place this at the end of the main File/Project menu section
 		CommandList);
+
+	// Add toolbar button using the modern ToolMenus system (if enabled in settings)
+	const UScooterUtilsSettings* Settings = GetDefault<UScooterUtilsSettings>();
+	if (Settings && Settings->bShowToolbarButton)
+	{
+		UToolMenus* ToolMenus = UToolMenus::Get();
+		if (ToolMenus)
+		{
+			UToolMenu* ToolbarMenu = ToolMenus->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
+			if (ToolbarMenu)
+			{
+				FToolMenuSection& Section = ToolbarMenu->AddSection("ScooterUtils", FText::FromString("Scooter Utils"));
+
+				FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitComboButton(
+					"ScooterUtilsCombo",
+					FUIAction(),
+					FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
+					LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
+					LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
+					FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")
+				));
+			}
+		}
+	}
 }
 
 void ScooterUtilsMenu::OnShutdownModule()
@@ -84,6 +112,48 @@ void ScooterUtilsMenu::MenuShowExplorer()
 {
 	FString ProjectFolder = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
 	FPlatformProcess::ExploreFolder(*ProjectFolder);
+}
+
+// Create the toolbar button with dropdown menu (legacy method - no longer used)
+void ScooterUtilsMenu::MakeToolbarEntry(FToolBarBuilder &toolbarBuilder)
+{
+	toolbarBuilder.AddComboButton(
+		FUIAction(),
+		FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
+		LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
+		LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
+		FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")
+	);
+}
+
+// Generate the dropdown menu content
+TSharedRef<SWidget> ScooterUtilsMenu::GenerateToolbarMenu()
+{
+	const bool bShouldCloseWindowAfterMenuSelection = true;
+	FMenuBuilder MenuBuilder(bShouldCloseWindowAfterMenuSelection, CommandList);
+
+	MenuBuilder.BeginSection("ScooterUtilsActions", LOCTEXT("ActionsSection", "Actions"));
+	{
+		MenuBuilder.AddMenuEntry(ScooterUtilsMenuCommands::Get().MenuRestartEditor);
+		MenuBuilder.AddMenuEntry(ScooterUtilsMenuCommands::Get().MenuShowExplorer);
+	}
+	MenuBuilder.EndSection();
+
+	MenuBuilder.BeginSection("ScooterUtilsSettings", LOCTEXT("SettingsSection", "Settings"));
+	{
+		MenuBuilder.AddMenuEntry(
+			LOCTEXT("OpenPluginSettings", "Plugin Settings..."),
+			LOCTEXT("OpenPluginSettingsTooltip", "Open Scooter Utilities settings in Editor Preferences"),
+			FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings.Small"),
+			FUIAction(FExecuteAction::CreateLambda([]()
+			{
+				FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", "sk_UE_Utils");
+			}))
+		);
+	}
+	MenuBuilder.EndSection();
+
+	return MenuBuilder.MakeWidget();
 }
 
 #undef LOCTEXT_NAMESPACE

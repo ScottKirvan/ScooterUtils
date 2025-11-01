@@ -25,6 +25,9 @@ UScooterUtilsSettings::UScooterUtilsSettings(const FObjectInitializer &ObjectIni
 	bEnableRestartEditorHotkey = true;
 	RestartEditorHotkey = FInputChord(EModifierKey::Control | EModifierKey::Shift | EModifierKey::Alt, EKeys::R);
 
+	// Initialize UI settings
+	bShowToolbarButton = true;
+
 	// Initialize plugin settings - read current state from .uplugin file
 	// bPluginEnabledByDefault = ReadPluginEnabledByDefaultFromFile();
 }
@@ -86,6 +89,12 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 	{
 		// Notify user that editor restart is required for hotkey changes
 		UE_LOG(LogTemp, Warning, TEXT("ScooterUtils: Hotkey settings changed. Please restart the editor for changes to take effect."));
+	}
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bShowToolbarButton))
+	{
+		// Notify user that editor restart is required for toolbar visibility changes
+		UE_LOG(LogTemp, Warning, TEXT("ScooterUtils: Toolbar button visibility changed. Please restart the editor for changes to take effect."));
 	}
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bPluginEnabledByDefault))

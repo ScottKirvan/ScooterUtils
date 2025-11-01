@@ -13,6 +13,8 @@ public:
 	virtual void OnShutdownModule() override;
 
 	void MakeMenuEntry(FMenuBuilder &menuBuilder);
+	void MakeToolbarEntry(FToolBarBuilder &toolbarBuilder);
+	TSharedRef<SWidget> GenerateToolbarMenu();
 
 protected:
 	TSharedPtr<FUICommandList> CommandList;

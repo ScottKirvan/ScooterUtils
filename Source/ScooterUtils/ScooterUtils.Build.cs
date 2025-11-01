@@ -42,10 +42,11 @@ public class ScooterUtils : ModuleRules
 				"UnrealEd",
 				"InputCore",
 				"LevelEditor",
+				"ToolMenus",
 				"Json",
 				"JsonUtilities",
 				"Projects",
-				// ... add private dependencies that you statically link with here ...	
+				// ... add private dependencies that you statically link with here ...
 			}
 			);
 

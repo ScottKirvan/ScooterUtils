@@ -96,6 +96,15 @@ public:
 	FInputChord RestartEditorHotkey;
 
 	/**
+	 * Show the Scooter Utils toolbar button in the Level Editor.
+	 * When enabled, a dropdown button will appear in the Play toolbar providing quick access to plugin tools.
+	 *
+	 * NOTE: Changes to this setting require an editor restart to take effect.
+	 */
+	UPROPERTY(EditAnywhere, config, Category = "UI", meta = (DisplayName = "Show Toolbar Button"))
+	bool bShowToolbarButton;
+
+	/**
 	 * Controls whether this plugin is enabled by default for new projects.
 	 * When true, the plugin will be automatically enabled in all new projects without requiring manual activation.
 	 * When false, you'll need to enable the plugin manually in each project's plugin settings.
