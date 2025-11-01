@@ -22,7 +22,9 @@
 
 ## Features
 
-- **Restart the editor** from the File menu—no more hunting for your .uproject file
+- **Toolbar dropdown button** in the Level Editor for quick access to plugin tools and settings
+- **Restart the editor** from the File menu or toolbar—no more hunting for your .uproject file
+- **Customizable hotkey** for restarting the editor (default: Ctrl+Shift+Alt+R)
 - **Open your project folder** in File Explorer with one click
 - **Adjust the editor interface scale** for comfortable viewing or presentations
 - **Set a persistent Maximum FPS** that survives editor restarts
@@ -52,14 +54,26 @@ To enable ScooterUtils in your project, navigate to **Edit > Plugins**, then sea
 
 ## Menus
 
-> [!NOTE]  
+> [!NOTE]
 > Make sure you've enabled the Scooter Utilities plugin via **Edit > Plugins** before looking for these menu items.
 
-Two new menu items are added to the **File Menu**: **Restart Editor...** and **Show Project in Explorer**.
+Scooter Utilities adds a toolbar dropdown button to the Play toolbar and two new menu items to the **File Menu**.
+
+### Toolbar Dropdown
+
+A dropdown button appears in the Level Editor's Play toolbar (enabled by default, can be toggled in settings). The dropdown provides quick access to:
+
+- **Restart Editor...** - Restart the editor with the current project
+- **Show Project in Explorer** - Open the project folder on disk
+- **Plugin Settings...** - Jump directly to the Scooter Utilities settings page
+
+The toolbar button can be shown or hidden via **Edit > Editor Preferences > Plugins > Scooter Utilities > UI > Show Toolbar Button**. Changes require an editor restart.
 
 ### File > Restart Editor...
 
 Shuts down and restarts Unreal Engine, prompting you to save any unsaved changes before reloading your project. This is the same behavior you see when enabling or disabling a plugin.
+
+**Hotkey:** Ctrl+Shift+Alt+R (customizable in Editor Preferences)
 
 **Why use this?** Perfect for developers who frequently restart the engine to test code changes, clear undo stacks, or refresh the system. It's also great when the editor starts feeling sluggish—just hit **Restart Editor...** and you're back in action without navigating through the launcher or hunting for your .uproject file.
 
@@ -78,15 +92,22 @@ To access these settings: **Edit > Editor Preferences...** → **Plugins** secti
 
 ![Preferences Screenshot](../assets/media/prefs2.png)
 
-| Section            | Name                  | Description                                                                               |
-| ------------------ | --------------------- | ----------------------------------------------------------------------------------------- |
-| Screen Real Estate |                       |                                                                                           |
-|                    | **Application Scale** | Adjust the size of editor interface fonts and widgets for comfort or presentations        |
-| FPS                |                       |                                                                                           |
-|                    | **Show Viewport FPS** | Shows current FPS in the editor viewport (like `stat fps`), but persists between restarts |
-|                    | **Max FPS**           | Same as `t.MaxFPS`, but persistent across sessions                                        |
-| About              |                       |                                                                                           |
-|                    | **Version**           | Scooter Utilities Version (read-only)                                                     |
+| Section            | Name                              | Description                                                                               |
+| ------------------ | --------------------------------- | ----------------------------------------------------------------------------------------- |
+| Screen Real Estate |                                   |                                                                                           |
+|                    | **Application Scale**             | Adjust the size of editor interface fonts and widgets for comfort or presentations        |
+| FPS                |                                   |                                                                                           |
+|                    | **Show Viewport FPS**             | Shows current FPS in the editor viewport (like `stat fps`), but persists between restarts |
+|                    | **Max FPS**                       | Same as `t.MaxFPS`, but persistent across sessions                                        |
+| Hotkeys            |                                   |                                                                                           |
+|                    | **Enable Restart Editor Hotkey**  | Enable/disable the restart editor hotkey (requires editor restart)                        |
+|                    | **Restart Editor Hotkey**         | Customize the hotkey (default: Ctrl+Shift+Alt+R, requires editor restart)                |
+| UI                 |                                   |                                                                                           |
+|                    | **Show Toolbar Button**           | Show/hide the Scooter Utils toolbar dropdown button (requires editor restart)             |
+| Plugin Settings    |                                   |                                                                                           |
+|                    | **Enable Plugin By Default**      | Control whether this plugin is enabled by default for new projects                        |
+| About              |                                   |                                                                                           |
+|                    | **Version**                       | Scooter Utilities Version (read-only)                                                     |
 
 ### Prefs: Screen Real Estate: Persistent Editor Scale
 
