@@ -22,20 +22,22 @@ public:
     /**
      * Reads the contents of a text file and returns it as a string
      *
+     * @param LoadLocation - The base directory location to load from (Project Saved, User Documents, etc.)
      * @param FileName     The name of the file to read (with extension). Example: "MyData.txt" or "Config/Settings.ini"
      * @param OutString    Returns the contents of the file as a string
      * @param OutFilePath  Returns the full path where the file was found
      * @return            True if the file was read successfully, false if the file couldn't be found or read
-     * 
+     *
      * Example Usage in Blueprint:
+     * - LoadLocation: ProjectSaved
      * - FileName: "SaveGame/PlayerData.txt"
      * - OutString will contain the file contents
      * - OutFilePath might be "C:/MyGame/Saved/SaveGame/PlayerData.txt"
      */
-    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO", 
+    UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|File IO",
               meta = (ToolTip = "Reads a text file's contents into a string",
                      Keywords = "load,read,text,file,string,disk"))
-    static bool LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath);
+    static bool LoadFileToString(EFileLocation LoadLocation, FString FileName, FString &OutString, FString &OutFilePath);
 
     /**
      * Saves text content to a file at the specified location.

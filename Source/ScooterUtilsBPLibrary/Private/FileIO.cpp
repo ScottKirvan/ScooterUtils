@@ -6,10 +6,50 @@
 #include "Misc/Paths.h"
 #include "HAL/PlatformProcess.h"
 
-bool UFileIO::LoadFileToString(FString FileName, FString &OutString, FString &OutFilePath)
+bool UFileIO::LoadFileToString(EFileLocation LoadLocation, FString FileName, FString &OutString, FString &OutFilePath)
 {
-    OutFilePath = FPaths::ProjectSavedDir() + FileName;
-    return FFileHelper::LoadFileToString(OutString, *OutFilePath);
+    // Determine base directory based on selected location
+    FString BaseDirectory;
+
+    switch (LoadLocation)
+    {
+    case EFileLocation::ProjectSaved:
+        BaseDirectory = FPaths::ProjectSavedDir();
+        break;
+
+    case EFileLocation::UserDocuments:
+#if PLATFORM_ANDROID
+        BaseDirectory = TEXT("/storage/emulated/0/Documents/");
+#else
+        BaseDirectory = FPlatformProcess::UserDir();
+#endif
+        break;
+
+    case EFileLocation::ProjectContent:
+        BaseDirectory = FPaths::ProjectContentDir();
+        break;
+
+    default:
+        BaseDirectory = FPaths::ProjectSavedDir();
+        break;
+    }
+
+    // Combine base directory with filename
+    OutFilePath = FPaths::Combine(BaseDirectory, FileName);
+
+    // Load the file
+    bool bSuccess = FFileHelper::LoadFileToString(OutString, *OutFilePath);
+
+    if (bSuccess)
+    {
+        UE_LOG(LogTemp, Log, TEXT("Successfully loaded file from: %s"), *OutFilePath);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("Failed to load file from: %s"), *OutFilePath);
+    }
+
+    return bSuccess;
 }
 
 bool UFileIO::SaveTextToFile(EFileLocation SaveLocation, const FString &FileName, const FString &Content, FString &OutFullPath)
