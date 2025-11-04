@@ -174,17 +174,25 @@ Read and write values from your engine's global configuration files (for example
 
 **Nodes:**
 
-- Load File To String (FileName) → OutString, OutFilePath, Bool
+- Load File To String (LoadLocation, FileName) → OutString, OutFilePath, Bool
 - Save Text To File (SaveLocation, FileName, Content) → OutFullPath, Bool
 - Append Text To File (SaveLocation, FileName, Content, bAddLineBreak) → OutFullPath, Bool
 
-**Description:**  
-Simple file read/write helpers. `Load File To String` looks for files in typical project locations and returns the full path. `Save Text To File` and `Append Text To File` create parent directories as needed and will overwrite (or append to) files.
+**Description:**
+Simple file read/write helpers with support for multiple directory locations. All nodes accept a `Location` parameter to specify where files should be loaded from or saved to:
 
-**Example Usage:**  
-Save a debug dump by calling `Save Text To File` with `SaveLocation = ProjectSaved`, `FileName = "Logs/DebugDump.txt"`, and your text content. The node returns the full path it wrote to.
+- **Project Saved Directory** - Your project's `Saved` folder
+- **User Documents Folder** - The user's Documents directory (cross-platform)
+- **Project Content Directory** - Your project's `Content` folder
 
-**Warning:**  
+`Load File To String` reads a text file from the specified location and returns both the file contents and the full path. `Save Text To File` and `Append Text To File` create parent directories as needed and will overwrite (or append to) files at the chosen location.
+
+**Example Usage:**
+- Load a file: Call `Load File To String` with `LoadLocation = ProjectSaved` and `FileName = "Config/Settings.txt"` to read from your project's Saved folder
+- Save a debug dump: Call `Save Text To File` with `SaveLocation = ProjectSaved`, `FileName = "Logs/DebugDump.txt"`, and your text content. The node returns the full path it wrote to
+- Save to user documents: Use `SaveLocation = UserDocuments` to write files to the user's Documents folder, which persists outside your project
+
+**Warning:**
 Save operations overwrite files without confirmation. Use `Append Text To File` to preserve existing content.
 
 ### Debug Print / Logging
