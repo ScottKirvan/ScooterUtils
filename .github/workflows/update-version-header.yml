@@ -13,7 +13,7 @@ jobs:
       - name: Check out the release-please--branches--master branch
         uses: actions/checkout@v4
         with:
-          ref: release-please--branches--master
+          ref: release-please--branches--main
       
       
       - name: Update Version Header
@@ -79,6 +79,6 @@ jobs:
             echo "No changes to commit, skipping commit step"
           else
             git commit -m "chore: Update version header file"
-            git push origin release-please--branches--master
+            git push origin release-please--branches--main
           fi
 
