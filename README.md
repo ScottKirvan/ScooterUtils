@@ -182,7 +182,7 @@ Contributions
 Contact
 -------
 - Feel free to reach out to me on the [Unreal Slackers](https://discord.gg/unreal-slackers) discord. I'm @Fragmanget_. There is a ton of other Unreal programmers up there, so if I'm not around to help, someone else may be able to get you going.
-- You can also reach me on my personal [Discord Server](https://discord.gg/TSKHvVFYxB) (@cptvideo),
+- You can also reach me on my personal [Discord Server](https://discord.gg/TN6XJSNK5Y) (@cptvideo),
 via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto://ScooterUtils@skvfx.com).
 
 
