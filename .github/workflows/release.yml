@@ -30,10 +30,10 @@ jobs:
     uses: ScottKirvan/.github/.github/workflows/reusable-release-notes.yml@main
     with:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
-      project_name: "ScooterUtils"
-      project_context: "ScooterUtils is an Unreal Engine utility plugin providing helpful development tools and utilities for Unreal Engine projects."
+      project_name: "UE ScooterUtils"
+      project_context: "UE ScooterUtils is an Unreal Engine utility plugin providing helpful development tools and utilities for Unreal Engine projects."
       header: |
-        ## ScooterUtils
+        ## UE ScooterUtils
 
         > Unreal Engine utility plugin for developers.
 
@@ -49,5 +49,6 @@ jobs:
     uses: ScottKirvan/.github/.github/workflows/reusable-discord-notify.yml@main
     with:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
-      project_name: "ScooterUtils"
+      project_name: "UE ScooterUtils"
+      emoji: "🛵"
     secrets: inherit
