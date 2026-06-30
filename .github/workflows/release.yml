@@ -1,4 +1,4 @@
-name: Release Please Workflow
+name: Release Workflow
 
 on:
   push:
@@ -8,24 +8,46 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  models: read
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
-          # this assumes that you have created a personal access token
-          # (PAT) and configured it as a GitHub action secret named
-          # `MY_RELEASE_PLEASE_TOKEN` (this secret name is not important).
-          # token: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ github.token }}
           config-file: .github/release-please/release-please-config.json
           manifest-file: .github/release-please/.release-please-manifest.json
-          # this is a built-in strategy in release-please, see "Action Inputs"
-          # for more options
-          # release-type: simple
 
-          
+  improve-release-notes:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    uses: ScottKirvan/.github/.github/workflows/reusable-release-notes.yml@main
+    with:
+      tag_name: ${{ needs.release-please.outputs.tag_name }}
+      project_name: "ScooterUtils"
+      project_context: "ScooterUtils is an Unreal Engine utility plugin providing helpful development tools and utilities for Unreal Engine projects."
+      header: |
+        ## ScooterUtils
 
+        > Unreal Engine utility plugin for developers.
+
+        ---
+      footer: |
+        ---
+        📖 [User Guide](https://www.scottkirvan.com/ScooterUtils/) · 💬 [Discord](https://discord.gg/TN6XJSNK5Y) · 🐛 [Report a Bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md) · ✨ [Request Feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md)
+    secrets: inherit
+
+  discord-notify:
+    needs: [release-please, improve-release-notes]
+    if: ${{ needs.release-please.outputs.release_created }}
+    uses: ScottKirvan/.github/.github/workflows/reusable-discord-notify.yml@main
+    with:
+      tag_name: ${{ needs.release-please.outputs.tag_name }}
+      project_name: "ScooterUtils"
+    secrets: inherit
