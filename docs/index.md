@@ -12,4 +12,7 @@ hero:
     - theme: alt
       text: Discord
       link: https://discord.gg/TN6XJSNK5Y
+    - theme: alt
+      text: User Guide
+      link: https://www.scottkirvan.com/ScooterUtils/
 ---
