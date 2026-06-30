@@ -280,7 +280,7 @@ Rate/review the plugin on [fab.com](http://fab.com/) or donate to support develo
 ## Support/Contact
 
 - Find me on the [Unreal Slackers](https://discord.gg/unreal-slackers) Discord as @Fragmanget_. Tons of other Unreal programmers hang out there too
-- You can also reach me on my personal [Discord Server](https://discord.gg/TSKHvVFYxB) (@cptvideo), via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto:ScooterUtils@skvfx.com)
+- You can also reach me on my personal [Discord Server](https://discord.gg/TN6XJSNK5Y) (@cptvideo), via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto:ScooterUtils@skvfx.com)
 
 ## Credits
 
