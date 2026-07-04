@@ -10,6 +10,8 @@
 * add update-changelog-prs job to release workflow ([1129014](https://github.com/ScottKirvan/ScooterUtils/commit/1129014a9a1a17a4c59bd0330b64bafc7e9f4f06))
 * rename product to UE ScooterUtils and add discord emoji ([6444274](https://github.com/ScottKirvan/ScooterUtils/commit/6444274aae29be81d20ee76605e68d3e2e079868))
 
+Includes PRs: [#91](https://github.com/ScottKirvan/ScooterUtils/pull/91), [#92](https://github.com/ScottKirvan/ScooterUtils/pull/92)
+
 ## [1.9.4](https://github.com/ScottKirvan/ScooterUtils/compare/v1.9.3...v1.9.4) (2026-06-30)
 
 
