@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,16 +32,17 @@ jobs:
     with:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
       project_name: "UE ScooterUtils"
-      project_context: "UE ScooterUtils is an Unreal Engine utility plugin providing helpful development tools and utilities for Unreal Engine projects."
+      project_context: "UE ScooterUtils is an Unreal Engine utility plugin for game developers and technical artists. It adds productivity tools, editor utilities, and workflow helpers to Unreal Engine projects. Changes affect how developers work in the editor — write in terms of workflow improvements, time saved, or friction eliminated."
       header: |
         ## UE ScooterUtils
 
-        > Unreal Engine utility plugin for developers.
+        > Unreal Engine utility plugin for developers and technical artists.
+
+        🫶❤️[Support this project](https://ko-fi.com/ScottKirvan) · 📖 [User Guide](https://www.scottkirvan.com/ScooterUtils/) · 💬 [Discord](https://discord.gg/TN6XJSNK5Y) · 🐛 [Report a Bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md) · ✨ [Request Feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md) · 📋 [Changelog](https://github.com/ScottKirvan/ScooterUtils/blob/main/notes/CHANGELOG.md)
 
         ---
-      footer: |
-        ---
-        📖 [User Guide](https://www.scottkirvan.com/ScooterUtils/) · 💬 [Discord](https://discord.gg/TN6XJSNK5Y) · 🐛 [Report a Bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md) · ✨ [Request Feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md)
+      footer: ""
+      changelog_path: ""
     secrets: inherit
 
   update-changelog-prs:
@@ -58,4 +60,5 @@ jobs:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
       project_name: "UE ScooterUtils"
       emoji: "🛵"
+      discord_blurb: ${{ needs.improve-release-notes.outputs.discord_blurb }}
     secrets: inherit

@@ -1,0 +1,32 @@
+name: Manual — Preview Release Notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Anticipated next version tag (e.g. v1.2.0) — need not exist yet
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  models: read
+
+jobs:
+  preview:
+    uses: ScottKirvan/.github/.github/workflows/reusable-preview-release-notes.yml@main
+    with:
+      tag_name: ${{ inputs.tag_name }}
+      project_name: "UE ScooterUtils"
+      project_context: "UE ScooterUtils is an Unreal Engine utility plugin for game developers and technical artists. It adds productivity tools, editor utilities, and workflow helpers to Unreal Engine projects. Changes affect how developers work in the editor — write in terms of workflow improvements, time saved, or friction eliminated."
+      header: |
+        ## UE ScooterUtils
+
+        > Unreal Engine utility plugin for developers and technical artists.
+
+        🫶❤️[Support this project](https://ko-fi.com/ScottKirvan) · 📖 [User Guide](https://www.scottkirvan.com/ScooterUtils/) · 💬 [Discord](https://discord.gg/TN6XJSNK5Y) · 🐛 [Report a Bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md) · ✨ [Request Feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md) · 📋 [Changelog](https://github.com/ScottKirvan/ScooterUtils/blob/main/notes/CHANGELOG.md)
+
+        ---
+      footer: ""
+      changelog_path: ""
+    secrets: inherit
