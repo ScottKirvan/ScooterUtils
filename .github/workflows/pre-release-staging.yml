@@ -1,20 +1,22 @@
-name: Manual — Preview Release Notes
+name: Manual — Pre-Release Staging
 
 on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: Anticipated next version tag (e.g. v1.2.0) — need not exist yet
-        required: true
+        description: Version tag override — leave blank to infer from open release-please PR
+        required: false
         type: string
+        default: ""
 
 permissions:
   contents: write
   models: read
+  pull-requests: read
 
 jobs:
-  preview:
-    uses: ScottKirvan/.github/.github/workflows/reusable-preview-release-notes.yml@main
+  stage:
+    uses: ScottKirvan/.github/.github/workflows/reusable-pre-release-staging.yml@main
     with:
       tag_name: ${{ inputs.tag_name }}
       project_name: "UE ScooterUtils"
@@ -27,6 +29,4 @@ jobs:
         🫶❤️[Support this project](https://ko-fi.com/ScottKirvan) · 📖 [User Guide](https://www.scottkirvan.com/ScooterUtils/) · 💬 [Discord](https://discord.gg/TN6XJSNK5Y) · 🐛 [Report a Bug](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md) · ✨ [Request Feature](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md) · 📋 [Changelog](https://github.com/ScottKirvan/ScooterUtils/blob/main/notes/CHANGELOG.md)
 
         ---
-      footer: ""
-      changelog_path: ""
     secrets: inherit
