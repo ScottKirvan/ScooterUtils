@@ -1,4 +1,4 @@
-# Scooter Utilities [![starline](https://starlines.qoo.monster/assets/ScottKirvan/ScooterUtils)](https://github.com/qoomon/starline)
+﻿# Scooter Utilities [![starline](https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/starlines/ScottKirvan/ScooterUtils/starline.svg)](https://github.com/qoomon/starlines)
 <div align="center">
 
   <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
