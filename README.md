@@ -26,7 +26,7 @@
   <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/ScottKirvan/ScooterUtils.svg" alt="license" />
   </a>
-  <a href="https://discord.gg/gQH4mXWQRT">
+  <a href="https://discord.gg/TN6XJSNK5Y">
     <!--<img src="https://img.shields.io/discord/704680098577514527?style=flat-square&label=%F0%9F%92%AC%20discord&color=00ACD7">-->
     <img src="https://img.shields.io/discord/1052011377415438346?style=flat-square&label=discord&color=00ACD7">
   </a>
