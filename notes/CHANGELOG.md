@@ -9,6 +9,8 @@
 
 * bypass PowerShell execution policy on self-hosted runner ([d208f10](https://github.com/ScottKirvan/ScooterUtils/commit/d208f10711a6782e38ff3bbfdd9e4eddfb983081))
 
+Includes PRs: [#102](https://github.com/ScottKirvan/ScooterUtils/pull/102), [#103](https://github.com/ScottKirvan/ScooterUtils/pull/103)
+
 ## [1.10.0](https://github.com/ScottKirvan/ScooterUtils/compare/v1.9.5...v1.10.0) (2026-08-09)
 
 
