@@ -17,6 +17,8 @@
 * migrate starline badge to self-hosted GitHub Action ([2094d02](https://github.com/ScottKirvan/ScooterUtils/commit/2094d0261cd9e3336c445abbccb23cad68ee720b))
 * move link banner to header, add Ko-Fi, update context, add preview workflow ([d324f4f](https://github.com/ScottKirvan/ScooterUtils/commit/d324f4f16c2549e599effc503a95bc036f3319af))
 
+Includes PRs: [#100](https://github.com/ScottKirvan/ScooterUtils/pull/100), [#101](https://github.com/ScottKirvan/ScooterUtils/pull/101), [#93](https://github.com/ScottKirvan/ScooterUtils/pull/93), [#94](https://github.com/ScottKirvan/ScooterUtils/pull/94), [#95](https://github.com/ScottKirvan/ScooterUtils/pull/95), [#96](https://github.com/ScottKirvan/ScooterUtils/pull/96), [#97](https://github.com/ScottKirvan/ScooterUtils/pull/97), [#98](https://github.com/ScottKirvan/ScooterUtils/pull/98), [#99](https://github.com/ScottKirvan/ScooterUtils/pull/99)
+
 ## [1.9.5](https://github.com/ScottKirvan/ScooterUtils/compare/v1.9.4...v1.9.5) (2026-07-04)
 
 
