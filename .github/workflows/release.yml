@@ -90,6 +90,41 @@ jobs:
       changelog_path: ""
     secrets: inherit
 
+  build-plugin:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    runs-on: [self-hosted, windows, unreal]
+    strategy:
+      matrix:
+        ue_version: ['5.4', '5.5', '5.6', '5.7', '5.8']
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build plugin for UE ${{ matrix.ue_version }}
+        shell: powershell
+        run: |
+          $UAT = "D:\bin\Epic Games\UE_${{ matrix.ue_version }}\Engine\Build\BatchFiles\RunUAT.bat"
+          $plugin = "${{ github.workspace }}\ScooterUtils.uplugin"
+          $output = "${{ github.workspace }}\build\UE_${{ matrix.ue_version }}"
+          & $UAT BuildPlugin -Plugin="$plugin" -Package="$output" -Rocket
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Package artifact
+        shell: powershell
+        run: |
+          $zipName = "ScooterUtils-UE${{ matrix.ue_version }}-Win64.zip"
+          Compress-Archive -Path "build\UE_${{ matrix.ue_version }}\*" -DestinationPath $zipName
+          Write-Host "Created: $zipName"
+
+      - name: Upload to release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ needs.release-please.outputs.tag_name }}" \
+            "ScooterUtils-UE${{ matrix.ue_version }}-Win64.zip" --clobber
+
   update-changelog-prs:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
