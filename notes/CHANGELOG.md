@@ -9,6 +9,8 @@
 
 * use PowerShell for release upload step — WSL runs as NetworkService, no user distros visible ([d9f52a7](https://github.com/ScottKirvan/ScooterUtils/commit/d9f52a7cdf4a3004776c114bc32df7f19fc42e54))
 
+Includes PRs: [#112](https://github.com/ScottKirvan/ScooterUtils/pull/112), [#113](https://github.com/ScottKirvan/ScooterUtils/pull/113)
+
 ## [1.10.4](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.3...v1.10.4) (2026-08-10)
 
 
