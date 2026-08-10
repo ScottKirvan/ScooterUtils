@@ -9,6 +9,8 @@
 
 * restrict CI builds to Win64 pending Android platform setup ([#107](https://github.com/ScottKirvan/ScooterUtils/issues/107)) ([4a7a2db](https://github.com/ScottKirvan/ScooterUtils/commit/4a7a2db47195037bef0d47734c7cbcf2fa7b1ecb))
 
+Includes PRs: [#108](https://github.com/ScottKirvan/ScooterUtils/pull/108), [#109](https://github.com/ScottKirvan/ScooterUtils/pull/109)
+
 ## [1.10.2](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.1...v1.10.2) (2026-08-10)
 
 
