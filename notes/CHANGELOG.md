@@ -9,6 +9,8 @@
 
 * use operator* for cross-version FJsonObject key conversion ([6b7c7aa](https://github.com/ScottKirvan/ScooterUtils/commit/6b7c7aa3afd7574a3b90d56c24a1ede67ef60e81))
 
+Includes PRs: [#120](https://github.com/ScottKirvan/ScooterUtils/pull/120), [#121](https://github.com/ScottKirvan/ScooterUtils/pull/121)
+
 ## [1.10.8](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.7...v1.10.8) (2026-08-10)
 
 
