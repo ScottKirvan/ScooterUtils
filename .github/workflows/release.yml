@@ -108,7 +108,7 @@ jobs:
           $UAT = "D:\bin\Epic Games\UE_${{ matrix.ue_version }}\Engine\Build\BatchFiles\RunUAT.bat"
           $plugin = "${{ github.workspace }}\ScooterUtils.uplugin"
           $output = "${{ github.workspace }}\build\UE_${{ matrix.ue_version }}"
-          & $UAT BuildPlugin -Plugin="$plugin" -Package="$output" -Rocket
+          & $UAT BuildPlugin -Plugin="$plugin" -Package="$output" -Rocket -TargetPlatforms=Win64
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Clean build output
