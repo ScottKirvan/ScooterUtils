@@ -96,7 +96,7 @@ jobs:
     runs-on: [self-hosted, windows, unreal]
     strategy:
       matrix:
-        ue_version: ['5.7']
+        ue_version: ['5.4', '5.5', '5.6', '5.7', '5.8']
       fail-fast: false
       max-parallel: 1
     steps:
@@ -142,7 +142,7 @@ jobs:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
 
   discord-notify:
-    needs: [release-please, apply-staged-notes, improve-release-notes]
+    needs: [release-please, apply-staged-notes, improve-release-notes, build-plugin]
     if: >-
       always() &&
       needs.release-please.outputs.release_created == 'true' &&
