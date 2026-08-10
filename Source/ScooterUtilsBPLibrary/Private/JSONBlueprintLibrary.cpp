@@ -256,10 +256,10 @@ bool UJSONBlueprintLibrary::IsFieldNull(const FString &JSONString, const FString
         return false;
     }
 
-    const TSharedPtr<FJsonValue> *FieldValue = JSONObject->Values.Find(FieldName);
-    if (FieldValue && FieldValue->IsValid())
+    TSharedPtr<FJsonValue> FieldValue = JSONObject->TryGetField(FieldName);
+    if (FieldValue.IsValid())
     {
-        return (*FieldValue)->IsNull();
+        return FieldValue->IsNull();
     }
 
     return false;
@@ -404,7 +404,11 @@ bool UJSONBlueprintLibrary::GetAllFieldNames(const FString &JSONString, TArray<F
     OutFieldNames.Empty();
     for (const auto &Entry : JSONObject->Values)
     {
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+        OutFieldNames.Add(FString(Entry.Key.ToStringView()));
+#else
         OutFieldNames.Add(Entry.Key);
+#endif
     }
 
     return true;
