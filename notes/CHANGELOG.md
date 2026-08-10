@@ -9,6 +9,8 @@
 
 * restore full UE matrix, wait for builds before Discord notify ([3b1aa2e](https://github.com/ScottKirvan/ScooterUtils/commit/3b1aa2e807945aaaa08db57ca3511759a7f696b2))
 
+Includes PRs: [#114](https://github.com/ScottKirvan/ScooterUtils/pull/114), [#115](https://github.com/ScottKirvan/ScooterUtils/pull/115)
+
 ## [1.10.5](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.4...v1.10.5) (2026-08-10)
 
 
