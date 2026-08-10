@@ -9,6 +9,8 @@
 
 * serialize builds and strip Intermediate from plugin packages ([2d582af](https://github.com/ScottKirvan/ScooterUtils/commit/2d582af325ecee0f419cd2894f71bba2ed78066e))
 
+Includes PRs: [#104](https://github.com/ScottKirvan/ScooterUtils/pull/104), [#105](https://github.com/ScottKirvan/ScooterUtils/pull/105)
+
 ## [1.10.1](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.0...v1.10.1) (2026-08-09)
 
 
