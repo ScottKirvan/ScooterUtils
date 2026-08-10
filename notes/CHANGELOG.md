@@ -9,6 +9,8 @@
 
 * narrow build matrix to 5.7 for debugging ([42c6d54](https://github.com/ScottKirvan/ScooterUtils/commit/42c6d54e2f3619900c568af28e9dd0be76f11e71))
 
+Includes PRs: [#110](https://github.com/ScottKirvan/ScooterUtils/pull/110), [#111](https://github.com/ScottKirvan/ScooterUtils/pull/111)
+
 ## [1.10.3](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.2...v1.10.3) (2026-08-10)
 
 
