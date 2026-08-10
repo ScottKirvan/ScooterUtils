@@ -4,7 +4,6 @@
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
 #include "DebugPrint.h"
-#include "Runtime/Launch/Resources/Version.h"
 
 // ========== Helper Functions (not class members) ==========
 
@@ -405,11 +404,7 @@ bool UJSONBlueprintLibrary::GetAllFieldNames(const FString &JSONString, TArray<F
     OutFieldNames.Empty();
     for (const auto &Entry : JSONObject->Values)
     {
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
-        OutFieldNames.Add(FString(Entry.Key.ToStringView()));
-#else
-        OutFieldNames.Add(Entry.Key);
-#endif
+        OutFieldNames.Add(FString(*Entry.Key));
     }
 
     return true;
