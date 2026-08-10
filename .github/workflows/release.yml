@@ -128,12 +128,11 @@ jobs:
           Write-Host "Created: $zipName"
 
       - name: Upload to release
-        shell: bash
+        shell: powershell -ExecutionPolicy Bypass -Command ". '{0}'"
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload "${{ needs.release-please.outputs.tag_name }}" \
-            "ScooterUtils-UE${{ matrix.ue_version }}-Win64.zip" --clobber
+          gh release upload "${{ needs.release-please.outputs.tag_name }}" "ScooterUtils-UE${{ matrix.ue_version }}-Win64.zip" --clobber
 
   update-changelog-prs:
     needs: release-please
