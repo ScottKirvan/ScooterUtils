@@ -98,6 +98,7 @@ jobs:
       matrix:
         ue_version: ['5.4', '5.5', '5.6', '5.7', '5.8']
       fail-fast: false
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v4
 
@@ -109,6 +110,15 @@ jobs:
           $output = "${{ github.workspace }}\build\UE_${{ matrix.ue_version }}"
           & $UAT BuildPlugin -Plugin="$plugin" -Package="$output" -Rocket
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Clean build output
+        shell: powershell -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $intermediate = "build\UE_${{ matrix.ue_version }}\Intermediate"
+          if (Test-Path $intermediate) {
+            Remove-Item -Recurse -Force $intermediate
+            Write-Host "Removed Intermediate folder"
+          }
 
       - name: Package artifact
         shell: powershell -ExecutionPolicy Bypass -Command ". '{0}'"
