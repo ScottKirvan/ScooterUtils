@@ -9,6 +9,8 @@
 
 * UE 5.8 FJsonObject key type compatibility in JSONBlueprintLibrary ([5a4de0f](https://github.com/ScottKirvan/ScooterUtils/commit/5a4de0f2812f0ca120eaa9c066be11a40d1dc338))
 
+Includes PRs: [#116](https://github.com/ScottKirvan/ScooterUtils/pull/116), [#117](https://github.com/ScottKirvan/ScooterUtils/pull/117)
+
 ## [1.10.6](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.5...v1.10.6) (2026-08-10)
 
 
