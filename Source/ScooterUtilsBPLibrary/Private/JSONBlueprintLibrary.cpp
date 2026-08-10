@@ -4,6 +4,7 @@
 #include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
 #include "DebugPrint.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 // ========== Helper Functions (not class members) ==========
 
