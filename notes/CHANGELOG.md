@@ -9,6 +9,8 @@
 
 * include Version.h to resolve ENGINE_MAJOR_VERSION macro in JSONBlueprintLibrary ([2d3626b](https://github.com/ScottKirvan/ScooterUtils/commit/2d3626b311a14c66fdc48f65f935c49a113ba6e1))
 
+Includes PRs: [#118](https://github.com/ScottKirvan/ScooterUtils/pull/118), [#119](https://github.com/ScottKirvan/ScooterUtils/pull/119)
+
 ## [1.10.7](https://github.com/ScottKirvan/ScooterUtils/compare/v1.10.6...v1.10.7) (2026-08-10)
 
 
