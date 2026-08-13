@@ -1,7 +1,7 @@
 ﻿# Scooter Utilities [![starline](https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/starlines/ScottKirvan/ScooterUtils/starline.svg)](https://github.com/qoomon/starlines)
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/master/assets/media/logo2.png" alt="logo" width="200" height="auto" />
+  <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/main/assets/media/logo2.png" alt="logo" width="200" height="auto" />
     <h1><a href="https://github.com/ScottKirvan/ScooterUtils">ScottKirvan/ScooterUtils</a></h1>
   <h3>A collection of editor tools for Unreal Engine</h3>
   
