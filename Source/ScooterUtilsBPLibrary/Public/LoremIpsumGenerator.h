@@ -6,7 +6,7 @@
 #include "LoremIpsumGenerator.generated.h"
 
 UCLASS()
-class ULoremIpsumGenerator : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API ULoremIpsumGenerator : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 public:
