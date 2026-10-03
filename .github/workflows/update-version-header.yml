@@ -1,7 +1,7 @@
 name: Update Version Header
 on:
   workflow_run:
-    workflows: ["Release Please Workflow"]
+    workflows: ["Release Workflow"]
     types:
       - completed
 
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Check out the release-please--branches--master branch
+      - name: Check out the release-please--branches--main branch
         uses: actions/checkout@v4
         with:
           ref: release-please--branches--main
