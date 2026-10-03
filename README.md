@@ -1,9 +1,9 @@
 ﻿# Scooter Utilities [![starline](https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/starlines/ScottKirvan/ScooterUtils/starline.svg)](https://github.com/qoomon/starlines)
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/ScottKirvan/ScooterUtils/refs/heads/main/assets/media/logo2.png" alt="logo" width="200" height="auto" />
+  <img src="assets/media/logo2.png" alt="logo" width="200" height="auto" />
     <h1><a href="https://github.com/ScottKirvan/ScooterUtils">ScottKirvan/ScooterUtils</a></h1>
-  <h3>A collection of editor tools for Unreal Engine</h3>
+  <h3>Your Swiss Army Knife of editor tools for Unreal Engine</h3>
   
   
 <!-- Badges -->
@@ -23,7 +23,7 @@
   <a href="https://github.com/ScottKirvan/ScooterUtils/issues/">
     <img src="https://img.shields.io/github/issues/ScottKirvan/ScooterUtils" alt="open issues" />
   </a>
-  <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/LICENSE">
+  <a href="https://github.com/ScottKirvan/ScooterUtils/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/ScottKirvan/ScooterUtils.svg" alt="license" />
   </a>
   <a href="https://discord.gg/TN6XJSNK5Y">
@@ -35,112 +35,114 @@
 <h4>
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
-    <a href="https://www.scottkirvan.com/ScooterUtils/guide/">User Documentation</a>
+    <a href="https://www.scottkirvan.com/ScooterUtils/guide/">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20">Report Bug</a>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20">Request Feature</a>
+    <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md">Request Feature</a>
   </h4>
 </div>
 
-**Scooter Utilities** is an Unreal Engine editor plugin that bundles essential quality-of-life tools for artists and developers. Quickly navigate to disk files, restart/reload your projects with a single click, and keep important settings persistent between editor sessions.
+**Scooter Utilities** is an Unreal Engine editor plugin that bundles essential quality-of-life tools for artists and developers. Quickly navigate to disk files, restart/reload your projects with a single click, and keep important settings persistent between editor sessions. It also ships a runtime Blueprint library for JSON, file IO, config access, debug logging, Blueprint reflection, and placeholder text.
 
-Think of **ScooterUtils** as a Swiss Army Knife of tools that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning on or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
+Think of **ScooterUtils** as a Swiss Army Knife of tools that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning on or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md).
 
-If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Documentation](https://www.scottkirvan.com/ScooterUtils/guide/). This document is for people using the source code in the [GitHub repository](https://github.com/ScottKirvan/ScooterUtils).
+If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/). This document is for people working with the source code in this repository.
 
-Branches
+## Key Features
+
+**Automated Release Management**: The `release.yml` workflow uses [Release-Please](https://github.com/googleapis/release-please) for automated versioning and CHANGELOG updates driven by [Conventional Commits](https://www.conventionalcommits.org/). Merging the Release-Please pull request back into `main` creates a new release and tags it in GitHub. AI-generated release notes and Discord notifications are wired in. See [CONTRIBUTING.md](CONTRIBUTING.md) for commit conventions.
+
+**VitePress Documentation Site**: The `docs/` folder contains the [VitePress](https://vitepress.dev/) user guide, deployed to [scottkirvan.com/ScooterUtils](https://www.scottkirvan.com/ScooterUtils/) by the `docs.yml` workflow whenever `docs/` changes on `main`.
+
+**Pre-release Staging**: The `pre-release-staging.yml` workflow lets you generate and review AI-drafted release notes on a staging branch before the release goes out.
+
+**AI Agent Context (optional)**: The included `CLAUDE.md` gives AI coding agents (e.g. [Claude Code](https://claude.ai/code)) the project's engineering standards — branching conventions, commit discipline, test-driven development, verification discipline, and a no-shortcuts ethos.
+
+## Repo Layout
+
+```
+ScooterUtils/
+├── .github/
+│   ├── release-please/         # Release-Please configuration and version manifest
+│   └── workflows/              # GitHub Actions workflows (see Key Features above)
+├── Config/                     # Plugin packaging filters
+├── Resources/                  # Plugin icon
+├── Source/
+│   ├── ScooterUtils/           # Editor-only module: menus, toolbar, Editor Preferences
+│   └── ScooterUtilsBPLibrary/  # Runtime module: Blueprint node library
+├── _layouts/                   # Legacy Jekyll layout for GitHub Pages
+├── assets/
+│   ├── css/                    # Legacy Jekyll styles
+│   └── media/                  # Images and logos
+├── docs/                       # VitePress documentation site
+├── notes/                      # CHANGELOG, VERSION, TODO
+├── tools/                      # Packaging scripts
+├── CLAUDE.md                   # AI agent context (optional)
+├── CONTRIBUTING.md
+├── LICENSE.md
+├── README.md
+└── ScooterUtils.uplugin        # Plugin descriptor
+```
+
+The plugin is made of *two* modules because one needs to be editor-only and the other needs to run in-game. `ScooterUtils` is the editor-only module; it loads at `PostEngineInit` and uses an `OnEndFrame` callback to apply settings once the engine is fully loaded. `FScooterUtilsModule` is the main module implementation, where `ScooterUtilsMenu` (restart editor, show project in explorer) and `ScooterUtilsSettings` (the persistent Editor Preferences) are wired up. `ScooterUtilsBPLibraryModule` is the runtime module and only contains Blueprint nodes.
+
+> **Note:** Issue templates, PR templates, and funding config live in the org-level [`ScottKirvan/.github`](https://github.com/ScottKirvan/.github) repo and apply here automatically via GitHub's community health file fallback.
+
+Features
 --------
+- **Restart the editor** from the **File** menu, the toolbar, or a customizable hotkey (default **Ctrl+Shift+Alt+R**)
+- **Show Project in Explorer** opens your project folder on disk with one click
+- **Toolbar dropdown** in the Level Editor for quick access to the plugin's tools and settings
+- **Persistent Editor Preferences**: application scale, max FPS, and viewport FPS display that survive restarts and apply across projects
+- **Blueprint nodes** for JSON, file IO, global config, debug logging, Blueprint reflection, and Lorem Ipsum placeholder text
 
-```
-master
-     └─── main development branch - supports the latest version of Unreal
-All-Versions-Prior-to-5.1
-     └─── These are the UE4.x versions. Tested back to 4.25, may work in earlier versions.
-UE-5.1-to-5.2
-     └─── tested and working in UE-5.1-to-5.2
-UE-5.3-to-5.4
-     └─── tested and working in UE-5.3-to-5.4
-release-please--branches--master
-     └─── used by Please-Release GitHub action.
-```
-New features are added to the `master` branch.  Older branches may not have the same feature support.
-
-Repo Layout
------------
-```
-ScooterUtils
-├───.github
-│   ├───release-please
-│   └───workflows
-├───Config
-├───Resources
-├───Source
-│   ├───ScooterUtils
-│   │  ├────Private
-│   │  └────Public
-│   └───ScooterUtilsBPLibrary
-│      ├────Private
-│      └────Public
-├───_layouts
-├───assets
-│   ├───css
-│   └───media
-└───notes
-```
-The `_layouts` and `assets/css` folders help support the look of the repo when rended to GitHub Pages (Deployment Workflow).  You can see an example of this repo processed using Jekyll and published at [ScottKirvan.com](https://www.scottkirvan.com/ScooterUtils/). 
-
-The css file creates a page that is styled similar to GitHub's [Dark High Contrast](https://github.blog/changelog/2021-08-25-dark-high-contrast-theme-ga/) theme.
-
-The files in the `.github` folder implement and customizes a github action that runs [Release-Please](https://github.com/googleapis/release-please), which helps with releases, semantic versioning, and updating the [CHANGELOG](notes/CHANGELOG.md).  Release-Please uses the following: `fix:` triggers a patch release, `feat:` triggers a minor release, and `feat!:`, or `fix!:`, `refactor!:`, etc., are all considered breakers and trigger a new major version.  Some common commit prefixes are: `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`.
-
-Release-Please creates a pull request in this repo.  Merging that back into `master` will create a new release, and tag it in GitHub.  
-
-The two modules that make up the plugin are in the `Source` folder.  There's *two* modules because one needs to be editor-only, and the other is a runtime (in-game) module.  `ScooterUtils` is the editor-only module, and `ScooterUtilsBPLibrary` is the runtime module. The runtime module only contains Blueprint nodes.
-
-Table of Contents
------------------
-- [Branches](#branches)
-- [Repo Layout](#repo-layout)
-- [Installation](#installation)
-- [Features / Usage](#features--usage)
-- [Contributions / Contact](#contributions--contact)
-- [References / Inspirations / Credits](#references--inspirations--credits)
+See the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/) for the full feature documentation.
 
 Installation
 ------------
-This is kind of standard practice for GitHub Unreal plugins<sup>*</sup>; it goes
-like this:
+Supported Unreal Engine versions on `main`: **5.5–5.8**, on Windows, macOS, and Linux (the Blueprint library also supports Android).
 
-1. Create a new Unreal project.
-1. Create a ```Plugins``` folder in your project directory.
-1. Clone the GitHub repository (or grab and unzip the project) into your
-```Plugins``` folder.
-1. Launch Unreal; You should be prompted to build the plugin.
-2. Optional:  Use or convert your unreal project to a C++ project so
-that you can edit and build the code outside of Unreal.
+To install from Fab, see [Installing and Enabling](https://www.scottkirvan.com/ScooterUtils/guide/installing) in the User Guide. To build from source, the usual approach for GitHub Unreal plugins goes like this:
+
+1. Create a new Unreal C++ project, or open an existing one.
+2. Create a `Plugins` folder in your project directory.
+3. Clone the repository (or download and unzip it) into your `Plugins` folder. For engine versions older than 5.5, use the matching branch listed below.
+4. Launch Unreal; you should be prompted to build the plugin. Alternatively, go to **Tools** > **Refresh Visual Studio Project** and build from your IDE.
+5. Optional: once it's built, copy the plugin to other projects, or to your engine's plugin folder (`[UE_PATH]/Engine/Plugins/Marketplace`) to install it as an engine plugin.
 
 > [!NOTE]
-> As of UE 5.5.0, the automatic building of plugins within blueprint-only projects is no longer working - You need to be using a C++ based Unreal project for the source to build.  Once it's built, you can copy/paste the plugin to other projects (or to your engine's plugin folder (**[UE_PATH]/Engine/Plugins/Marketplace**) to install it as an engine plugin).
-> 
-> Working with c++ projects may involve additional dependencies, like installing and configuring an IDE, which may be more than some users are willing to do, and more than I'm willing to document and support, which is ~~why I've made the precompiled version(s) of the plugin available on the [Fab Marketplace](http://fab.com).~~ (WIP)
+> As of UE 5.5, plugins no longer build automatically inside Blueprint-only projects. Use a C++ project to build the source, then copy the built plugin wherever you need it.
 
+Building requires an IDE set up for Unreal C++ development (Visual Studio 2022 Community works well on Windows). If you are new to programming in Unreal, see the official [plugins documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/plugins-in-unreal-engine).
 
-Features / Usage
+**Branches:**
+```
+main
+     └─── main development branch - supports UE 5.5 through 5.8
+UE-5.3-to-5.4
+     └─── tested and working in UE 5.3 to 5.4
+UE-5.1-to-5.2
+     └─── tested and working in UE 5.1 to 5.2
+All-Versions-Prior-to-5.1
+     └─── the UE 4.x versions. Tested back to 4.25, may work in earlier versions.
+release-please--branches--main
+     └─── used by the Release-Please GitHub action
+```
+New features are added to the `main` branch. Older branches may not have the same feature support.
+
+Usage
 -----
-For documentation on what the plugin does, installing from fab, enabling, and using it, see the [User Documentation](https://www.scottkirvan.com/ScooterUtils/guide/).
+Enable the plugin under **Edit** > **Plugins**, then:
 
-Developer Notes
---------
-ScooterUtils is implemented in a single module: "ScooterUtils." It's an editor-only plugin (no runtime functionality), and uses an OnEndFrame callback to execute certain functionality when we're confident the engine (and our module) is fully loaded (PostEngineInit).
+- Use **File** > **Restart Editor...** or **File** > **Show Project in Explorer**, or the **Scooter Utils** toolbar dropdown.
+- Configure persistent settings under **Edit** > **Editor Preferences** > **Plugins** > **Scooter Utilities**.
+- Find the Blueprint nodes under the **Scooter Utilities** category in the Blueprint node browser.
 
-FScooterUtilsModule is the main module implementation, and that's where all the functionality of ScooterUtilsMenu (for restart, and open explorer) happen, and ScooterUtilsSettings (for all the Persistent Editor Preferences settings) are handled.
-
-ScooterUtils preferences (engine install: `[UE_PATH]/Engine/Plugins/Marketplace`) are written to disk at:
+Editor Preferences are saved per user, per engine version, in `EditorSettings.ini`. On Windows that's:
 ```
-c:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
+C:\Users\<username>\AppData\Local\UnrealEngine\<EngineVersion>\Saved\Config\WindowsEditor\EditorSettings.ini
 ```
-The ScooterUtils section of EngineSettings.ini will look something like:
 ```ini
 [/Script/ScooterUtils.ScooterUtilsSettings]
 bOverrideUEApplicationScale=True
@@ -148,55 +150,25 @@ ApplicationScale=0.800000
 MaxFPS=200
 ShowViewportFPS=False
 ```
-## Supported Platforms
 
-Supported Unreal Engine versions: **4.25-5.5**<sup>*</sup>
+See the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/) for details on every menu, setting, and Blueprint node.
 
-For the most part, it should work on other platforms, and be easily adaptable to any earlier or later versions.
-
-<sup>*</sup> *If you are building this repo/plugin from source, with an engine version prior to UE 5.5, please make sure you clone/download the correct [branch](#branches).*
-
-## Dependencies
-
-The source requires Visual Studio (I've used the free 2019 & 2022 community version)
-and either an Unreal C++ code (rather than blueprint) project or the full
-Unreal Engine 4 source code from GitHub.
-
-Building it inside a project is dead simple.  Clone the repository
-into the *Plugins* directory of your Unreal C++ based project. Go to
-**File**, and select **Update Visual Studio Project**.  From there,
-the plugin should be buildable, and once compiled, can be left in *Plugins* directory for the project you're working on, or copied into
-your Engine's main *Plugins* folder so it's available to all your future
-editing sessions.  
-
-If you are new to programming in UE,
-please see the official [Programming Guide](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html). 
-
-Contributions
+Contributions / Contact
 -----------------------
-- [report any issues](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20).
-- [request new features](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D%20).
-- Developers:  [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and toss in a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls) with your changes.
-- To show your support for my work, Throw me a bone!  please TODO TODO [star]() this repo, and rate/review the plugin on [fab](http://fab.com), and/or [donate]() to my GitHub projects.
+- Please [file an issue](https://github.com/ScottKirvan/ScooterUtils/issues/new/choose), or [grab a fork](https://github.com/ScottKirvan/ScooterUtils/fork), hack away, and submit a [pull request](https://github.com/ScottKirvan/ScooterUtils/pulls). See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+- To show your support, star this repo, rate/review the plugin on [Fab](https://www.fab.com/), or sponsor development through [Ko-fi](https://ko-fi.com/ScottKirvan) or [GitHub Sponsors](https://github.com/sponsors/ScottKirvan).
+- Find me on the [Unreal Slackers](https://discord.gg/unreal-slackers) Discord as @Fragmanget_. There are a ton of other Unreal programmers up there, so if I'm not around to help, someone else may be able to get you going.
+- Contact me at [linkedin.com/in/scottkirvan/](https://www.linkedin.com/in/scottkirvan/) or by [email](mailto:ScooterUtils@skvfx.com).
+- You can also contact me at my [discord](https://discord.gg/TN6XJSNK5Y) server, I'm cptvideo.
 
-Contact
+Credits
 -------
-- Feel free to reach out to me on the [Unreal Slackers](https://discord.gg/unreal-slackers) discord. I'm @Fragmanget_. There is a ton of other Unreal programmers up there, so if I'm not around to help, someone else may be able to get you going.
-- You can also reach me on my personal [Discord Server](https://discord.gg/TN6XJSNK5Y) (@cptvideo),
-via [LinkedIn](https://www.linkedin.com/in/scottkirvan/), or [email](mailto://ScooterUtils@skvfx.com).
+**[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)** — Copyright (c) 2020-2025 [Scott Kirvan](https://github.com/ScottKirvan). [BSD 3-Clause License](LICENSE.md).
 
-
-References / Inspirations / Credits
------------------------------------
-- <strike>To learn c++ coding plugins in Unreal, sign into the Unreal Engine [Learning & Support](https://www.unrealengine.com/en-US/learn) area and take the *Best Practices for Creating and Using Plugins* course - it's great!</strike> *Anyone know where this went? It's out of date, but it still had a lot of great info.*
-- Another resource for creating Editor (not runtime) specific tools is [this tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang.
+- Thanks to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.
+- [This tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang is a great resource for creating editor (not runtime) tools.
 - This blog post on [custom project settings](http://www.mov-eax-rgb.net/blog/custom-settings-object/) is short, but it saved me when I got stuck.
-- Huge thanks to the Unreal Team!  I had only been learning Unreal for a little over a month when I first wrote this.  I am so totally blown away.  Epic's training material is outstanding - The sheer amount of material available, directly from Unreal, and being produced by end users, artists, and programmers is unlike anything I've ever experienced in the industry.
-- Thanks, also, to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.  
-
----
-**Copyright (c) 2020-2025:** [Scott Kirvan](https://github.com/ScottKirvan)
-*ScooterUtils is licensed under the [BSD 3-Clause License](../LICENSE.md).*  
+- Huge thanks to the Unreal team! I had only been learning Unreal for a little over a month when I first wrote this. Epic's training material is outstanding, and the sheer amount of material available, from Epic and from end users, artists, and programmers, is unlike anything I've ever experienced in the industry.
 
 Project Link:  [ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)  
 [CHANGELOG](notes/CHANGELOG.md)  
