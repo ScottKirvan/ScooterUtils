@@ -26,7 +26,7 @@ void FScooterUtilsModule::StartupModule()
 	if (SettingsModule != nullptr)
 	{
 		TSharedPtr<ISettingsSection> SettingsSection =
-			SettingsModule->RegisterSettings("Editor", "Plugins", "sk_UE_Utils", // Editor Preferences->Plugins->Scooter Utilities...
+			SettingsModule->RegisterSettings("Editor", "Plugins", SettingsSectionName, // Editor Preferences->Plugins->Scooter Utilities...
 											 FText::FromString("Scooter Utilities"),
 											 FText::FromString("Persistent settings for Unreal Editor"),
 											 GetMutableDefault<UScooterUtilsSettings>());
@@ -87,7 +87,7 @@ void FScooterUtilsModule::ShutdownModule()
 
 	if (SettingsModule != nullptr)
 	{
-		SettingsModule->UnregisterSettings("Editor", "Plugins", "sk_UE4_Utils"); // what happens if this text doesn't match exactly?
+		SettingsModule->UnregisterSettings("Editor", "Plugins", SettingsSectionName);
 	}
 }
 

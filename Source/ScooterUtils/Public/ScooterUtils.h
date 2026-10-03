@@ -18,6 +18,8 @@ public:
 class FScooterUtilsModule : public IModuleInterface
 {
 public:
+	static constexpr const TCHAR *SettingsSectionName = TEXT("sk_UE_Utils");
+
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;

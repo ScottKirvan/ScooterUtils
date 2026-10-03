@@ -147,7 +147,7 @@ TSharedRef<SWidget> ScooterUtilsMenu::GenerateToolbarMenu()
 			FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings.Small"),
 			FUIAction(FExecuteAction::CreateLambda([]()
 			{
-				FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", "sk_UE_Utils");
+				FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", FScooterUtilsModule::SettingsSectionName);
 			}))
 		);
 	}
