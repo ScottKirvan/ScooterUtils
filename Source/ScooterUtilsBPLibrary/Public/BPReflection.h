@@ -3,10 +3,11 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Engine/Blueprint.h"
 #include "BPReflection.generated.h"
 
 UCLASS()
-class UBPReflection : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API UBPReflection : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 public:

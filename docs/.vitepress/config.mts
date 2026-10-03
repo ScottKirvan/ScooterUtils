@@ -41,6 +41,18 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: 'C++ Reference',
+          items: [
+            { text: 'C++ Reference Overview', link: '/guide/cpp/' },
+            { text: 'Debug Print', link: '/guide/cpp/debug-print' },
+            { text: 'File IO', link: '/guide/cpp/file-io' },
+            { text: 'Global Config', link: '/guide/cpp/global-config' },
+            { text: 'Blueprint Reflection', link: '/guide/cpp/blueprint-reflection' },
+            { text: 'Lorem Ipsum', link: '/guide/cpp/lorem-ipsum' },
+            { text: 'JSON', link: '/guide/cpp/json' }
+          ]
         }
       ]
     },

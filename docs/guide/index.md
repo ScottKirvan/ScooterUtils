@@ -40,6 +40,10 @@ Scooter Utilities supports **Unreal Engine 5.5 through 5.8** on Windows, macOS, 
     <strong>Blueprint Nodes</strong>
     <span>JSON, file IO, config, logging, reflection, and Lorem Ipsum nodes.</span>
   </a>
+  <a class="card" href="./cpp/">
+    <strong>C++ Reference</strong>
+    <span>Call the runtime library from your own C++ modules.</span>
+  </a>
 </div>
 
 ## Contributing
