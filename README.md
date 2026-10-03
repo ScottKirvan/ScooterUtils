@@ -35,7 +35,7 @@
 <h4>
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/ScottKirvan/ScooterUtils/blob/master/notes/USER_README.md">User Documentation</a>
+    <a href="https://www.scottkirvan.com/ScooterUtils/guide/">User Documentation</a>
   <span> · </span>
     <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=bug&title=%5BBUG%5D%20">Report Bug</a>
   <span> · </span>
@@ -47,7 +47,7 @@
 
 Think of **ScooterUtils** as a Swiss Army Knife of tools that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning on or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?labels=enhancement&title=%5BFEATURE+REQUEST%5D).
 
-If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Documentation](notes/USER_README.md). This document is for people using the source code in the [GitHub repository](https://github.com/ScottKirvan/ScooterUtils).
+If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Documentation](https://www.scottkirvan.com/ScooterUtils/guide/). This document is for people using the source code in the [GitHub repository](https://github.com/ScottKirvan/ScooterUtils).
 
 Branches
 --------
@@ -128,7 +128,7 @@ that you can edit and build the code outside of Unreal.
 
 Features / Usage
 -----
-For documentation on what the plugin does, installing from fab, enabling, and using it, see the [User Documentation](notes/USER_README.md).
+For documentation on what the plugin does, installing from fab, enabling, and using it, see the [User Documentation](https://www.scottkirvan.com/ScooterUtils/guide/).
 
 Developer Notes
 --------

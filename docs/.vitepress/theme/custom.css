@@ -6,6 +6,35 @@ html {
   zoom: 0.875;
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.card-grid a.card {
+  display: block;
+  padding: 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: border-color 0.25s;
+}
+.card-grid a.card:hover {
+  border-color: var(--vp-c-brand-1);
+}
+.card-grid a.card strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--vp-c-brand-1);
+}
+.card-grid a.card span {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+
 /* Light/dark sponsor logo swap */
 .sponsor-logo.dark-only {
   display: none;

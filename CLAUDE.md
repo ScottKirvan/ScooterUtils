@@ -1,5 +1,21 @@
 # CLAUDE.md — ScooterUtils
 
+ScooterUtils is an Unreal Engine plugin (UE 5.5–5.8 on `main`; older engines live on the
+`All-Versions-Prior-to-5.1`, `UE-5.1-to-5.2`, and `UE-5.3-to-5.4` branches). It has an
+editor-only module (`Source/ScooterUtils`: menus, toolbar, persistent Editor Preferences)
+and a runtime Blueprint library module (`Source/ScooterUtilsBPLibrary`: JSON, File IO,
+Global Config, Debug Print, Blueprint Reflection, Lorem Ipsum).
+
+## Documentation
+
+- User documentation lives in the VitePress site under `docs/` (`docs/guide/`), deployed
+  by `.github/workflows/docs.yml` to https://www.scottkirvan.com/ScooterUtils/.
+- Build locally: `cd docs && npm ci && npx vitepress build` (the build fails on dead links).
+- Pages follow Unreal Engine 5.8 documentation conventions: H1 title plus one-line summary,
+  each menu segment bolded (**Edit** > **Plugins**), numbered procedures, Name/Description
+  tables, one-line `> [!NOTE]`/`[!TIP]`/`[!WARNING]` callouts. Keep the tone light, no emoji.
+- Document behavior from the source, not from header comments — several comments are stale.
+
 ## Keeping This File Current
 
 This file is the primary context for any agent working in this repo — keep it accurate

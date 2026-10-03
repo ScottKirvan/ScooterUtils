@@ -7,14 +7,14 @@ hero:
   tagline: Helpful development tools and utilities for Unreal Engine projects.
   actions:
     - theme: brand
+      text: User Guide
+      link: /guide/
+    - theme: alt
       text: View on GitHub
       link: https://github.com/ScottKirvan/ScooterUtils
     - theme: alt
       text: Discord
       link: https://discord.gg/TN6XJSNK5Y
-    - theme: alt
-      text: User Guide
-      link: https://www.scottkirvan.com/ScooterUtils/
 ---
 
 <!-- Begin Sponsors -->
