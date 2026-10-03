@@ -113,7 +113,7 @@ bool UFileIO::SaveStringToFileFunction(
     OutFullPath = FPaths::Combine(BaseDirectory, FileName);
 
     // Save the file
-    bool bSuccess = FFileHelper::SaveStringToFile(TextToSave, *OutFullPath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), WriteFlags);
+    bool bSuccess = FFileHelper::SaveStringToFile(TextToSave, *OutFullPath, FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM, &IFileManager::Get(), WriteFlags);
 
     if (bSuccess)
     {
