@@ -11,7 +11,7 @@ Writes a message to the **Output Log** and, if you give it a file name, appends 
 | Pin | Direction | Description |
 | --- | --------- | ----------- |
 | **Log File** | Input | The log file to append to, relative to `Saved/Logs`. Example: `MyGame.log` or `Debug/Testing.log`. Leave empty to write only to the **Output Log**. |
-| **Level** | Input | The severity label for the message: **Info**, **Warning**, **Error**, or **Critical**. |
+| **Level** | Input | The severity of the message: **Info**, **Warning**, **Error**, or **Critical**. Sets both the label in the message and the **Output Log** verbosity. |
 | **Content** | Input | The message to log. |
 | **Context** | Input (advanced) | Optional text that says where the message came from, like `PlayerController` or `SaveGame`. Expand the node's advanced pins to see it. |
 | **Return Value** | Output | **true** if the message was logged. When **Log File** is set, **false** means the file couldn't be written. |
@@ -26,10 +26,17 @@ Each message is formatted as:
 
 The timestamp uses a "stardate" style format: `YYYY.DDD.HHMMSS`, where `DDD` is the day of the year. When **Context** is empty, it's left out along with its colon.
 
-Messages appear in the **Output Log** under the `LogDebugPrint` category.
+Messages appear in the **Output Log** under the `LogDebugPrint` category, at the verbosity that matches their **Level**:
+
+| Level | Label | Output Log Verbosity |
+| ----- | ----- | -------------------- |
+| **Info** | `INFO` | Log |
+| **Warning** | `WARNING` | Warning (yellow) |
+| **Error** | `ERROR` | Error (red) |
+| **Critical** | `CRITICAL` | Error (red) |
 
 > [!NOTE]
-> **Level** is written into the message text. All messages appear in the **Output Log** at the normal log verbosity, so filter on the label (for example, `ERROR:`) rather than the **Output Log**'s Warnings or Errors filters.
+> **Critical** is logged as an error rather than a fatal error, so it never stops your game or the editor.
 
 ## Example
 
