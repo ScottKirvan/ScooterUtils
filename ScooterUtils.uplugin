@@ -18,7 +18,7 @@
 			"Name": "ScooterUtils",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux"
@@ -28,7 +28,7 @@
 			"Name": "ScooterUtilsBPLibraryModule",
 			"Type": "RuntimeAndProgram",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux",
