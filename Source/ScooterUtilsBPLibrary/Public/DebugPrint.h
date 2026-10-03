@@ -10,7 +10,7 @@
 #include "ScooterUtilsBPLibrary.h"
 #include "DebugPrint.generated.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogDebugPrint, Log, All);
+SCOOTERUTILSBPLIBRARYMODULE_API DECLARE_LOG_CATEGORY_EXTERN(LogDebugPrint, Log, All);
 
 UENUM(BlueprintType)
 enum class EDebugLevel : uint8
