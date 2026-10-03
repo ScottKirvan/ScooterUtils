@@ -34,17 +34,8 @@ SULogDebugPrint: Error: [2025.283.143054] MyActor.cpp:51: ERROR: Failed to load:
 
 bool USUDebugPrint::LogMessage(const FString &LogFile, EDebugLevel Level, const FString &Content, const FString &Context)
 {
-    // Get current time and format stardate style timestamp
-    FDateTime Now = FDateTime::Now();
-    const FString Timestamp = FString::Printf(TEXT("%04d.%03d.%02d%02d%02d"),
-                                              Now.GetYear(),
-                                              Now.GetDayOfYear(),
-                                              Now.GetHour(),
-                                              Now.GetMinute(),
-                                              Now.GetSecond());
-
+    const FString Timestamp = GetFormattedTimestamp();
     const FString LevelStr = GetLevelString(Level);
-    const ELogVerbosity::Type Verbosity = GetVerbosityForLevel(Level);
 
     // Create the full log message with stardate timestamp and context
     FString FullMessage = FString::Printf(TEXT("[%s] %s%s%s: %s"),
@@ -54,8 +45,20 @@ bool USUDebugPrint::LogMessage(const FString &LogFile, EDebugLevel Level, const 
                                           *LevelStr,
                                           *Content);
 
-    // Output to UE log
-    UE_LOG(LogDebugPrint, Log, TEXT("%s"), *FullMessage);
+    // Critical maps to Error rather than Fatal: a Fatal log terminates the process.
+    switch (Level)
+    {
+    case EDebugLevel::Warning:
+        UE_LOG(LogDebugPrint, Warning, TEXT("%s"), *FullMessage);
+        break;
+    case EDebugLevel::Error:
+    case EDebugLevel::Critical:
+        UE_LOG(LogDebugPrint, Error, TEXT("%s"), *FullMessage);
+        break;
+    default:
+        UE_LOG(LogDebugPrint, Log, TEXT("%s"), *FullMessage);
+        break;
+    }
 
     // Append to log file if specified
     if (!LogFile.IsEmpty())
@@ -72,23 +75,6 @@ bool USUDebugPrint::LogMessage(const FString &LogFile, EDebugLevel Level, const 
     }
 
     return true;
-}
-
-ELogVerbosity::Type USUDebugPrint::GetVerbosityForLevel(EDebugLevel Level)
-{
-    switch (Level)
-    {
-    case EDebugLevel::Info:
-        return ELogVerbosity::Log;
-    case EDebugLevel::Warning:
-        return ELogVerbosity::Warning;
-    case EDebugLevel::Error:
-        return ELogVerbosity::Error;
-    case EDebugLevel::Critical:
-        return ELogVerbosity::Fatal;
-    default:
-        return ELogVerbosity::Log;
-    }
 }
 
 FString USUDebugPrint::GetLevelString(EDebugLevel Level)
