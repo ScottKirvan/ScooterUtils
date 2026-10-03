@@ -2,7 +2,7 @@
 
 An overview of the Blueprint nodes included with Scooter Utilities.
 
-Scooter Utilities includes a runtime Blueprint library with practical helpers grouped by purpose. Unlike the editor tools, these nodes work in packaged games as well as in the editor.
+Scooter Utilities includes a runtime Blueprint library with practical helpers grouped by purpose. Unlike the editor tools, these nodes work in packaged games as well as in the editor. You can also call them from your own code; see the [C++ Reference](../cpp/).
 
 ## Node Categories
 

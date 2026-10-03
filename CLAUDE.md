@@ -10,6 +10,9 @@ Global Config, Debug Print, Blueprint Reflection, Lorem Ipsum).
 
 - User documentation lives in the VitePress site under `docs/` (`docs/guide/`), deployed
   by `.github/workflows/docs.yml` to https://www.scottkirvan.com/ScooterUtils/.
+  `docs/guide/blueprint-nodes/` covers the Blueprint nodes; `docs/guide/cpp/` is the C++
+  reference for the same runtime library. A behavior change in `ScooterUtilsBPLibrary`
+  usually needs both updated.
 - Build locally: `cd docs && npm ci && npx vitepress build` (the build fails on dead links).
 - Pages follow Unreal Engine 5.8 documentation conventions: H1 title plus one-line summary,
   each menu segment bolded (**Edit** > **Plugins**), numbered procedures, Name/Description
