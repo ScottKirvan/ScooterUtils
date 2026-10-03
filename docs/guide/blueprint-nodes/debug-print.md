@@ -49,4 +49,4 @@ Messages appear in the **Output Log** under the `LogDebugPrint` category, at the
    ```
 
 > [!TIP]
-> Writing from C++? The `SCOOTER_DEBUG_PRINT` macro adds the source file and line number as the context automatically.
+> Writing from C++? The [`SCOOTER_DEBUG_PRINT`](../cpp/debug-print#scooter-debug-print) macro adds the source file and line number as the context automatically.
