@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 1010009,
-	"VersionName": "v1.10.9",
+	"Version": 1010010,
+	"VersionName": "v1.10.10",
 	"FriendlyName": "Scooter Utilities",
 	"Description": "Your Swiss Army Knife of Editor Utilities for Unreal Engine",
 	"Category": "Editor",
