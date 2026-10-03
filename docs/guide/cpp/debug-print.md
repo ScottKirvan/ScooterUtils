@@ -93,7 +93,7 @@ USUDebugPrint::LogMessage(TEXT("Multiplayer.log"), EDebugLevel::Info, TEXT("Play
 * Pass `FString` values to the printf-style versions with `*`, like `*GetName()`. Passing an `FString` directly to `...` is undefined behavior.
 * The printf-style versions also take `LogFile` as a `const TCHAR*`, so use `TEXT("MyGame.log")` or `*MyLogFileString`.
 * To log text that might contain a `%`, use `TEXT("%s"), *Text` rather than passing the text as `Format`, or call [`LogMessage`](#logmessage).
-* The printf-style versions format into a 4,096-character buffer. For longer messages, build an `FString` and call [`LogMessage`](#logmessage).
+* The printf-style versions handle messages of any practical length. Messages over about a million characters are truncated.
 
 > [!NOTE]
 > `SCOOTER_DEBUG_PRINT` expands to a call to `USUDebugPrint::DebugPrintInternal`, which is public only so the macro can reach it. Use the macro instead of calling it directly.

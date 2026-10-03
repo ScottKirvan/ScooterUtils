@@ -69,12 +69,11 @@ public:
      */
     static bool FORCEINLINE DebugPrintInternal(const TCHAR *LogFile, EDebugLevel Level, const TCHAR *File, int32 Line, const TCHAR *Format, ...)
     {
-        TCHAR TempStr[4096];
         va_list Args;
         va_start(Args, Format);
-        FCString::GetVarArgs(TempStr, UE_ARRAY_COUNT(TempStr), Format, Args);
+        const FString Message = FormatVarArgs(Format, Args);
         va_end(Args);
-        return LogMessage(LogFile, Level, TempStr, *FString::Printf(TEXT("%s:%d"), File, Line));
+        return LogMessage(LogFile, Level, Message, *FString::Printf(TEXT("%s:%d"), File, Line));
     }
 
     /**
@@ -82,12 +81,11 @@ public:
      */
     static bool FORCEINLINE DebugPrint(const TCHAR *LogFile, EDebugLevel Level, const TCHAR *Format, ...)
     {
-        TCHAR TempStr[4096];
         va_list Args;
         va_start(Args, Format);
-        FCString::GetVarArgs(TempStr, UE_ARRAY_COUNT(TempStr), Format, Args);
+        const FString Message = FormatVarArgs(Format, Args);
         va_end(Args);
-        return LogMessage(LogFile, Level, TempStr, TEXT(""));
+        return LogMessage(LogFile, Level, Message, TEXT(""));
     }
 
 private:
@@ -99,4 +97,7 @@ private:
 
     /** Formats the timestamp in YYYY.DDD.HHMMSS format */
     static FString GetFormattedTimestamp();
+
+    /** Formats a printf-style message of any length */
+    static FString FormatVarArgs(const TCHAR *Format, va_list Args);
 };

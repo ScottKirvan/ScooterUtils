@@ -118,3 +118,29 @@ FString USUDebugPrint::GetFormattedTimestamp()
                            Now.GetMinute(),
                            Now.GetSecond());
 }
+
+FString USUDebugPrint::FormatVarArgs(const TCHAR *Format, va_list Args)
+{
+    // GetVarArgs signals a too-small buffer with -1 or a length >= the buffer size, so grow and retry.
+    // The cap stops the loop if a malformed format makes it fail for a reason other than size.
+    constexpr int32 MaxBufferSize = 1024 * 1024;
+    TArray<TCHAR> Buffer;
+    for (int32 BufferSize = 1024;; BufferSize *= 2)
+    {
+        Buffer.SetNumUninitialized(BufferSize);
+        va_list ArgsCopy;
+        va_copy(ArgsCopy, Args);
+        const int32 Result = FCString::GetVarArgs(Buffer.GetData(), BufferSize, Format, ArgsCopy);
+        va_end(ArgsCopy);
+
+        if (Result >= 0 && Result < BufferSize)
+        {
+            return FString(Buffer.GetData());
+        }
+        if (BufferSize >= MaxBufferSize)
+        {
+            Buffer[BufferSize - 1] = TEXT('\0');
+            return FString(Buffer.GetData());
+        }
+    }
+}
