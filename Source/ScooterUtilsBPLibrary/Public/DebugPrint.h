@@ -22,7 +22,7 @@ enum class EDebugLevel : uint8
 };
 
 UCLASS()
-class USUDebugPrint : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API USUDebugPrint : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 

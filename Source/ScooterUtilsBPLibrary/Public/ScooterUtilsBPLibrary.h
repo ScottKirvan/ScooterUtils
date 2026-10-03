@@ -25,7 +25,7 @@
  */
 
 UCLASS()
-class UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
