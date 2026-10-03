@@ -7,10 +7,16 @@
     ".": {
       "extra-files": [
         "notes/VERSION.md",
+        "Source/ScooterUtils/Public/ScooterUtilsVersion.h",
         {
           "type": "json",
           "path": "version.json",
           "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "ScooterUtils.uplugin",
+          "jsonpath": "$.VersionName"
         }
       ]
     }
