@@ -66,7 +66,7 @@ bool USUDebugPrint::LogMessage(const FString &LogFile, EDebugLevel Level, const 
         return FFileHelper::SaveStringToFile(
             FileMessage,
             *OutputPath,
-            FFileHelper::EEncodingOptions::AutoDetect,
+            FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM,
             &IFileManager::Get(),
             FILEWRITE_Append);
     }

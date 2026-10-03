@@ -56,7 +56,7 @@ Adds text to the end of a file, creating the file if it doesn't exist.
 | **Out Full Path** | Output | The full path the file was written to. |
 | **Return Value** | Output | **true** if the text was written successfully. |
 
-The save and append nodes create any missing parent folders. Every node writes a success or failure message, including the full path, to the **Output Log**.
+The save and append nodes write UTF-8 text without a byte-order mark and create any missing parent folders. Every node writes a success or failure message, including the full path, to the **Output Log**.
 
 ## Examples
 
