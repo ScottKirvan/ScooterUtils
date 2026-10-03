@@ -15,7 +15,7 @@ enum class EFileLocation : uint8
 };
 
 UCLASS()
-class UFileIO : public UBlueprintFunctionLibrary
+class SCOOTERUTILSBPLIBRARYMODULE_API UFileIO : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 public:
