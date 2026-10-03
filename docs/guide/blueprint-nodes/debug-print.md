@@ -6,7 +6,7 @@ Write timestamped debug messages to the Output Log and, optionally, to a log fil
 
 ## Log Message
 
-Writes a message to the **Output Log** and, if you give it a file name, appends the same line to a log file in your project's `Saved/Logs` folder.
+Writes a message to the **Output Log** and, if you give it a file name, appends the same line, as UTF-8 text, to a log file in your project's `Saved/Logs` folder.
 
 | Pin | Direction | Description |
 | --- | --------- | ----------- |
