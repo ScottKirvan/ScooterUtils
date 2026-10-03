@@ -38,7 +38,7 @@ public:
      *                   - Info: General information and status updates
      *                   - Warning: Non-critical issues that should be reviewed
      *                   - Error: Problems that need immediate attention
-     *                   - Critical: Severe issues that might crash the game
+     *                   - Critical: Severe issues (logged at Error verbosity; does not halt)
      *
      * @param Content    The actual message to log. Can be any text or value converted to string.
      *                   Examples: "Player spawned", "Health is low: 25", "Loading complete"
@@ -91,9 +91,6 @@ public:
     }
 
 private:
-    /** Gets the verbosity level based on debug level */
-    static ELogVerbosity::Type GetVerbosityForLevel(EDebugLevel Level);
-
     /** Gets the string representation of the debug level */
     static FString GetLevelString(EDebugLevel Level);
 
