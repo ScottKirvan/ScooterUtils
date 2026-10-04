@@ -17,6 +17,7 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      packed_version: ${{ steps.packed.outputs.value }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -24,6 +25,21 @@ jobs:
           token: ${{ github.token }}
           config-file: .github/release-please/release-please-config.json
           manifest-file: .github/release-please/.release-please-manifest.json
+
+      # The .uplugin "Version" must be an increasing integer, which release-please
+      # can't write (its JSON updater only writes the version string, used for
+      # VersionName). Pack major.minor.patch into one, e.g. 1.10.10 -> 1010010.
+      - name: Compute packed plugin version
+        id: packed
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          MAJOR: ${{ steps.release.outputs.major }}
+          MINOR: ${{ steps.release.outputs.minor }}
+          PATCH: ${{ steps.release.outputs.patch }}
+        run: |
+          VALUE=$((MAJOR * 1000000 + MINOR * 1000 + PATCH))
+          echo "Packed version: $VALUE"
+          echo "value=$VALUE" >> "$GITHUB_OUTPUT"
 
   apply-staged-notes:
     needs: release-please
@@ -102,6 +118,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # BuildPlugin re-saves the descriptor without touching "Version", so the
+      # packaged plugin only gets the right one if it's set here first.
+      - name: Set .uplugin Version to ${{ needs.release-please.outputs.packed_version }}
+        shell: powershell -ExecutionPolicy Bypass -Command ". '{0}'"
+        env:
+          PACKED_VERSION: ${{ needs.release-please.outputs.packed_version }}
+        run: |
+          $path = "${{ github.workspace }}\ScooterUtils.uplugin"
+          $text = [IO.File]::ReadAllText($path)
+          $updated = [regex]::Replace($text, '"Version":\s*\d+', "`"Version`": $env:PACKED_VERSION")
+          if ($updated -notmatch "`"Version`": $env:PACKED_VERSION\b") { Write-Error "Failed to set Version in $path"; exit 1 }
+          [IO.File]::WriteAllText($path, $updated, (New-Object System.Text.UTF8Encoding $false))
+          Select-String -Path $path -Pattern '"Version(Name)?"'
+
       - name: Build plugin for UE ${{ matrix.ue_version }}
         shell: powershell -ExecutionPolicy Bypass -Command ". '{0}'"
         run: |
@@ -133,6 +163,47 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release upload "${{ needs.release-please.outputs.tag_name }}" "ScooterUtils-UE${{ matrix.ue_version }}-Win64.zip" --clobber
+
+  # Keeps the repo's .uplugin "Version" in step with VersionName. Runs after the
+  # release commit is on main, so there's no release-please branch to race
+  # (pushing to release-please's PR branch is what #136 was about). A
+  # GITHUB_TOKEN push doesn't trigger this workflow again.
+  commit-uplugin-version:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Commit .uplugin Version
+        env:
+          PACKED_VERSION: ${{ needs.release-please.outputs.packed_version }}
+          TAG: ${{ needs.release-please.outputs.tag_name }}
+        run: |
+          sed -i -E "s/\"Version\":[[:space:]]*[0-9]+/\"Version\": $PACKED_VERSION/" ScooterUtils.uplugin
+          grep -E '"Version(Name)?"' ScooterUtils.uplugin
+          if git diff --quiet -- ScooterUtils.uplugin; then
+            echo "ScooterUtils.uplugin already at Version $PACKED_VERSION"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: set .uplugin Version to $PACKED_VERSION for $TAG" -- ScooterUtils.uplugin
+          # update-changelog-prs pushes to main around the same time; rebase and retry.
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Push rejected (attempt $attempt), rebasing onto main"
+            sleep $((attempt * 3))
+            if ! git pull --rebase origin main; then
+              git rebase --abort || true
+              echo "::error::Rebasing the .uplugin Version commit onto main failed"
+              exit 1
+            fi
+          done
+          echo "::error::Could not push the .uplugin Version update to main"
+          exit 1
 
   update-changelog-prs:
     needs: release-please
