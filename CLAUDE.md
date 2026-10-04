@@ -18,6 +18,7 @@ Global Config, Debug Print, Blueprint Reflection, Lorem Ipsum).
   each menu segment bolded (**Edit** > **Plugins**), numbered procedures, Name/Description
   tables, one-line `> [!NOTE]`/`[!TIP]`/`[!WARNING]` callouts. Keep the tone light, no emoji.
 - Document behavior from the source, not from header comments — several comments are stale.
+- Design specs for larger changes live in `notes/dev/specs/` (e.g. `json-node-redesign.md`).
 
 ## Keeping This File Current
 
