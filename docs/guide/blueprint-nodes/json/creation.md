@@ -4,7 +4,7 @@ Reference for the nodes that build and modify JSON strings.
 
 **Category:** **Scooter Utilities** > **JSON** > **Creation**
 
-Creation nodes build JSON from scratch or modify existing JSON. Each one takes a JSON string and returns an updated copy through its **JSON String Out** pin, so you can chain them together to build complex structures.
+Creation nodes build JSON from scratch or modify existing JSON. Each one takes a JSON string and returns an updated copy through its **JSON String Out** pin, so you can chain them together to build complex structures. The output is compact JSON on a single line. Use [Pretty Print JSON](#pretty-print-json) when you want it readable.
 
 > [!WARNING]
 > If the **JSON String** input isn't a valid JSON object, the add nodes start over with a new, empty object. Use [Is Valid JSON](./parsing#is-valid-json) first if you're not sure what you're passing in.

@@ -2,6 +2,7 @@
 #include "JSONBlueprintLibrary.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
+#include "Policies/CondensedJsonPrintPolicy.h"
 #include "Serialization/JsonReader.h"
 
 // ========== Helper Functions (not class members) ==========
@@ -27,7 +28,7 @@ FString JSONObjectToString(const TSharedPtr<FJsonObject> &JSONObject)
     }
 
     FString OutputString;
-    TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
+    TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&OutputString);
 
     if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
     {
@@ -414,9 +415,8 @@ FString UJSONBlueprintLibrary::MinifyJSON(const FString &JSONString)
         return JSONString;
     }
 
-    // Use default compact writer (no pretty print policy)
     FString OutputString;
-    TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
+    TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&OutputString);
 
     if (FJsonSerializer::Serialize(JSONObject.ToSharedRef(), Writer))
     {
