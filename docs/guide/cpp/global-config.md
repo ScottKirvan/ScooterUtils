@@ -44,3 +44,5 @@ const FString ViewportClass = UScooterUtilsBPLibrary::GetGlobalConfigFileString(
 UScooterUtilsBPLibrary::SetGlobalConfigFileBool(
     TEXT("/Script/MyGame.MySettings"), TEXT("bShowIntro"), false);
 ```
+
+In a default project, `ViewportClass` is `/Script/Engine.GameViewportClient`.
