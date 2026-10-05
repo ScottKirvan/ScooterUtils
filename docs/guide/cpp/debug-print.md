@@ -32,7 +32,11 @@ enum class EDebugLevel : uint8 { Info, Warning, Error, Critical };
 SCOOTER_DEBUG_PRINT(LogFile, Level, Format, ...)
 ```
 
-Formats a printf-style message and logs it, using `<file>:<line>` of the call site as the context. The file part is the compiler's `__FILE__` value, which may be a full path depending on your compiler and build settings.
+Formats a printf-style message and logs it, using the call site's file and line as the context:
+
+```
+LogDebugPrint: [2026.277.180002] D:\MyGame\Source\MyGame\MyCharacter.cpp:15: INFO: macro 42
+```
 
 | Name | Description |
 | ---- | ----------- |
@@ -67,6 +71,12 @@ Formats a printf-style message and logs it with no context. Takes the same param
 USUDebugPrint::DebugPrint(TEXT(""), EDebugLevel::Info, TEXT("Loaded %d items"), Items.Num());
 ```
 
+Output (no context):
+
+```
+LogDebugPrint: [2026.277.180002] INFO: Loaded 12 items
+```
+
 ## LogMessage
 
 ```cpp
@@ -86,6 +96,19 @@ Logs a message that's already been built. This is the function behind the **Log 
 
 ```cpp
 USUDebugPrint::LogMessage(TEXT("Multiplayer.log"), EDebugLevel::Info, TEXT("Player joined: ") + PlayerName, TEXT("Multiplayer"));
+```
+
+Output, in the **Output Log** and appended to `Saved/Logs/Multiplayer.log`:
+
+```
+LogDebugPrint: [2026.277.180002] Multiplayer: INFO: Player joined: Steve
+```
+
+Warnings and errors carry the Output Log's verbosity prefix:
+
+```
+LogDebugPrint: Warning: [2026.277.180002] WARNING: DebugPrint ok
+LogDebugPrint: Error: [2026.277.180002] LinkTest: ERROR: LogMessage ok
 ```
 
 ## Formatting Tips

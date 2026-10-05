@@ -77,6 +77,12 @@ FString SavedPath;
 UFileIO::SaveTextToFile(EFileLocation::ProjectSaved, TEXT("Logs/DebugDump.txt"), DumpText, SavedPath);
 ```
 
+`SavedPath` receives the full path, and the Output Log shows:
+
+```
+LogTemp: Successfully saved file to: D:/MyGame/Saved/Logs/DebugDump.txt
+```
+
 > [!WARNING]
 > `SaveTextToFile` overwrites existing files without asking. Use `AppendTextToFile` to keep existing content.
 
