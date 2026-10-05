@@ -4,9 +4,6 @@ Call the Scooter Utilities runtime library from your own C++ code.
 
 Every Scooter Utilities Blueprint node is a static function on a Blueprint function library class in the `ScooterUtilsBPLibraryModule` runtime module. Add the module as a dependency and you can call those same functions from C++, plus a couple of C++-only extras for debug logging.
 
-> [!NOTE]
-> C++ access requires a plugin version that includes the fix for [issue #130](https://github.com/ScottKirvan/ScooterUtils/issues/130). Earlier versions don't export most of the library classes, so calls into them can fail to link.
-
 ## Setting Up Your Module
 
 1. Make sure the plugin is installed and enabled in your project. See [Installing and Enabling](../installing).

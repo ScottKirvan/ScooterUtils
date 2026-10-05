@@ -11,7 +11,7 @@ All three entry points produce the same message format and can append to a log f
 | [`SCOOTER_DEBUG_PRINT`](#scooter-debug-print) | printf-style macro that fills in the source file and line number as the context. |
 | [`USUDebugPrint::DebugPrint`](#debugprint) | printf-style function with no context. |
 | [`USUDebugPrint::LogMessage`](#logmessage) | `FString` version with an optional context. Also the Blueprint node. |
-| [`EDebugLevel`](#edebuglevel) | The severity label written into the message. |
+| [`EDebugLevel`](#edebuglevel) | The severity: sets the label in the message and the **Output Log** verbosity. |
 
 ## EDebugLevel
 
@@ -19,12 +19,12 @@ All three entry points produce the same message format and can append to a log f
 enum class EDebugLevel : uint8 { Info, Warning, Error, Critical };
 ```
 
-| Value | Label in the message |
-| ----- | -------------------- |
-| `EDebugLevel::Info` | `INFO` |
-| `EDebugLevel::Warning` | `WARNING` |
-| `EDebugLevel::Error` | `ERROR` |
-| `EDebugLevel::Critical` | `CRITICAL` |
+| Value | Label in the message | Output Log verbosity |
+| ----- | -------------------- | -------------------- |
+| `EDebugLevel::Info` | `INFO` | `Log` |
+| `EDebugLevel::Warning` | `WARNING` | `Warning` |
+| `EDebugLevel::Error` | `ERROR` | `Error` |
+| `EDebugLevel::Critical` | `CRITICAL` | `Error` (never `Fatal`, so it doesn't stop the process) |
 
 ## SCOOTER_DEBUG_PRINT
 
@@ -37,7 +37,7 @@ Formats a printf-style message and logs it, using `<file>:<line>` of the call si
 | Name | Description |
 | ---- | ----------- |
 | `LogFile` | `const TCHAR*`. The log file to append to, relative to `Saved/Logs`. Pass `TEXT("")` to write only to the **Output Log**. |
-| `Level` | `EDebugLevel`. The severity label. |
+| `Level` | `EDebugLevel`. The severity. See [`EDebugLevel`](#edebuglevel). |
 | `Format` | `const TCHAR*`. A printf-style format string, such as `TEXT("Health: %d")`. |
 | `...` | The values for `Format`. |
 
@@ -78,7 +78,7 @@ Logs a message that's already been built. This is the function behind the **Log 
 | Name | Description |
 | ---- | ----------- |
 | `LogFile` | The log file to append to, relative to `Saved/Logs`. Example: `MyGame.log` or `Debug/Testing.log`. Pass an empty string to write only to the **Output Log**. |
-| `Level` | The severity label. |
+| `Level` | The severity. See [`EDebugLevel`](#edebuglevel). |
 | `Content` | The message text. It isn't treated as a format string. |
 | `Context` | Optional text that says where the message came from. When empty, it's left out along with its colon. |
 
