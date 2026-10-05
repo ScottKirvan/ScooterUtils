@@ -54,6 +54,7 @@ void ScooterUtilsMenu::OnStartupModule()
 	CommandList = MakeShareable(new FUICommandList);
 	ScooterUtilsMenuCommands::Register();
 	MapCommands();
+	SettingsChangedHandle = GetMutableDefault<UScooterUtilsSettings>()->OnSettingChanged().AddRaw(this, &ScooterUtilsMenu::OnSettingsChanged);
 
 	// Register commands with the global editor command list for hotkey to work globally
 	FLevelEditorModule &LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
@@ -65,33 +66,66 @@ void ScooterUtilsMenu::OnStartupModule()
 		FName("FileProject"), // trying to place this at the end of the main File/Project menu section
 		CommandList);
 
-	// Add toolbar button using the modern ToolMenus system (if enabled in settings)
-	const UScooterUtilsSettings *Settings = GetDefault<UScooterUtilsSettings>();
-	if (Settings && Settings->bShowToolbarButton)
-	{
-		UToolMenus *ToolMenus = UToolMenus::Get();
-		if (ToolMenus)
-		{
-			UToolMenu *ToolbarMenu = ToolMenus->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
-			if (ToolbarMenu)
-			{
-				FToolMenuSection &Section = ToolbarMenu->AddSection("ScooterUtils", FText::FromString("Scooter Utils"));
-
-				FToolMenuEntry &Entry = Section.AddEntry(FToolMenuEntry::InitComboButton(
-					"ScooterUtilsCombo",
-					FUIAction(),
-					FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
-					LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
-					LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
-					FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")));
-			}
-		}
-	}
+	UpdateToolbarButton();
 }
 
 void ScooterUtilsMenu::OnShutdownModule()
 {
+	if (SettingsChangedHandle.IsValid())
+	{
+		GetMutableDefault<UScooterUtilsSettings>()->OnSettingChanged().Remove(SettingsChangedHandle);
+		SettingsChangedHandle.Reset();
+	}
+
+	UToolMenus::UnregisterOwner(this);
 	ScooterUtilsMenuCommands::Unregister();
+}
+
+void ScooterUtilsMenu::OnSettingsChanged(FName PropertyName)
+{
+	if (PropertyName != GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bEnableRestartEditorHotkey) &&
+		PropertyName != GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, RestartEditorHotkey) &&
+		PropertyName != GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bShowToolbarButton))
+	{
+		return;
+	}
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bShowToolbarButton))
+	{
+		UpdateToolbarButton();
+		return;
+	}
+
+	const UScooterUtilsSettings *Settings = GetDefault<UScooterUtilsSettings>();
+	const FInputChord RestartHotkey = Settings->bEnableRestartEditorHotkey
+										  ? Settings->RestartEditorHotkey
+										  : FInputChord();
+	ScooterUtilsMenuCommands::Get().MenuRestartEditor->SetActiveChord(RestartHotkey, EMultipleKeyBindingIndex::Primary);
+}
+
+void ScooterUtilsMenu::UpdateToolbarButton()
+{
+	UToolMenus *ToolMenus = UToolMenus::Get();
+	UToolMenus::UnregisterOwner(this);
+
+	const UScooterUtilsSettings *Settings = GetDefault<UScooterUtilsSettings>();
+	if (Settings->bShowToolbarButton)
+	{
+		FToolMenuOwnerScoped Owner(this);
+		if (UToolMenu *ToolbarMenu = ToolMenus->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar"))
+		{
+			FToolMenuSection &Section = ToolbarMenu->FindOrAddSection("ScooterUtils", FText::FromString("Scooter Utils"));
+			Section.AddEntry(FToolMenuEntry::InitComboButton(
+				"ScooterUtilsCombo",
+				FUIAction(),
+				FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
+				LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
+				LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
+				FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")));
+		}
+	}
+
+	ToolMenus->RefreshMenuWidget("LevelEditor.LevelEditorToolBar.PlayToolBar");
 }
 
 void ScooterUtilsMenu::MakeMenuEntry(FMenuBuilder &menuBuilder)

@@ -9,11 +9,11 @@ Scooter Utilities adds two items to the **File** menu and a dropdown button to t
 
 ## Menu and Toolbar Reference
 
-| Name | Location | Description |
-| ---- | -------- | ----------- |
-| **Restart Editor...** | **File** menu, toolbar dropdown | Shuts down and restarts the editor, re-opening the current project. |
+| Name                         | Location                        | Description                                                                                 |
+| ---------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Restart Editor...**        | **File** menu, toolbar dropdown | Shuts down and restarts the editor, re-opening the current project.                         |
 | **Show Project in Explorer** | **File** menu, toolbar dropdown | Opens your project folder (where the `.uproject` file lives) in your system's file browser. |
-| **Plugin Settings...** | Toolbar dropdown | Opens the Scooter Utilities page in **Editor Preferences**. |
+| **Plugin Settings...**       | Toolbar dropdown                | Opens the Scooter Utilities page in **Editor Preferences**.                                 |
 
 ## Toolbar Dropdown
 
@@ -26,9 +26,6 @@ The **Scooter Utils** dropdown button appears in the Level Editor's Play toolbar
   * **Plugin Settings...**
 
 The toolbar button is shown by default. To hide it, go to **Edit** > **Editor Preferences** > **Plugins** > **Scooter Utilities** and disable **Show Toolbar Button** in the **UI** section.
-
-> [!NOTE]
-> Changes to **Show Toolbar Button** take effect after you restart the editor.
 
 ## Restart Editor
 

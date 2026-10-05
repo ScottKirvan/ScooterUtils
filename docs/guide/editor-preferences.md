@@ -12,42 +12,42 @@ To open these settings, go to **Edit** > **Editor Preferences**, then select **S
 
 ### Screen Real Estate
 
-| Name | Description |
-| ---- | ----------- |
+| Name                  | Description                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Application Scale** | Scales the size of editor fonts and widgets. Enable the checkbox to override the engine's scale, then set a value between **0.5** and **3.0**. |
 
 ### FPS
 
-| Name | Description |
-| ---- | ----------- |
-| **Show Viewport FPS** | Shows the current FPS in the editor viewport, like `stat fps`, and keeps it on between restarts. |
+| Name                                      | Description                                                                                                                   |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Show Viewport FPS**                     | Shows the current FPS in the editor viewport, like `stat fps`, and keeps it on between restarts.                              |
 | **Max FPS (Console default: t.MaxFPS 0)** | Sets the editor's maximum frame rate, like `t.MaxFPS`, but persistent across sessions. Set to **0** to let the engine decide. |
 
 ### Hotkeys
 
-| Name | Description |
-| ---- | ----------- |
-| **Enable Restart Editor Hotkey** | Enables the hotkey for [Restart Editor](./editor-menus#restart-editor). Requires an editor restart. |
-| **Restart Editor Hotkey** | The key combination that restarts the editor. Default: **Ctrl + Shift + Alt + R**. Requires an editor restart. |
+| Name                             | Description                                                                        |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| **Enable Restart Editor Hotkey** | Enables the hotkey for [Restart Editor](./editor-menus#restart-editor).            |
+| **Restart Editor Hotkey**        | The key combination that restarts the editor. Default: **Ctrl + Shift + Alt + R**. |
 
 ### UI
 
-| Name | Description |
-| ---- | ----------- |
-| **Show Toolbar Button** | Shows or hides the [Scooter Utils toolbar dropdown](./editor-menus#toolbar-dropdown). Requires an editor restart. |
+| Name                    | Description                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| **Show Toolbar Button** | Shows or hides the [Scooter Utils toolbar dropdown](./editor-menus#toolbar-dropdown). |
 
 ### Plugin Settings
 
-| Name | Description |
-| ---- | ----------- |
+| Name                                          | Description                                                                                                                       |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | **Enable Plugin By Default For New Projects** | Controls whether Scooter Utilities is automatically enabled in new projects. Applied immediately to the plugin's `.uplugin` file. |
 
 ### About Scooter Utilities
 
-| Name | Description |
-| ---- | ----------- |
-| **Version** | The installed Scooter Utilities version (read-only). |
-| **Copyright** | Copyright information (read-only). |
+| Name          | Description                                          |
+| ------------- | ---------------------------------------------------- |
+| **Version**   | The installed Scooter Utilities version (read-only). |
+| **Copyright** | Copyright information (read-only).                   |
 
 ## Application Scale
 
@@ -76,9 +76,6 @@ It provides the same functionality as **Show FPS** in the viewport's options men
 ## Hotkeys
 
 **Enable Restart Editor Hotkey** and **Restart Editor Hotkey** control the keyboard shortcut for **File** > **Restart Editor...**. To change the shortcut, click the **Restart Editor Hotkey** field and press the new key combination.
-
-> [!NOTE]
-> Hotkey changes take effect after you restart the editor.
 
 ## Plugin Settings
 

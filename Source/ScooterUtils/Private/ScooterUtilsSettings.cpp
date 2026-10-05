@@ -60,7 +60,7 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	const FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+	const FName PropertyName = PropertyChangedEvent.GetMemberPropertyName();
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, ApplicationScale))
 	{
@@ -87,14 +87,12 @@ void UScooterUtilsSettings::PostEditChangeProperty(struct FPropertyChangedEvent 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bEnableRestartEditorHotkey) ||
 		PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, RestartEditorHotkey))
 	{
-		// Notify user that editor restart is required for hotkey changes
-		UE_LOG(LogTemp, Warning, TEXT("ScooterUtils: Hotkey settings changed. Please restart the editor for changes to take effect."));
+		UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Restart Editor hotkey settings updated."));
 	}
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bShowToolbarButton))
 	{
-		// Notify user that editor restart is required for toolbar visibility changes
-		UE_LOG(LogTemp, Warning, TEXT("ScooterUtils: Toolbar button visibility changed. Please restart the editor for changes to take effect."));
+		UE_LOG(LogTemp, Log, TEXT("ScooterUtils: Toolbar button visibility updated."));
 	}
 
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UScooterUtilsSettings, bPluginEnabledByDefault))

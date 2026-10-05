@@ -18,8 +18,11 @@ public:
 
 protected:
 	TSharedPtr<FUICommandList> CommandList;
+	FDelegateHandle SettingsChangedHandle;
 
 	void MapCommands();
+	void OnSettingsChanged(FName PropertyName);
+	void UpdateToolbarButton();
 
 	//************************
 	// UI Command functions

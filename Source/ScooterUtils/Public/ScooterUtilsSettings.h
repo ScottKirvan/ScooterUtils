@@ -89,8 +89,6 @@ public:
 	/**
 	 * Hotkey to restart the editor.
 	 * Default: Ctrl+Shift+Alt+R
-	 *
-	 * NOTE: Changes to this setting require an editor restart to take effect.
 	 */
 	UPROPERTY(EditAnywhere, config, Category = "Hotkeys", meta = (EditCondition = "bEnableRestartEditorHotkey", DisplayName = "Restart Editor Hotkey"))
 	FInputChord RestartEditorHotkey;
@@ -98,8 +96,6 @@ public:
 	/**
 	 * Show the Scooter Utils toolbar button in the Level Editor.
 	 * When enabled, a dropdown button will appear in the Play toolbar providing quick access to plugin tools.
-	 *
-	 * NOTE: Changes to this setting require an editor restart to take effect.
 	 */
 	UPROPERTY(EditAnywhere, config, Category = "UI", meta = (DisplayName = "Show Toolbar Button"))
 	bool bShowToolbarButton;
