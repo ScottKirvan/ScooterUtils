@@ -53,6 +53,12 @@ export default defineConfig({
             { text: 'Lorem Ipsum', link: '/guide/cpp/lorem-ipsum' },
             { text: 'JSON', link: '/guide/cpp/json' }
           ]
+        },
+        {
+          text: 'Python',
+          items: [
+            { text: 'Python Scripting', link: '/guide/python' }
+          ]
         }
       ]
     },
