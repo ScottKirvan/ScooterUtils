@@ -1,4 +1,4 @@
-// Copyright (c) 2020-2025 Scott Kirvan. All Rights Reserved.
+// Copyright (c) 2020-2026 Scott Kirvan. All Rights Reserved.
 
 #include "ScooterUtilsMenu.h"
 #include "ScooterUtils.h"
@@ -27,10 +27,10 @@ public:
 	virtual void RegisterCommands() override
 	{
 		// Get the hotkey from settings
-		const UScooterUtilsSettings* Settings = GetDefault<UScooterUtilsSettings>();
-		FInputChord RestartHotkey = Settings && Settings->bEnableRestartEditorHotkey 
-			? Settings->RestartEditorHotkey 
-			: FInputChord();
+		const UScooterUtilsSettings *Settings = GetDefault<UScooterUtilsSettings>();
+		FInputChord RestartHotkey = Settings && Settings->bEnableRestartEditorHotkey
+										? Settings->RestartEditorHotkey
+										: FInputChord();
 
 		UI_COMMAND(MenuRestartEditor, "Restart Editor...", "Restart the editor, re-opening the current project. - ScooterUtils", EUserInterfaceActionType::Button, RestartHotkey);
 		UI_COMMAND(MenuShowExplorer, "Show Project in Explorer", "Find this project on disk. - ScooterUtils", EUserInterfaceActionType::Button, FInputChord());
@@ -56,7 +56,7 @@ void ScooterUtilsMenu::OnStartupModule()
 	MapCommands();
 
 	// Register commands with the global editor command list for hotkey to work globally
-	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+	FLevelEditorModule &LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	LevelEditorModule.GetGlobalLevelEditorActions()->Append(CommandList.ToSharedRef());
 
 	// Add menu extension to File menu
@@ -66,25 +66,24 @@ void ScooterUtilsMenu::OnStartupModule()
 		CommandList);
 
 	// Add toolbar button using the modern ToolMenus system (if enabled in settings)
-	const UScooterUtilsSettings* Settings = GetDefault<UScooterUtilsSettings>();
+	const UScooterUtilsSettings *Settings = GetDefault<UScooterUtilsSettings>();
 	if (Settings && Settings->bShowToolbarButton)
 	{
-		UToolMenus* ToolMenus = UToolMenus::Get();
+		UToolMenus *ToolMenus = UToolMenus::Get();
 		if (ToolMenus)
 		{
-			UToolMenu* ToolbarMenu = ToolMenus->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
+			UToolMenu *ToolbarMenu = ToolMenus->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
 			if (ToolbarMenu)
 			{
-				FToolMenuSection& Section = ToolbarMenu->AddSection("ScooterUtils", FText::FromString("Scooter Utils"));
+				FToolMenuSection &Section = ToolbarMenu->AddSection("ScooterUtils", FText::FromString("Scooter Utils"));
 
-				FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitComboButton(
+				FToolMenuEntry &Entry = Section.AddEntry(FToolMenuEntry::InitComboButton(
 					"ScooterUtilsCombo",
 					FUIAction(),
 					FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
 					LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
 					LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
-					FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")
-				));
+					FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")));
 			}
 		}
 	}
@@ -122,8 +121,7 @@ void ScooterUtilsMenu::MakeToolbarEntry(FToolBarBuilder &toolbarBuilder)
 		FOnGetContent::CreateSP(this, &ScooterUtilsMenu::GenerateToolbarMenu),
 		LOCTEXT("ScooterUtilsToolbarLabel", "Scooter Utils"),
 		LOCTEXT("ScooterUtilsToolbarTooltip", "Scooter Utilities tools and settings"),
-		FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings")
-	);
+		FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings"));
 }
 
 // Generate the dropdown menu content
@@ -146,10 +144,7 @@ TSharedRef<SWidget> ScooterUtilsMenu::GenerateToolbarMenu()
 			LOCTEXT("OpenPluginSettingsTooltip", "Open Scooter Utilities settings in Editor Preferences"),
 			FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings.Small"),
 			FUIAction(FExecuteAction::CreateLambda([]()
-			{
-				FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", FScooterUtilsModule::SettingsSectionName);
-			}))
-		);
+												   { FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", FScooterUtilsModule::SettingsSectionName); })));
 	}
 	MenuBuilder.EndSection();
 

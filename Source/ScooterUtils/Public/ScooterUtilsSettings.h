@@ -1,4 +1,4 @@
-// Copyright (c) 2020-2025 Scott Kirvan. All Rights Reserved.
+// Copyright (c) 2020-2026 Scott Kirvan. All Rights Reserved.
 
 #pragma once
 
@@ -114,10 +114,10 @@ public:
 	UPROPERTY(EditAnywhere, config, Category = "Plugin Settings", meta = (DisplayName = "Enable Plugin By Default For New Projects"))
 	bool bPluginEnabledByDefault;
 
-	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Version"))
+	UPROPERTY(VisibleAnywhere, Category = "About Scooter Utilities", meta = (DisplayName = "Version"))
 	FString ScooterUtilsVersion = "v11.0.0";
-	UPROPERTY(VisibleAnywhere, config, Category = "About Scooter Utilities", meta = (DisplayName = "Copyright"))
-	FString ScooterUtilsCopyright = "Copyright (c) 2020-2025 Scott Kirvan. All Rights Reserved";
+	UPROPERTY(VisibleAnywhere, Category = "About Scooter Utilities", meta = (DisplayName = "Copyright"))
+	FString ScooterUtilsCopyright = "Copyright (c) 2020-2026 Scott Kirvan. All Rights Reserved";
 
 	// UPROPERTY(VisibleAnywhere, config, Category = "About", meta = (DisplayName = "Scooter Utilities Version"))
 	// FString ScooterUtilsVersion = "1.0.0";

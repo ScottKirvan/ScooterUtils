@@ -163,7 +163,7 @@ Contributions / Contact
 
 Credits
 -------
-**[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)** — Copyright (c) 2020-2025 [Scott Kirvan](https://github.com/ScottKirvan). [BSD 3-Clause License](LICENSE.md).
+**[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)** — Copyright (c) 2020-2026 [Scott Kirvan](https://github.com/ScottKirvan). [BSD 3-Clause License](LICENSE.md).
 
 - Thanks to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.
 - [This tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang is a great resource for creating editor (not runtime) tools.
