@@ -25,3 +25,10 @@ const FText Title = FText::FromString(ULoremIpsumGenerator::GenerateWords(3));
 const FText Body = FText::FromString(ULoremIpsumGenerator::GenerateLoremIpsum(2));
 const FString Dialogue = ULoremIpsumGenerator::GenerateSentences(1);
 ```
+
+Example values (the text is random on every call):
+
+```
+Title:    sem ullamco mattis
+Dialogue: Aliquip molestie sit dolor, tempor magna consequat irure viverra.
+```

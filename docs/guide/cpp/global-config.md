@@ -14,10 +14,10 @@ These functions read and write the engine's `Engine` config through `GConfig` an
 | `GetGlobalConfigFileFloat(const FString& Section, const FString& Key)` | `float` | Reads a decimal value. Returns `0.0f` if not found. |
 | `GetGlobalConfigFileInt(const FString& Section, const FString& Key)` | `int32` | Reads a whole number value. Returns `0` if not found. |
 | `GetGlobalConfigFileBool(const FString& Section, const FString& Key)` | `bool` | Reads a true/false value. Returns `false` if not found. |
-| `SetGlobalConfigFileString(const FString& Section, const FString& Key, const FString& Value)` | `void` | Writes a string value, then flushes the config to disk. |
-| `SetGlobalConfigFileFloat(const FString& Section, const FString& Key, float Value)` | `void` | Writes a decimal value, then flushes the config to disk. |
-| `SetGlobalConfigFileInt(const FString& Section, const FString& Key, int32 Value)` | `void` | Writes a whole number value, then flushes the config to disk. |
-| `SetGlobalConfigFileBool(const FString& Section, const FString& Key, bool Value)` | `void` | Writes a true/false value, then flushes the config to disk. |
+| `SetGlobalConfigFileString(const FString& Section, const FString& Key, const FString& Value)` | `void` | Writes a string value, then calls `GConfig->Flush`. See the note below. |
+| `SetGlobalConfigFileFloat(const FString& Section, const FString& Key, float Value)` | `void` | Writes a decimal value, then calls `GConfig->Flush`. See the note below. |
+| `SetGlobalConfigFileInt(const FString& Section, const FString& Key, int32 Value)` | `void` | Writes a whole number value, then calls `GConfig->Flush`. See the note below. |
+| `SetGlobalConfigFileBool(const FString& Section, const FString& Key, bool Value)` | `void` | Writes a true/false value, then calls `GConfig->Flush`. See the note below. |
 
 All of them are `static`. The parameters are the same throughout:
 
@@ -30,6 +30,9 @@ All of them are `static`. The parameters are the same throughout:
 > [!NOTE]
 > A missing key returns the type's default (empty, `0`, or `false`), so you can't tell it apart from a key that's set to that value. Call `GConfig` directly if you need to know whether a key exists.
 
+> [!WARNING]
+> In testing on UE 5.8, values written by the setters weren't saved to any `.ini` file, despite the `Flush` call, so they may not survive a restart.
+
 ## Example
 
 ```cpp
@@ -41,3 +44,5 @@ const FString ViewportClass = UScooterUtilsBPLibrary::GetGlobalConfigFileString(
 UScooterUtilsBPLibrary::SetGlobalConfigFileBool(
     TEXT("/Script/MyGame.MySettings"), TEXT("bShowIntro"), false);
 ```
+
+In a default project, `ViewportClass` is `/Script/Engine.GameViewportClient`.
