@@ -14,17 +14,20 @@ The Global Config nodes read and write values in the engine's config, the same `
 | **Get Global Config File Float** | Section, Key | Float | Reads a decimal value. Returns **0.0** if not found. |
 | **Get Global Config File Int** | Section, Key | Integer | Reads a whole number value. Returns **0** if not found. |
 | **Get Global Config File Bool** | Section, Key | Boolean | Reads a true/false value. Returns **false** if not found. |
-| **Set Global Config File String** | Section, Key, Value | | Writes a string value and saves it to disk. |
-| **Set Global Config File Float** | Section, Key, Value | | Writes a decimal value and saves it to disk. |
-| **Set Global Config File Int** | Section, Key, Value | | Writes a whole number value and saves it to disk. |
-| **Set Global Config File Bool** | Section, Key, Value | | Writes a true/false value and saves it to disk. |
+| **Set Global Config File String** | Section, Key, Value | | Writes a string value. |
+| **Set Global Config File Float** | Section, Key, Value | | Writes a decimal value. |
+| **Set Global Config File Int** | Section, Key, Value | | Writes a whole number value. |
+| **Set Global Config File Bool** | Section, Key, Value | | Writes a true/false value. |
 
-The **Get** nodes are pure nodes (no execution pins). The **Set** nodes write the value immediately, then flush the config to disk.
+The **Get** nodes are pure nodes (no execution pins). The **Set** nodes update the value immediately, and a **Get** with the same section and key returns the new value for the rest of the session.
 
 ## Where Values Are Read and Written
 
 * **Get** nodes read from the engine's merged config, which combines the engine's base settings, your project's `Config/DefaultEngine.ini`, and any saved user overrides.
-* **Set** nodes write to the saved user config (`Saved/Config/<Platform>/Engine.ini`), not to `Config/DefaultEngine.ini`. The new value takes priority over `DefaultEngine.ini` the next time the config loads.
+* **Set** nodes don't modify `Config/DefaultEngine.ini`.
+
+> [!WARNING]
+> In testing on UE 5.8, values written by the **Set** nodes weren't saved to any `.ini` file, so they may not survive an editor restart.
 
 > [!NOTE]
 > Because a "not found" key returns a default (empty, 0, or false), you can't tell a missing key from one set to that default value.

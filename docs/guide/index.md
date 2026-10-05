@@ -66,6 +66,6 @@ To show your support, rate and review the plugin on [Fab](https://www.fab.com/),
 
 ## Credits
 
-**Copyright © 2020-2025** [Scott Kirvan](https://github.com/ScottKirvan). Scooter Utilities is licensed under the [BSD 3-Clause License](https://github.com/ScottKirvan/ScooterUtils/blob/main/LICENSE.md).
+**Copyright © 2020-2026** [Scott Kirvan](https://github.com/ScottKirvan). Scooter Utilities is licensed under the [BSD 3-Clause License](https://github.com/ScottKirvan/ScooterUtils/blob/main/LICENSE.md).
 
 See the [CHANGELOG](https://github.com/ScottKirvan/ScooterUtils/blob/main/notes/CHANGELOG.md) for release history.

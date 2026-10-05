@@ -20,6 +20,25 @@ Global Config, Debug Print, Blueprint Reflection, Lorem Ipsum).
 - Document behavior from the source, not from header comments — several comments are stale.
 - Design specs for larger changes live in `notes/dev/specs/` (e.g. `json-node-redesign.md`).
 
+## Building and Testing Locally
+
+There's no automated test harness or PR build yet. Bug fixes are verified red/green by hand
+on the maintainer's Windows workstation, and PRs carry manual test steps. Commands are in
+`CONTRIBUTING.md` under "Building from the command line". Things learned the hard way:
+
+- Engines on the workstation: UE 5.4–5.6 and 5.8 under `C:\bin\Epic Games\UE_5.x`; 5.7 under
+  `C:\Program Files\Epic Games\UE_5.7` (no source headers). The host project is
+  `ScooterUtils_base`, with this repo checked out at `Plugins/ScooterUtils`.
+- `RunUAT BuildPlugin` needs a short `-Package` path (e.g. `D:\sub\<name>`); deep paths exceed
+  Windows' 260-character limit and fail with `OtherCompilationError`.
+- Headless editor runs (`UnrealEditor-Cmd -ExecCmds=...`) must end with `QUIT_EDITOR`;
+  plain `quit` leaves the editor running. Run builds and headless runs in the background, and
+  tell the maintainer the expected duration first (build ~2 min, headless run ~2–3 min).
+- An engine-level copy of ScooterUtils is installed in UE 5.8; the project copy takes priority,
+  so tests in `ScooterUtils_base` exercise the repo's code.
+- Building the host editor target compiles the plugin in place into `Plugins/ScooterUtils/Binaries`
+  (git-ignored). Close the editor first, because Windows locks the DLLs.
+
 ## Keeping This File Current
 
 This file is the primary context for any agent working in this repo — keep it accurate

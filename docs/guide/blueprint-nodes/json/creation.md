@@ -189,9 +189,9 @@ Before: {"name":"Bob","health":100,"alive":true}
 
 After:
 {
-    "name": "Bob",
-    "health": 100,
-    "alive": true
+	"name": "Bob",
+	"health": 100,
+	"alive": true
 }
 ```
 
@@ -212,9 +212,9 @@ Strips all the whitespace. Removes formatting, indentation, and line breaks to m
 ```
 Before:
 {
-    "name": "Bob",
-    "health": 100,
-    "alive": true
+	"name": "Bob",
+	"health": 100,
+	"alive": true
 }
 
 After: {"name":"Bob","health":100,"alive":true}

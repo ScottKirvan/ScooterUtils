@@ -35,7 +35,7 @@
 <h4>
     <a href="https://tinyurl.com/3vf7whyd">View Demo</a>
   <span> · </span>
-    <a href="https://www.scottkirvan.com/ScooterUtils/guide/">Documentation</a>
+    <a href="https://www.scottkirvan.com/ScooterUtils/">Documentation</a>
   <span> · </span>
     <a href="https://github.com/ScottKirvan/ScooterUtils/issues/new?template=bug_report.md">Report Bug</a>
   <span> · </span>
@@ -47,7 +47,7 @@
 
 Think of **ScooterUtils** as a Swiss Army Knife of tools that make Unreal Engine a bit quicker to use, especially if you're creating and maintaining several projects. If you've got something you're repeatedly turning on or resetting every time you open your projects, that might be a good candidate for an addition to **Scooter Utilities**, so feel free to [make a suggestion](https://github.com/ScottKirvan/ScooterUtils/issues/new?template=feature_request.md).
 
-If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/). This document is for people working with the source code in this repository.
+If you're looking for information on how to *use* the plugin inside Unreal, please check out the [User Guide](https://www.scottkirvan.com/ScooterUtils/). This document is for people working with the source code in this repository.
 
 ## Key Features
 
@@ -76,7 +76,7 @@ ScooterUtils/
 │   ├── css/                    # Legacy Jekyll styles
 │   └── media/                  # Images and logos
 ├── docs/                       # VitePress documentation site
-├── notes/                      # CHANGELOG, VERSION, TODO
+├── notes/                      # CHANGELOG, VERSION, TODO, WHITEBOARD; dev/specs/ for design specs
 ├── tools/                      # Packaging scripts
 ├── CLAUDE.md                   # AI agent context (optional)
 ├── CONTRIBUTING.md
@@ -97,7 +97,7 @@ Features
 - **Persistent Editor Preferences**: application scale, max FPS, and viewport FPS display that survive restarts and apply across projects
 - **Blueprint nodes** for JSON, file IO, global config, debug logging, Blueprint reflection, and Lorem Ipsum placeholder text
 
-See the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/) for the full feature documentation.
+See the [User Guide](https://www.scottkirvan.com/ScooterUtils/) for the full feature documentation.
 
 Installation
 ------------
@@ -151,7 +151,7 @@ MaxFPS=200
 ShowViewportFPS=False
 ```
 
-See the [User Guide](https://www.scottkirvan.com/ScooterUtils/guide/) for details on every menu, setting, and Blueprint node.
+See the [User Guide](https://www.scottkirvan.com/ScooterUtils/) for details on every menu, setting, and Blueprint node.
 
 Contributions / Contact
 -----------------------
@@ -163,7 +163,7 @@ Contributions / Contact
 
 Credits
 -------
-**[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)** — Copyright (c) 2020-2025 [Scott Kirvan](https://github.com/ScottKirvan). [BSD 3-Clause License](LICENSE.md).
+**[ScooterUtils](https://github.com/ScottKirvan/ScooterUtils)** — Copyright (c) 2020-2026 [Scott Kirvan](https://github.com/ScottKirvan). [BSD 3-Clause License](LICENSE.md).
 
 - Thanks to [Caio Liberali](https://github.com/caioliberali) for the original Unreal Engine [Pull Request](https://github.com/EpicGames/UnrealEngine/pull/7436) that inspired this project.
 - [This tutorial](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html) by Xun (Eric) Zhang is a great resource for creating editor (not runtime) tools.

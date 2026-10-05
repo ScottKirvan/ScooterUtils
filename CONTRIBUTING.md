@@ -74,6 +74,31 @@ feat!: rename Blueprint node categories
 4. Test your changes in the editor, and in a packaged build for changes to the runtime Blueprint library
 5. Submit a pull request
 
+### Building from the command line
+
+You can build and package the plugin without opening the editor, using the engine's `RunUAT` (Windows paths shown):
+
+```
+"<UE_PATH>\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="<path>\ScooterUtils.uplugin" -Package="D:\sub\out" -TargetPlatforms=Win64 -Rocket
+```
+
+- Keep the `-Package` path short. Intermediate file paths are deep, and a long output folder pushes them past Windows' 260-character limit, so the build fails with `OtherCompilationError`.
+- `BuildPlugin` rewrites the packaged `.uplugin`: it adds `EngineVersion`, converts legacy keys, and removes `EnabledByDefault`. That's expected for Fab packages.
+
+To build the host project's editor target, which also compiles the plugin in place:
+
+```
+"<UE_PATH>\Engine\Build\BatchFiles\Build.bat" <Project>Editor Win64 Development -Project="<path>\<Project>.uproject" -WaitMutex
+```
+
+To run console commands in a headless editor, for example to exercise test code:
+
+```
+"<UE_PATH>\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" "<path>\<Project>.uproject" -ExecCmds="<YourCommand>, QUIT_EDITOR" -unattended -nullrhi -nosplash -nosound -NoLiveCoding -abslog="<path>\run.log"
+```
+
+End `-ExecCmds` with `QUIT_EDITOR`. Plain `quit` doesn't close the full editor, so the process keeps running.
+
 To work on the documentation site:
 
 ```
@@ -100,7 +125,7 @@ ScooterUtils/
 ├── docs/                       # VitePress documentation site
 │   ├── .vitepress/             # VitePress config and theme
 │   └── index.md                # Docs home page
-├── notes/                      # CHANGELOG, VERSION, TODO
+├── notes/                      # CHANGELOG, VERSION, TODO, WHITEBOARD; dev/specs/ for design specs
 ├── tools/                      # Packaging scripts
 ├── CLAUDE.md                   # AI agent context (optional)
 ├── CONTRIBUTING.md             # This file
