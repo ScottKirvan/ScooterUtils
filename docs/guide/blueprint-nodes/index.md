@@ -12,7 +12,7 @@ All nodes live under the **Scooter Utilities** category in the Blueprint node br
 | -------- | ----------- |
 | [JSON](./json/) | Build, parse, and modify JSON strings. |
 | [File IO](./file-io) | Load, save, and append text files in the project's `Saved` or `Content` folders, or the user's Documents folder. |
-| [Global Config](./global-config) | Read and write values in the engine's config (`Engine.ini`). |
+| [Global Config](./global-config) | Read and write values in project config or the current user's editor settings. |
 | [Debug Print](./debug-print) | Write timestamped messages to the **Output Log** and, optionally, a log file. |
 | [Blueprint Reflection](./blueprint-reflection) | Find out which Blueprint a call came from, along with its content paths. |
 | [Lorem Ipsum](./lorem-ipsum) | Generate placeholder text for UI mockups and layout testing. |

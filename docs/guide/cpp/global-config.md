@@ -1,48 +1,61 @@
 # Global Config C++ Reference
 
-Read and write values in the engine's global configuration from C++ with `UScooterUtilsBPLibrary`.
+Read and write values in project config or the current user's Unreal Editor settings with `UScooterUtilsBPLibrary`.
 
-**Header:** `ScooterUtilsBPLibrary.h` · **Class:** `UScooterUtilsBPLibrary`
+**Header:** `ScooterUtilsBPLibrary.h` · **Class:** `UScooterUtilsBPLibrary` · **Module:** `ScooterUtilsBPLibraryModule`
 
-These functions read and write the engine's `Engine` config through `GConfig` and `GEngineIni`. For where values are read from and written to, see the [Global Config nodes](../blueprint-nodes/global-config#where-values-are-read-and-written).
+For Blueprint-node behavior and scope details, see the [Global Config nodes](../blueprint-nodes/global-config.md).
 
-## Function Reference
+## Scope
 
-| Name | Returns | Description |
-| ---- | ------- | ----------- |
-| `GetGlobalConfigFileString(const FString& Section, const FString& Key)` | `FString` | Reads a string value. Returns an empty string if not found. |
-| `GetGlobalConfigFileFloat(const FString& Section, const FString& Key)` | `float` | Reads a decimal value. Returns `0.0f` if not found. |
-| `GetGlobalConfigFileInt(const FString& Section, const FString& Key)` | `int32` | Reads a whole number value. Returns `0` if not found. |
-| `GetGlobalConfigFileBool(const FString& Section, const FString& Key)` | `bool` | Reads a true/false value. Returns `false` if not found. |
-| `SetGlobalConfigFileString(const FString& Section, const FString& Key, const FString& Value)` | `void` | Writes a string value, then calls `GConfig->Flush`. See the note below. |
-| `SetGlobalConfigFileFloat(const FString& Section, const FString& Key, float Value)` | `void` | Writes a decimal value, then calls `GConfig->Flush`. See the note below. |
-| `SetGlobalConfigFileInt(const FString& Section, const FString& Key, int32 Value)` | `void` | Writes a whole number value, then calls `GConfig->Flush`. See the note below. |
-| `SetGlobalConfigFileBool(const FString& Section, const FString& Key, bool Value)` | `void` | Writes a true/false value, then calls `GConfig->Flush`. See the note below. |
+All functions take an `EGlobalConfigScope`:
 
-All of them are `static`. The parameters are the same throughout:
+| Scope | Read source | Write destination |
+| ----- | ----------- | ----------------- |
+| `EGlobalConfigScope::Project` | The current project's merged Editor config | The current project's `Config/DefaultEditor.ini` (must be writable) |
+| `EGlobalConfigScope::UserGlobal` | The current user's `EditorSettings.ini` | The current user's `EditorSettings.ini` |
 
-| Name | Description |
-| ---- | ----------- |
-| `Section` | The INI section, exactly as it appears in the file, like `/Script/Engine.Engine`. |
-| `Key` | The key name within the section. |
-| `Value` | The value to write (setters only). |
+`UserGlobal` is the default on Blueprint nodes. C++ calls must pass the scope explicitly. User-global config is available when the editor settings file is initialized; Project and user-global config are intended for editor use; packaged builds do not provide a writable `DefaultEditor.ini` or an editor settings file.
 
-> [!NOTE]
-> A missing key returns the type's default (empty, `0`, or `false`), so you can't tell it apart from a key that's set to that value. Call `GConfig` directly if you need to know whether a key exists.
+## Functions
 
-> [!WARNING]
-> In testing on UE 5.8, values written by the setters weren't saved to any `.ini` file, despite the `Flush` call, so they may not survive a restart.
+The class provides `GetGlobalConfigFileString`, `GetGlobalConfigFileFloat`, `GetGlobalConfigFileInt`, and `GetGlobalConfigFileBool`. Each takes the same arguments and returns the requested typed value:
+
+```cpp
+static FString GetGlobalConfigFileString(
+    const FString& Section,
+    const FString& Key,
+    EGlobalConfigScope Scope,
+    FString& OutSection,
+    FString& OutKey,
+    EGlobalConfigScope& OutScope,
+    EGlobalConfigResult& OutResult,
+    FString& OutReason);
+```
+
+The `Out...` arguments echo the inputs to support chaining. `OutResult` reports `Success`, `KeyNotFound`, `InvalidInput`, or `ConfigUnavailable`; `OutReason` is empty on success and explains non-success results. Missing keys return the type's default (empty string, `0`, or `false`), so check `OutResult` to distinguish a missing value from one explicitly set to its default.
+
+The class also provides `SetGlobalConfigFileString`, `SetGlobalConfigFileFloat`, `SetGlobalConfigFileInt`, and `SetGlobalConfigFileBool`. Each takes `Section`, `Key`, a typed `Value`, `Scope`, and output references for `OutSection`, `OutKey`, `OutValue`, `OutScope`, and `OutReason`. Setters return an `EGlobalConfigResult`. `Success` means Unreal flushed the config and the value was found again in the saved file. A setter can also return `InvalidInput`, `ConfigUnavailable`, or `SaveFailed`; inspect `OutReason` for details.
 
 ## Example
 
 ```cpp
 #include "ScooterUtilsBPLibrary.h"
 
-const FString ViewportClass = UScooterUtilsBPLibrary::GetGlobalConfigFileString(
-    TEXT("/Script/Engine.Engine"), TEXT("GameViewportClientClassName"));
+FString Section = TEXT("/Script/MyGame.MySettings");
+FString Key = TEXT("bShowIntro");
+bool Value = false;
+EGlobalConfigScope Scope = EGlobalConfigScope::UserGlobal;
+FString OutSection;
+FString OutKey;
+bool OutValue;
+EGlobalConfigScope OutScope;
+FString Reason;
 
-UScooterUtilsBPLibrary::SetGlobalConfigFileBool(
-    TEXT("/Script/MyGame.MySettings"), TEXT("bShowIntro"), false);
+const EGlobalConfigResult Result = UScooterUtilsBPLibrary::SetGlobalConfigFileBool(
+    Section, Key, Value, Scope, OutSection, OutKey, OutValue, OutScope, Reason);
+if (Result != EGlobalConfigResult::Success)
+{
+    UE_LOG(LogTemp, Error, TEXT("Could not save config value: %s"), *Reason);
+}
 ```
-
-In a default project, `ViewportClass` is `/Script/Engine.GameViewportClient`.

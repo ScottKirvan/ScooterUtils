@@ -35,7 +35,7 @@ Every Scooter Utilities Blueprint node is a static function on a Blueprint funct
 | ------ | ----- | ----------- |
 | `DebugPrint.h` | `USUDebugPrint` | Timestamped logging to the **Output Log** and log files, plus the `SCOOTER_DEBUG_PRINT` macro. See [Debug Print](./debug-print). |
 | `FileIO.h` | `UFileIO` | Load, save, and append text files. See [File IO](./file-io). |
-| `ScooterUtilsBPLibrary.h` | `UScooterUtilsBPLibrary` | Read and write engine config values. See [Global Config](./global-config). |
+| `ScooterUtilsBPLibrary.h` | `UScooterUtilsBPLibrary` | Read and write config values. See [Global Config](./global-config). |
 | `BPReflection.h` | `UBPReflection` | Name and path information for an object's Blueprint. See [Blueprint Reflection](./blueprint-reflection). |
 | `LoremIpsumGenerator.h` | `ULoremIpsumGenerator` | Placeholder text. See [Lorem Ipsum](./lorem-ipsum). |
 | `JSONBlueprintLibrary.h` | `UJSONBlueprintLibrary` | String-based JSON creation and parsing. See [JSON](./json). |
@@ -81,7 +81,7 @@ void AMyActor::BeginPlay()
   </a>
   <a class="card" href="./global-config.html">
     <strong>Global Config</strong>
-    <span>Engine config getters and setters.</span>
+    <span>Config getters and setters.</span>
   </a>
   <a class="card" href="./blueprint-reflection.html">
     <strong>Blueprint Reflection</strong>
