@@ -48,6 +48,7 @@ To open these settings, go to **Edit** > **Editor Preferences**, then select **S
 | ------------- | ---------------------------------------------------- |
 | **Version**   | The installed Scooter Utilities version (read-only). |
 | **Copyright** | Copyright information (read-only).                   |
+| **About ScooterUtils...** | A button that opens the [About dialog](./editor-menus#about-scooterutils). |
 
 ## Application Scale
 

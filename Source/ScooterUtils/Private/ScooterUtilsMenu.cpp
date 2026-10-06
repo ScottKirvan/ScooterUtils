@@ -3,6 +3,7 @@
 #include "ScooterUtilsMenu.h"
 #include "ScooterUtils.h"
 #include "ScooterUtilsSettings.h"
+#include "ScooterUtilsAboutDialog.h"
 #include "EditorStyleSet.h"
 #include "LevelEditor.h"
 #include "ToolMenus.h"
@@ -179,6 +180,11 @@ TSharedRef<SWidget> ScooterUtilsMenu::GenerateToolbarMenu()
 			FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings.Small"),
 			FUIAction(FExecuteAction::CreateLambda([]()
 												   { FModuleManager::LoadModuleChecked<ISettingsModule>("Settings").ShowViewer("Editor", "Plugins", FScooterUtilsModule::SettingsSectionName); })));
+		MenuBuilder.AddMenuEntry(
+			LOCTEXT("AboutScooterUtils", "About ScooterUtils..."),
+			LOCTEXT("AboutScooterUtilsTooltip", "Show version, build information, and links for Scooter Utilities"),
+			FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Help"),
+			FUIAction(FExecuteAction::CreateStatic(&ScooterUtilsAbout::Show)));
 	}
 	MenuBuilder.EndSection();
 

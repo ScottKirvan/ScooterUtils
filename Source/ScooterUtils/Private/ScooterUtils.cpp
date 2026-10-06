@@ -5,6 +5,10 @@
 #include "ScooterUtilsSettings.h"
 #include "ISettingsSection.h"
 #include "ScooterUtilsMenu.h"
+#include "ScooterUtilsStyle.h"
+#include "ScooterUtilsSettingsCustomization.h"
+#include "PropertyEditorModule.h"
+#include "Framework/Application/SlateApplication.h"
 #include "LevelEditor.h"
 #include "Editor/UnrealEdEngine.h"
 #include "UnrealEdGlobals.h"
@@ -20,6 +24,16 @@ void FScooterUtilsModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	MyHandle = FCoreDelegates::OnEndFrame.AddRaw(this, &FScooterUtilsModule::EditorIsFullyLoaded);
+
+	if (FSlateApplication::IsInitialized())
+	{
+		FScooterUtilsStyle::Initialize();
+
+		FPropertyEditorModule &PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
+		PropertyModule.RegisterCustomClassLayout(
+			UScooterUtilsSettings::StaticClass()->GetFName(),
+			FOnGetDetailCustomizationInstance::CreateStatic(&FScooterUtilsSettingsCustomization::MakeInstance));
+	}
 
 	ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
@@ -82,6 +96,13 @@ void FScooterUtilsModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
+
+	FScooterUtilsStyle::Shutdown();
+
+	if (FPropertyEditorModule *PropertyModule = FModuleManager::GetModulePtr<FPropertyEditorModule>("PropertyEditor"))
+	{
+		PropertyModule->UnregisterCustomClassLayout(UScooterUtilsSettings::StaticClass()->GetFName());
+	}
 
 	ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
