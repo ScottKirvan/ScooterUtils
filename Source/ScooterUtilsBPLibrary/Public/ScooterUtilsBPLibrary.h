@@ -6,23 +6,22 @@
 #include "Misc/ConfigCacheIni.h"
 #include "ScooterUtilsBPLibrary.generated.h"
 
-/*
- *	Function library class.
- *	Each function in it is expected to be static and represents blueprint node that can be called in any blueprint.
- *
- *	When declaring function you can define metadata for the node. Key function specifiers will be BlueprintPure and BlueprintCallable.
- *	BlueprintPure - means the function does not affect the owning object in any way and thus creates a node without Exec pins.
- *	BlueprintCallable - makes a function which can be executed in Blueprints - Thus it has Exec pins.
- *	DisplayName - full name of the node, shown when you mouse over the node and in the blueprint drop down menu.
- *				Its lets you name the node using characters not allowed in C++ function names.
- *	CompactNodeTitle - the word(s) that appear on the node.
- *	Keywords -	the list of keywords that helps you to find node when you search for it using Blueprint drop-down menu.
- *				Good example is "Print String" node which you can find also by using keyword "log".
- *	Category -	the category your node will be under in the Blueprint drop-down menu.
- *
- *	For more info on custom blueprint nodes visit documentation:
- *	https://wiki.unrealengine.com/Custom_Blueprint_Node_Creation
- */
+UENUM(BlueprintType)
+enum class EGlobalConfigScope : uint8
+{
+	Project UMETA(DisplayName = "Project"),
+	UserGlobal UMETA(DisplayName = "User Global")
+};
+
+UENUM(BlueprintType)
+enum class EGlobalConfigResult : uint8
+{
+	Success UMETA(DisplayName = "Success"),
+	KeyNotFound UMETA(DisplayName = "Key Not Found"),
+	InvalidInput UMETA(DisplayName = "Invalid Input"),
+	ConfigUnavailable UMETA(DisplayName = "Config Unavailable"),
+	SaveFailed UMETA(DisplayName = "Save Failed")
+};
 
 UCLASS()
 class SCOOTERUTILSBPLIBRARYMODULE_API UScooterUtilsBPLibrary : public UBlueprintFunctionLibrary
@@ -30,147 +29,223 @@ class SCOOTERUTILSBPLIBRARYMODULE_API UScooterUtilsBPLibrary : public UBlueprint
 	GENERATED_UCLASS_BODY()
 
 	/**
-     * Reads a string value from the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to read (e.g., "GameViewportClientClassName")
-     * @return          The string value from the config file, or empty string if not found
-     * 
-     * Example Usage:
-     * - Section: "/Script/Engine.GameEngine"
-     * - Key: "NetDriverDefinitions"
-     * Returns the configuration value as a string
-     */
+	 * Reads a string value from the selected config scope.
+	 *
+	 * @param Section The INI section containing the value.
+	 * @param Key The key to read.
+	 * @param Scope The project or current-user editor settings config to read.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutResult Success when found; otherwise the failure category.
+	 * @param OutReason Empty on success; otherwise explains why the read failed.
+	 * @return The string value, or an empty string if the key was not found.
+	 */
 	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Reads a string value from DefaultEngine.ini config file",
-                     Keywords = "config,ini,engine,settings,read,string"))
-	static FString GetGlobalConfigFileString(const FString &Section, const FString &Key)
-	{
-		FString Value;
-		GConfig->GetString(*Section, *Key, Value, GEngineIni);
-		return Value;
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ToolTip = "Reads a string value from the selected config scope",
+			Keywords = "config,ini,project,user,editor,settings,read,string"))
+	static FString GetGlobalConfigFileString(
+		const FString &Section,
+		const FString &Key,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		EGlobalConfigScope &OutScope,
+		EGlobalConfigResult &OutResult,
+		FString &OutReason);
 
 	/**
-     * Reads a float value from the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to read (e.g., "MaximumLoopIterationCount")
-     * @return          The float value from the config, or 0.0 if not found
-     * 
-     * Example: Use this to read numeric settings like timers, speeds, or distances
-     */
+	 * Reads a float value from the selected config scope.
+	 *
+	 * @param Section The INI section containing the value.
+	 * @param Key The key to read.
+	 * @param Scope The project or current-user editor settings config to read.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutResult Success when found; otherwise the failure category.
+	 * @param OutReason Empty on success; otherwise explains why the read failed.
+	 * @return The float value, or 0.0 if the key was not found.
+	 */
 	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Reads a float (decimal) value from DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,read,float,number,decimal"))
-	static float GetGlobalConfigFileFloat(const FString &Section, const FString &Key)
-	{
-		float Value = 0.0f;
-		GConfig->GetFloat(*Section, *Key, Value, GEngineIni);
-		return Value;
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ToolTip = "Reads a float value from the selected config scope",
+			Keywords = "config,ini,project,user,editor,settings,read,float,number,decimal"))
+	static float GetGlobalConfigFileFloat(
+		const FString &Section,
+		const FString &Key,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		EGlobalConfigScope &OutScope,
+		EGlobalConfigResult &OutResult,
+		FString &OutReason);
 
 	/**
-     * Reads a boolean value from the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to read (e.g., "bUseFixedFrameRate")
-     * @return          The boolean value from the config, or false if not found
-     * 
-     * Example: Use this to read true/false settings like feature flags or toggles
-     */
+	 * Reads a boolean value from the selected config scope.
+	 *
+	 * @param Section The INI section containing the value.
+	 * @param Key The key to read.
+	 * @param Scope The project or current-user editor settings config to read.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutResult Success when found; otherwise the failure category.
+	 * @param OutReason Empty on success; otherwise explains why the read failed.
+	 * @return The boolean value, or false if the key was not found.
+	 */
 	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Reads a boolean (true/false) value from DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,read,bool,boolean,true,false"))
-	static bool GetGlobalConfigFileBool(const FString &Section, const FString &Key)
-	{
-		bool Value = false;
-		GConfig->GetBool(*Section, *Key, Value, GEngineIni);
-		return Value;
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ToolTip = "Reads a boolean value from the selected config scope",
+			Keywords = "config,ini,project,user,editor,settings,read,bool,boolean,true,false"))
+	static bool GetGlobalConfigFileBool(
+		const FString &Section,
+		const FString &Key,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		EGlobalConfigScope &OutScope,
+		EGlobalConfigResult &OutResult,
+		FString &OutReason);
 
 	/**
-     * Reads an integer value from the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to read (e.g., "MaximumLoopIterationCount")
-     * @return          The integer value from the config, or 0 if not found
-     * 
-     * Example: Use this to read whole number settings like counts, levels, or indices
-     */
+	 * Reads an integer value from the selected config scope.
+	 *
+	 * @param Section The INI section containing the value.
+	 * @param Key The key to read.
+	 * @param Scope The project or current-user editor settings config to read.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutResult Success when found; otherwise the failure category.
+	 * @param OutReason Empty on success; otherwise explains why the read failed.
+	 * @return The integer value, or 0 if the key was not found.
+	 */
 	UFUNCTION(BlueprintPure, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Reads an integer (whole number) value from DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,read,int,integer,number"))
-	static int32 GetGlobalConfigFileInt(const FString &Section, const FString &Key)
-	{
-		int32 Value = 0;
-		GConfig->GetInt(*Section, *Key, Value, GEngineIni);
-		return Value;
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ToolTip = "Reads an integer value from the selected config scope",
+			Keywords = "config,ini,project,user,editor,settings,read,int,integer,number"))
+	static int32 GetGlobalConfigFileInt(
+		const FString &Section,
+		const FString &Key,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		EGlobalConfigScope &OutScope,
+		EGlobalConfigResult &OutResult,
+		FString &OutReason);
 
 	/**
-     * Writes a string value to the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to write to (e.g., "GameViewportClientClassName")
-     * @param Value      The string value to save
-     * 
-     * Example: Use this to save text settings like class names, paths, or text preferences
-     * Note: Changes are saved immediately to the config file
-     */
+	 * Writes a string value to the selected config scope and verifies it was saved.
+	 *
+	 * @param Section The INI section to write.
+	 * @param Key The key to write.
+	 * @param Value The string value to save.
+	 * @param Scope The project or current-user editor settings config to write.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutValue Pass-through copy of Value.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutReason Empty on success; otherwise explains why the save failed.
+	 * @return Success only if the value can be read back from the saved file.
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Writes a string value to DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,write,save,string,text"))
-	static void SetGlobalConfigFileString(const FString &Section, const FString &Key, const FString &Value)
-	{
-		GConfig->SetString(*Section, *Key, *Value, GEngineIni);
-		GConfig->Flush(false, GEngineIni);
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ReturnDisplayName = "Result",
+			ToolTip = "Writes a string value to the selected config scope and verifies it was saved",
+			Keywords = "config,ini,project,user,editor,settings,write,save,string,text"))
+	static EGlobalConfigResult SetGlobalConfigFileString(
+		const FString &Section,
+		const FString &Key,
+		const FString &Value,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		FString &OutValue,
+		EGlobalConfigScope &OutScope,
+		FString &OutReason);
 
 	/**
-     * Writes a float value to the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to write to (e.g., "DefaultTimeDilation")
-     * @param Value      The float value to save
-     * 
-     * Example: Use this to save decimal numbers like speeds, timers, or distances
-     * Note: Changes are saved immediately to the config file
-     */
+	 * Writes a float value to the selected config scope and verifies it was saved.
+	 *
+	 * @param Section The INI section to write.
+	 * @param Key The key to write.
+	 * @param Value The float value to save.
+	 * @param Scope The project or current-user editor settings config to write.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutValue Pass-through copy of Value.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutReason Empty on success; otherwise explains why the save failed.
+	 * @return Success only if the value can be read back from the saved file.
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Writes a float (decimal) value to DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,write,save,float,decimal,number"))
-	static void SetGlobalConfigFileFloat(const FString &Section, const FString &Key, float Value)
-	{
-		GConfig->SetFloat(*Section, *Key, Value, GEngineIni);
-		GConfig->Flush(false, GEngineIni);
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ReturnDisplayName = "Result",
+			ToolTip = "Writes a float value to the selected config scope and verifies it was saved",
+			Keywords = "config,ini,project,user,editor,settings,write,save,float,decimal,number"))
+	static EGlobalConfigResult SetGlobalConfigFileFloat(
+		const FString &Section,
+		const FString &Key,
+		float Value,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		float &OutValue,
+		EGlobalConfigScope &OutScope,
+		FString &OutReason);
 
 	/**
-     * Writes a boolean value to the engine's global config file (DefaultEngine.ini)
-     * 
-     * @param Section    The section in the INI file (e.g., "/Script/Engine.Engine")
-     * @param Key        The key name to write to (e.g., "bUseFixedFrameRate")
-     * @param Value      The boolean value to save
-     * 
-     * Example: Use this to save true/false settings like feature toggles or debug flags
-     * Note: Changes are saved immediately to the config file
-     */
+	 * Writes a boolean value to the selected config scope and verifies it was saved.
+	 *
+	 * @param Section The INI section to write.
+	 * @param Key The key to write.
+	 * @param Value The boolean value to save.
+	 * @param Scope The project or current-user editor settings config to write.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutValue Pass-through copy of Value.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutReason Empty on success; otherwise explains why the save failed.
+	 * @return Success only if the value can be read back from the saved file.
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config",
-              meta = (ToolTip = "Writes a boolean (true/false) value to DefaultEngine.ini",
-                     Keywords = "config,ini,engine,settings,write,save,bool,boolean,true,false"))
-	static void SetGlobalConfigFileBool(const FString &Section, const FString &Key, bool Value)
-	{
-		GConfig->SetBool(*Section, *Key, Value, GEngineIni);
-		GConfig->Flush(false, GEngineIni);
-	}
+		meta = (CPP_Default_Scope = "UserGlobal", ReturnDisplayName = "Result",
+			ToolTip = "Writes a boolean value to the selected config scope and verifies it was saved",
+			Keywords = "config,ini,project,user,editor,settings,write,save,bool,boolean,true,false"))
+	static EGlobalConfigResult SetGlobalConfigFileBool(
+		const FString &Section,
+		const FString &Key,
+		bool Value,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		bool &OutValue,
+		EGlobalConfigScope &OutScope,
+		FString &OutReason);
 
-	// Set a value in the global config file (e.g. DefaultEngine.ini).
-	// Int version
-	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config")
-	static void SetGlobalConfigFileInt(const FString &Section, const FString &Key, int32 Value)
-	{
-		GConfig->SetInt(*Section, *Key, Value, GEngineIni);
-		GConfig->Flush(false, GEngineIni);
-	}
+	/**
+	 * Writes an integer value to the selected config scope and verifies it was saved.
+	 *
+	 * @param Section The INI section to write.
+	 * @param Key The key to write.
+	 * @param Value The integer value to save.
+	 * @param Scope The project or current-user editor settings config to write.
+	 * @param OutSection Pass-through copy of Section.
+	 * @param OutKey Pass-through copy of Key.
+	 * @param OutValue Pass-through copy of Value.
+	 * @param OutScope Pass-through copy of Scope.
+	 * @param OutReason Empty on success; otherwise explains why the save failed.
+	 * @return Success only if the value can be read back from the saved file.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Scooter Utilities|Global Config",
+		meta = (CPP_Default_Scope = "UserGlobal", ReturnDisplayName = "Result",
+			ToolTip = "Writes an integer value to the selected config scope and verifies it was saved",
+			Keywords = "config,ini,project,user,editor,settings,write,save,int,integer,number"))
+	static EGlobalConfigResult SetGlobalConfigFileInt(
+		const FString &Section,
+		const FString &Key,
+		int32 Value,
+		EGlobalConfigScope Scope,
+		FString &OutSection,
+		FString &OutKey,
+		int32 &OutValue,
+		EGlobalConfigScope &OutScope,
+		FString &OutReason);
+
 };

@@ -1,44 +1,57 @@
 # Global Config Nodes
 
-Read and write values in the engine's global configuration from Blueprints.
+Read and write values in project config or the current user's Unreal Editor settings.
 
 **Category:** **Scooter Utilities** > **Global Config**
 
-The Global Config nodes read and write values in the engine's config, the same `Engine` configuration that `DefaultEngine.ini` feeds into. Pass the INI section (for example, `/Script/Engine.GameEngine`) and the key name to read or write.
+Choose a scope on each node. **User Global** is the default and shares values across projects for the current Unreal Engine installation and user. **Project** stores values with the current project. These nodes are intended for editor use; packaged builds do not provide a writable `DefaultEditor.ini` or an editor settings file.
 
 ## Node Reference
 
-| Node | Inputs | Output | Description |
-| ---- | ------ | ------ | ----------- |
-| **Get Global Config File String** | Section, Key | String | Reads a string value. Returns an empty string if not found. |
-| **Get Global Config File Float** | Section, Key | Float | Reads a decimal value. Returns **0.0** if not found. |
-| **Get Global Config File Int** | Section, Key | Integer | Reads a whole number value. Returns **0** if not found. |
-| **Get Global Config File Bool** | Section, Key | Boolean | Reads a true/false value. Returns **false** if not found. |
-| **Set Global Config File String** | Section, Key, Value | | Writes a string value. |
-| **Set Global Config File Float** | Section, Key, Value | | Writes a decimal value. |
-| **Set Global Config File Int** | Section, Key, Value | | Writes a whole number value. |
-| **Set Global Config File Bool** | Section, Key, Value | | Writes a true/false value. |
+| Node | Inputs | Outputs | Description |
+| ---- | ------ | ------- | ----------- |
+| **Get Global Config File String** | Section, Key, Scope | Value, Section, Key, Scope, Result, Reason | Reads a string value. |
+| **Get Global Config File Float** | Section, Key, Scope | Value, Section, Key, Scope, Result, Reason | Reads a decimal value. |
+| **Get Global Config File Int** | Section, Key, Scope | Value, Section, Key, Scope, Result, Reason | Reads a whole number. |
+| **Get Global Config File Bool** | Section, Key, Scope | Value, Section, Key, Scope, Result, Reason | Reads a true/false value. |
+| **Set Global Config File String** | Section, Key, Value, Scope | Result, Section, Key, Value, Scope, Reason | Writes and verifies a string value. |
+| **Set Global Config File Float** | Section, Key, Value, Scope | Result, Section, Key, Value, Scope, Reason | Writes and verifies a decimal value. |
+| **Set Global Config File Int** | Section, Key, Value, Scope | Result, Section, Key, Value, Scope, Reason | Writes and verifies a whole number. |
+| **Set Global Config File Bool** | Section, Key, Value, Scope | Result, Section, Key, Value, Scope, Reason | Writes and verifies a true/false value. |
 
-The **Get** nodes are pure nodes (no execution pins). The **Set** nodes update the value immediately, and a **Get** with the same section and key returns the new value for the rest of the session.
+The Set nodes pass through their input values so they can be wired into later nodes. Their **Result** is **Success** only after the value is found in the saved file. **Reason** explains a failure.
 
-## Where Values Are Read and Written
+The Get nodes return the type's default value when a key is missing (**empty**, **0**, or **false**); check **Result** to distinguish a missing key from a value set to that default.
 
-* **Get** nodes read from the engine's merged config, which combines the engine's base settings, your project's `Config/DefaultEngine.ini`, and any saved user overrides.
-* **Set** nodes don't modify `Config/DefaultEngine.ini`.
+## Scope
 
-> [!WARNING]
-> In testing on UE 5.8, values written by the **Set** nodes weren't saved to any `.ini` file, so they may not survive an editor restart.
+| Scope | Reads from | Writes to | Persistence |
+| ----- | ---------- | --------- | ----------- |
+| **User Global** | The current user's `EditorSettings.ini` | The current user's `EditorSettings.ini` | Shared by projects using the same Unreal Engine installation and user. Available when the editor settings config is initialized; unavailable in packaged builds. |
+| **Project** | The current project's merged `Editor` config | The current project's `Config/DefaultEditor.ini` | Shared with the project and normally checked into source control. The file must be writable. |
 
-> [!NOTE]
-> Because a "not found" key returns a default (empty, 0, or false), you can't tell a missing key from one set to that default value.
+The Get and Set nodes use the same scope to find values. **Project** reads the merged Editor config, which includes project defaults and saved overrides. **User Global** reads only `EditorSettings.ini`; it is not a fallback layer in the project's Editor config.
+
+## Result Values
+
+| Result | Meaning |
+| ------ | ------- |
+| **Success** | A Get found the key, or a Set verified the value in the saved file. |
+| **Key Not Found** | A Get could not find the key in the selected scope. |
+| **Invalid Input** | The section or key is blank, or the scope value is invalid. |
+| **Config Unavailable** | Unreal has not initialized the selected config. User Global is unavailable outside an initialized editor session. |
+| **Save Failed** | Unreal could not flush the config, or the written value was not present in the saved file afterward. |
 
 ## Example
 
-1. Call **Get Global Config File String** with **Section** set to `/Script/Engine.Engine` and **Key** set to `GameViewportClientClassName`.
+To persist an editor preference across projects:
 
-2. Inspect the returned string, or call **Set Global Config File String** with the same section and key to update it.
+1. Call **Set Global Config File Bool** with **Section** `/Script/MyGame.MySettings`, **Key** `bShowIntro`, **Value** `false`, and **Scope** **User Global**.
+2. Check that **Result** is **Success** before continuing. Use **Reason** to diagnose a failure.
+3. Call **Get Global Config File Bool** with the same section, key, and scope to read the stored value.
 
 ## Tips
 
-* Section strings must match exactly as they appear in the INI file, for example `/Script/AndroidRuntimeSettings.AndroidRuntimeSettings`.
-* Use the **Set** nodes carefully. Changing engine config values can affect editor and game behavior.
+* Section strings must match the section name exactly, for example `/Script/Engine.Engine`.
+* Use **Project** for settings that should travel with a project and **User Global** for preferences shared across projects.
+* Changes to engine config can affect editor and game behavior. Use the scope intentionally.
