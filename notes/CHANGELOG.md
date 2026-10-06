@@ -7,7 +7,7 @@
 
 ### Bug Fixes
 
-* compile on UE &lt; 5.8 where FConfigCacheIni::Flush returns void ([51e8e57](https://github.com/ScottKirvan/ScooterUtils/commit/51e8e578e5b39990aeef399bf662b03365ed8fb1))
+* compile on UE &lt; 5.8 where FConfigCacheIni::Flush returns void ([#160](https://github.com/ScottKirvan/ScooterUtils/pull/160))
 
 ## [1.11.1](https://github.com/ScottKirvan/ScooterUtils/compare/v1.11.0...v1.11.1) (2026-10-06)
 
