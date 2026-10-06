@@ -67,7 +67,7 @@ ScooterUtils/
 │   ├── release-please/         # Release-Please configuration and version manifest
 │   └── workflows/              # GitHub Actions workflows (see Key Features above)
 ├── Config/                     # Plugin packaging filters
-├── Resources/                  # Plugin icon
+├── Resources/                  # Plugin icon and About dialog icons
 ├── Source/
 │   ├── ScooterUtils/           # Editor-only module: menus, toolbar, Editor Preferences
 │   └── ScooterUtilsBPLibrary/  # Runtime module: Blueprint node library
