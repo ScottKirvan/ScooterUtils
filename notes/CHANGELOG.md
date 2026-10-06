@@ -7,7 +7,7 @@
 
 ### Bug Fixes
 
-* compile Global Config save-path lookup on UE &lt; 5.5 ([f5876b2](https://github.com/ScottKirvan/ScooterUtils/commit/f5876b28d510cd717d87644f773ccb3d62fcbc84))
+* compile Global Config save-path lookup on UE &lt; 5.5 ([#162](https://github.com/ScottKirvan/ScooterUtils/pull/162))
 
 ## [1.11.2](https://github.com/ScottKirvan/ScooterUtils/compare/v1.11.1...v1.11.2) (2026-10-06)
 
