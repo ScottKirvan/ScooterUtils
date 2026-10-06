@@ -5,6 +5,7 @@
 #include "CoreGlobals.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include <type_traits>
 
 UScooterUtilsBPLibrary::UScooterUtilsBPLibrary(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -98,6 +99,21 @@ namespace
 		return Value;
 	}
 
+	// FConfigCacheIni::Flush returns void before UE 5.8 and bool from 5.8 on.
+	template <typename TConfigCache>
+	bool FlushConfigCache(TConfigCache &Cache, const FString &ConfigFilename)
+	{
+		if constexpr (std::is_void_v<decltype(Cache.Flush(false, ConfigFilename))>)
+		{
+			Cache.Flush(false, ConfigFilename);
+			return true;
+		}
+		else
+		{
+			return Cache.Flush(false, ConfigFilename);
+		}
+	}
+
 	template <typename Writer, typename DiskVerifier>
 	EGlobalConfigResult WriteGlobalConfigValue(
 		const FString &Section,
@@ -160,7 +176,7 @@ namespace
 				return EGlobalConfigResult::SaveFailed;
 			}
 		}
-		else if (!GConfig->Flush(false, ConfigFilename))
+		else if (!FlushConfigCache(*GConfig, ConfigFilename))
 		{
 			OutReason = FString::Printf(TEXT("Unreal failed to flush the selected config file: %s"), *SavePath);
 			return EGlobalConfigResult::SaveFailed;
