@@ -5,6 +5,7 @@
 #include "CoreGlobals.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "Runtime/Launch/Resources/Version.h"
 #include <type_traits>
 
 UScooterUtilsBPLibrary::UScooterUtilsBPLibrary(const FObjectInitializer &ObjectInitializer)
@@ -138,13 +139,26 @@ namespace
 					   : EGlobalConfigResult::InvalidInput;
 		}
 
+		FString SavePath;
+#if ENGINE_MAJOR_VERSION > 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5)
+		// UE 5.5+ stores configs in FConfigBranch objects.
 		FConfigBranch *ConfigBranch = GConfig->FindBranch(FName(*ConfigFilename), ConfigFilename);
-		if (ConfigBranch == nullptr || ConfigBranch->IniPath.IsEmpty())
+		if (ConfigBranch != nullptr)
+		{
+			SavePath = ConfigBranch->IniPath;
+		}
+#else
+		// Before UE 5.5 the cache is keyed by the ini path itself.
+		if (GConfig->FindConfigFile(ConfigFilename) != nullptr)
+		{
+			SavePath = ConfigFilename;
+		}
+#endif
+		if (SavePath.IsEmpty())
 		{
 			OutReason = FString::Printf(TEXT("Could not resolve the save path for config '%s'."), *ConfigFilename);
 			return EGlobalConfigResult::ConfigUnavailable;
 		}
-		FString SavePath = ConfigBranch->IniPath;
 
 		WriteValue(ConfigFilename);
 
