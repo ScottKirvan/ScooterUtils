@@ -175,7 +175,7 @@ TSharedRef<SWidget> ScooterUtilsMenu::GenerateToolbarMenu()
 	MenuBuilder.BeginSection("ScooterUtilsSettings", LOCTEXT("SettingsSection", "Settings"));
 	{
 		MenuBuilder.AddMenuEntry(
-			LOCTEXT("OpenPluginSettings", "Plugin Settings..."),
+			LOCTEXT("OpenPluginSettings", "Scooter Utils Settings..."),
 			LOCTEXT("OpenPluginSettingsTooltip", "Open Scooter Utilities settings in Editor Preferences"),
 			FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.GameSettings.Small"),
 			FUIAction(FExecuteAction::CreateLambda([]()
