@@ -19,7 +19,7 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
       packed_version: ${{ steps.packed.outputs.value }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
           token: ${{ github.token }}
@@ -116,7 +116,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # BuildPlugin re-saves the descriptor without touching "Version", so the
       # packaged plugin only gets the right one if it's set here first.
@@ -173,7 +173,7 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
 
